@@ -1,0 +1,19 @@
+/* ISTEC CSS */
+
+.inline {
+	display: inline-block!important;
+	width:30%!important;
+}
+
+.avatarmenu {
+	width: 30px;
+	display: inline-block;
+}
+
+.gridavatar {
+	width:45px;
+}
+
+.readonly {
+	opacity: 0.5 !important;
+}
