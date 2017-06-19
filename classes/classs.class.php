@@ -43,7 +43,7 @@ class classs {
         $data->bindvalue(':n', $fullName);
         $data->bindvalue(':cd', $credits);
         $data->bindvalue(':h', $hours);
-        $data->bindvalue(':a', $active);
+        $data->bindvalue(':a', (isset($active) ? true : false));
         $data->bindvalue(':id', $id_class);
         $data->execute();
         if ($destination != null) header('Location:' . $destination);

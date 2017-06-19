@@ -26,55 +26,96 @@
 <html lang="pt-pt">
   <head>
     <?php require_once('includes/head.inc.php'); ?>
+    <link rel="stylesheet" type="text/css" href="css/datetime.css">
   </head>
 
   <body id="InsertSummary">
     <!-- Menu -->
     <?php require_once('includes/menuAdmin.inc.php'); ?>
-
+    
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Novo Sumário</span>
+        </h1><!-- End Title -->
 
-    <!-- Header -->
-      <div class="row">
-        <h1>Sumário <small>Inserir Novo Sumário</small></h1>
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Sumários</a></li>
+          <li class="active">Novo Sumário</li>
+        </ol><!--breadcrum end-->
+
+        <div class="page-content profile-edit section-custom">
+          <div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+
+              <form class="form-chosen form-horizontal" method="post">
+                <div class="row">
+                  <div class="col-lg-9 custom-col-9">
+
+                    <!-- Cadeira -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_degree" class="control-label col-sm-3">Curso</label>
+                      <div class="col-sm-9">
+                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um nível de curso..">
+                          <option value=""></option>
+                          <?php
+                            $classes = $c->classesUser($_SESSION['id_user']);
+                            foreach ($classes as $class) {
+                          ?>
+                            <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- .Cadeira --> 
+
+                    <!-- Sumário -->
+                    <div class="form-group pmd-textfield">
+                      <label class="col-sm-3 control-label" for="summary">Sumário</label>
+                      <div class="col-sm-9">
+                        <textarea rows="4" id="summary" name="summary" class="form-control empty"  required></textarea>
+                      </div>
+                    </div>
+                    <!-- .Sumário -->
+
+
+                  <div class="form-group pmd-textfield ">
+                    <label for="regular1" class="control-label col-sm-3 control-label">Data</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                    </div>
+                  </div>
+
+
+                  <div class="form-group btns margin-bot-30">
+                    <div class="col-sm-9 col-sm-offset-3">
+                      <button type="submit" class="btn btn-primary pmd-ripple-effect">Inserir</button>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <!-- Form -->
-      <div class="row">
-        <form class="form-chosen" action="summary_new.php" method="post">
-          <div class="form-group col-xs-12">
-            <label for="id_class">Cadeira</label><br>
-            <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma cadeira..">
-              <option value=""></option>
-              <?php
-                $classes = $c->classesUser($_SESSION['id_user']);
-                foreach ($classes as $key => $value) {
-              ?>
-              <option value="<?= $value['id_class'] ?>"><?=  '(' . $value['code'] . ') - ' . $value['fullName'] ?></option>
-              <?php } ?>
-            </select>
-          </div>
-          <div class="form-group col-xs-12">
-            <label for="summary">Sumário</label><br>
-            <textarea rows="4" id="summary" name="summary" class="form-control" placeholder="Sumário da cadeira..." required></textarea>
-          </div>
-          <div class="form-group col-xs-4">
-            <label for="class_date">Data</label><br>
-            <input type="date" id="class_date" name="class_date" class="form-control" required>
-          </div>
-          <div class="form-group col-xs-12">
-            <button type="submit" class="btn btn-md btn-success">Inserir</button>
-          </div>
-        </form>
-      </div><!-- .Form -->
 
-    </div><!-- .Container -->
+   
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
+    <script type="text/javascript" src="js/datetime.js"></script>
 
     <!-- Custom scripts -->
-    <script> $(".chosen").chosen(); </script>
+    <script> 
+      $(".chosen").chosen(); 
+
+      $('.datetimepicker').datetimepicker();
+    </script>
   </body>
 </html>

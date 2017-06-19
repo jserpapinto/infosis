@@ -6,7 +6,7 @@
 }
 
 .avatarmenu {
-	width: 30px;
+	width: 60px;
 	display: inline-block;
 }
 
@@ -16,4 +16,9 @@
 
 .readonly {
 	opacity: 0.5 !important;
+}
+
+.alert {
+	z-index: 9999;
+	position: relative;
 }

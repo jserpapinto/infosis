@@ -4,7 +4,7 @@
 $GLOBALS['appname'] = 'ISTEC@infosis';
 $GLOBALS['version'] = '0.0.5';
 $GLOBALS['upload'] = 'uploads/';
-$GLOBALS['root'] = '/istecp4/istecinfosis_v6';
+$GLOBALS['root'] = '';
 
 //Sessions
 //$_SESSION['login'] = true;                 -> is the user logged in?

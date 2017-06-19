@@ -20,71 +20,76 @@
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
 
-      <!-- Header -->
-      <div class="row">
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Gerir Utilizador</span>
+        </h1><!-- End Title -->
 
-        <div class="col-xs-12">
-          <h1 class="pmd-display3">Utilizador <small class="text-muted">Gerir Utilizadores</small></h1>
-          <hr/>
-        </div>
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Utilizador</a></li>
+          <li class="active">Gerir Utilizador</li>
+        </ol><!--breadcrum end-->
 
-        <!-- FILTERS -->
-        <div class="col-xs-12">
-          <div class="btn-group">
-            <button class="btn pmd-ripple-effect btn-default" data-filter="*" type="button">Todos</button>
-          <?php
-            foreach ($roles as $role) { ?>
-              <button class="btn pmd-ripple-effect btn-primary" data-filter=".<?= strtolower($role['role']) ?>" type="button"><?= $role['role'] ?></button>
-          <?php } ?>
+        <div class="row">
+          <!-- FILTERS -->
+          <div class="col-xs-12">
+            <div class="btn-group">
+              <button class="btn pmd-ripple-effect btn-default" data-filter="*" type="button">Todos</button>
+            <?php
+              foreach ($roles as $role) { ?>
+                <button class="btn pmd-ripple-effect btn-primary" data-filter=".<?= strtolower($role['role']) ?>" type="button"><?= $role['role'] ?></button>
+            <?php } ?>
+            </div>
+            <hr/>
           </div>
-          <hr/>
-        </div>
-        <!-- .FILTERS -->
+          <!-- .FILTERS -->
 
-        <!-- GRID -->
-        <div class="col-xs-12">
-          <div class="grid row">
+          <!-- GRID -->
+          <div class="col-xs-12">
+            <div class="grid row">
 
-              <?php
-                $users = $u->users();
-                foreach($users as $key => $value) {
-              ?>
-              <div class="element-item <?= strtolower($value['role']) ?> <?= ($value['active']) ? 'activo' : 'desativo' ?> col-xs-6 col-sm-4 col-md-3">
+                <?php
+                  $users = $u->users();
+                  foreach($users as $key => $value) {
+                ?>
+                <div class="element-item <?= strtolower($value['role']) ?> <?= ($value['active']) ? 'activo' : 'desativo' ?> col-xs-6 col-sm-4 col-md-3">
 
-                <div class="<?php if(!$value['active']) echo 'checked="true"'; ?> pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth">
-                  <!-- Card media-->
-                    <div class="pmd-card-media">
-                      <!-- Card media heading -->
-                        <div class="media-body">
-                            <h2 class="pmd-card-title-text pmd-tooltip"  data-toggle="tooltip" data-placement="top" title="<?= $value['name'] ?>"><?= $value['username'] ?></h2>
-                            <span class="pmd-card-subtitle-text"><?= $value['role'] ?></span>  
-                        </div>
-                        <!-- Card media image -->
-                        <div class="media-right media-middle">
-                            <a href="javascript:void(0);">
-                                <img width="80" height="80" src="<?= $value['picture'] ?>">
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Card action -->
-                    <div class="pmd-card-actions">
-                        <a href="user_edit.php?id=<?= $value['id_user'] ?>">
-                          <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Editar</button>
-                        </a>
-                        <button data-destination="user_delete.php?id=<?= $value['id_user'] ?>" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default sweet-delete">Apagar</button>
-                    </div>
+                  <div class="<?php if(!$value['active']) echo 'pmd-card-inverse'; ?> pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth">
+                    <!-- Card media-->
+                      <div class="pmd-card-media">
+                        <!-- Card media heading -->
+                          <div class="media-body">
+                              <h2 class="pmd-card-title-text pmd-tooltip"  data-toggle="tooltip" data-placement="top" title="<?= $value['name'] ?>"><?= $value['username'] ?></h2>
+                              <span class="pmd-card-subtitle-text"><?= $value['role'] ?></span>  
+                          </div>
+                          <!-- Card media image -->
+                          <div class="media-right media-middle">
+                              <a href="javascript:void(0);">
+                                  <img width="80" height="80" src="<?= $value['picture'] ?>">
+                              </a>
+                          </div>
+                      </div>
+                      <!-- Card action -->
+                      <div class="pmd-card-actions">
+                          <a href="user_edit.php?id=<?= $value['id_user'] ?>">
+                            <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Editar</button>
+                          </a>
+                          <button data-destination="user_delete.php?id=<?= $value['id_user'] ?>" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default sweet-delete">Apagar</button>
+                      </div>
+                  </div>
+
                 </div>
+                <?php } ?>
 
-              </div>
-              <?php } ?>
-
+            </div>
           </div>
-        </div>
 
-      </div><!-- .Grid -->
-
+        </div><!-- .Grid -->
+      </div>
     </div><!-- .Container -->
 
     <!-- Scripts -->

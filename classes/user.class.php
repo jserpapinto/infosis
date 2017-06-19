@@ -222,7 +222,7 @@ class user {
     if (strlen($name) < 4) {
       echo $e->errorMessage('danger', 'Nome muito pequeno', "Tamanho mínimo 4 caracteres");
       return false;
-    } elseif ($this->existUser($username) || strlen($username) < 4) {
+    } elseif (strlen($username) < 4) {
       echo $e->errorMessage('danger', 'Utilizador já existe no sistema ou Nome de utilizador muito pequeno', "Utilizador <b>" . $username . "</b> já existente e tamanho mínimo 4 caracteres");
       return false;
     } elseif (strlen($password) < 4) {

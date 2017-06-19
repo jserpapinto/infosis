@@ -16,17 +16,19 @@
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content content-area dashboard">
+      <div class="container-fluid">
 
-    <!-- Header -->
-    <div class="row">
-      <div class="jumbotron">
-        <h1>Backoffice <?php echo $GLOBALS['appname']; ?></h1>
-        <small>Sistema de Informação v<?php echo $GLOBALS['version']; ?></small>
-      </div>
-    </div><!-- .Header -->
+      <!-- Header -->
+      <div class="row">
+        <div class="jumbotron">
+          <h1>Backoffice <?php echo $GLOBALS['appname']; ?></h1>
+          <small>Sistema de Informação v<?php echo $GLOBALS['version']; ?></small>
+        </div>
+      </div><!-- .Header -->
 
-    </div><!-- .Container -->
+      </div><!-- .Container -->
+    </div>
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>

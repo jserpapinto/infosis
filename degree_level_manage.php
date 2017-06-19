@@ -8,6 +8,8 @@
   require_once 'classes/degree.class.php';
   $d = new degree();
 
+  $levels = $d->levels();
+
   //form crate
   if(isset($_POST['designationCreate']) && $_POST['designationCreate'] != null){
     $designation = $_POST['designationCreate'];
@@ -41,49 +43,61 @@
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
 
-    <!-- Header -->
-      <div class="row">
-        <h1>Curso <small>Gerir Níveis de Cursos</small></h1>
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Gerir Níveis de Cursos</span>
+        </h1><!-- End Title -->
+
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Cursos</a></li>
+          <li class="active">Gerir Níveis de Cursos</li>
+        </ol><!--breadcrum end-->
+
+        <div class="row">
+
+          <!-- GRID -->
+          <div class="col-xs-12">
+            <div class="grid row">
+
+              <?php
+                foreach($levels as $level) {
+              ?>
+              <div class="element-item col-xs-6 col-sm-4 col-md-3">
+
+                <div class="pmd-card pmd-card-media-inline pmd-card-default pmd-z-depth">
+                  <!-- Card media-->
+                    <div class="pmd-card-media">
+                      <!-- Card media heading -->
+                        <div class="media-body">
+                            <h2 class="pmd-card-title-text" ><?= $level['designation'] ?></h2>
+                        </div>
+                    </div>
+                    <!-- Card action -->
+                    <div class="pmd-card-actions">
+                        <button data-target="#modal-edit-level" data-id="<?= $level['id_degree_level'] ?>" data-designation="<?= $level['designation'] ?>" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Editar</button>
+                        <button data-destination="degree_level_delete.php?id=<?= $level['id_degree_level'] ?>" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default sweet-delete">Apagar</button>
+                    </div>
+                </div>
+
+              </div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Datatable -->
-      <div class="row">
-        <h3>Lista de Níveis de Curso no Sistema</h3>
-        <table class="table table-hover">
-          <thead>
-            <th>Designação</th>
-            <th>Opções</th>
-          </thead>
-          <tbody>
-            <?php
-              $levels = $d->levels();
-              foreach($levels as $key => $value) {
-            ?>
-            <!-- Degree level item -->
-            <tr>
-              <td><?= $value['designation'] ?></td>
-              <td>
-                <button data-target="#modal-edit-level" data-id="<?= $value['id_degree_level'] ?>" data-designation="<?= $value['designation'] ?>" data-toggle="modal" type="button" class="btn btn-sm btn-info">Editar</button>
-                <button data-destination="degree_level_delete.php?id=<?= $value['id_degree_level'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
-
-
-
-
-                <!-- Mensagens sobre ter de desassociar primeiro -->
-                <!--<a href="degree_level_delete.php?id=<?php //echo $value['id_degree']; ?>"><button type="button" class="btn btn-sm btn-danger">Apagar</button></a>-->
-              </td>
-            </tr><!-- .Degree level item -->
-            <?php } ?>
-          </tbody>
-        </table>
-      </div><!-- .Datatable -->
-
-      <!-- Create -->
-      <div class="row">
-        <button data-target="#modal-create-level" data-toggle="modal" type="button" class="btn btn-sm btn-primary">Criar Novo Nível</button>
+      <!-- FLOATING BTN -->
+      <div class="menu pmd-floating-action"  role="navigation">   
+        <button data-target="#modal-create-level" data-toggle="modal"  class="pmd-floating-action-btn btn pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary" data-title="Add" href="javascript:void(0);" type=button> 
+          <span class="pmd-floating-hidden">Primary</span>
+          <i class="material-icons pmd-sm">add</i> 
+        </button> 
       </div>
+      <!-- .FLOATING BTN -->
 
     </div><!-- .Container -->
 
@@ -121,7 +135,7 @@
               <h2 class="pmd-card-title-text">Editar Nível de Curso</h2>
             </div>
             <div class="modal-body">
-                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                <div class="form-group pmd-textfield ">
                   <label for="designationEdit">Designação</label>
                   <input type="text" class="mat-input form-control" id="designationEdit" name="designationEdit" value="" required>
                 </div>

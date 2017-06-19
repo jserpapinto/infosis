@@ -19,19 +19,82 @@
 
   <body>
     <!-- Menu -->
-      <?php require_once('includes/menuAdmin.inc.php'); ?>
+    <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
 
-    <!-- Header -->
-      <div class="row">
-        <h1>Cadeiras <small>Gerir Cadeiras</small></h1>
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Gerir Cadeiras</span>
+        </h1><!-- End Title -->
+
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Cadeiras</a></li>
+          <li class="active">Gerir Cadeiras</li>
+        </ol><!--breadcrum end-->
+
+
+        <!-- table card -->
+        <section class="row component-section">
+
+          <!-- table card code and example -->
+          <div class="col-sm-12">
+            <div class="component-box">
+              <!-- table card example -->
+              <div  class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="table-responsive">
+                  <table id="table-class" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <tr>
+                        <th>Curso</th>
+                        <th>Código</th>
+                        <th>Designação</th>
+                        <th>Horas</th>
+                        <th>Créditos</th>
+                        <th>Estado</th>
+                        <th>Opções</th>
+                      </tr>
+                    </thead>
+                    <tbody class="classes">
+                    <?php
+                      $classes = $c->classes();
+                      foreach($classes as $class) {
+                    ?>
+
+                      <tr>
+                        <td><?= $class['dcode'] ?></td>
+                        <td><?= $class['code'] ?></td>
+                        <td><?= $class['fullName'] ?></td>
+                        <td><?= $class['hours'] ?></td>
+                        <td><?= $class['credits'] ?></td>
+                        <td><input type="checkbox" id="active" name="active" <?= ($class['active']) ? 'checked="true"' : '' ?> disabled="true"></td>
+                        <td>
+                          <a href="class_edit.php?id=<?= $class['id_class'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
+                          <button data-destination="class_delete.php?id=<?= $class['id_class'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
+                        </td>
+                      </tr><!-- .Class item -->
+
+                    <?php } ?>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+    </div>
+
+
+
+
 
       <!-- Filters -->
       <div class="row">
-        <h3>Lista de Cadeiras no Sistema</h3>
         <div class="col-sm-6">
           <label for="id_degree_level">Nível do curso</label>
           <select id="id_degree_level" name="id_degree_level" class="form-control chosen" data-placeholder="Escolha um nível de curso...">
@@ -91,12 +154,49 @@
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
+    <script type="text/javascript" src="js/dataTable.js"></script>
 
     <!-- Custom scripts -->
     <script> 
       $(".chosen").chosen({width:'65%', allow_single_deselect:true}); 
 
       $(document).ready(function() {
+
+        // trigger data table 
+        var exampleDatatable = $('#table-class').DataTable({
+          responsive: {
+            details: {
+              type: 'column',
+              target: 'tr'
+            }
+          },
+          /*columnDefs: [ {
+            className: 'control',
+            orderable: false,
+            targets:   1
+          } ],*/
+          order: [ 1, 'asc' ],
+          bFilter: true,
+          bLengthChange: true,
+          pagingType: "simple",
+          "paging": true,
+          "searching": true,
+          "language": {
+            "info": " _START_ - _END_ of _TOTAL_ ",
+            "sLengthMenu": "<span class='custom-select-title'>Rows per page:</span> <span class='custom-select'> _MENU_ </span>",
+            "sSearch": "",
+            "sSearchPlaceholder": "Search",
+            "paginate": {
+              "sNext": " ",
+              "sPrevious": " "
+            },
+          },
+          dom:
+            "<'pmd-card-title'<'data-table-responsive pull-left'><'search-paper pmd-textfield'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
+        });
+
 
         //class template
         var template = `

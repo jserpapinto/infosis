@@ -30,43 +30,83 @@
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
 
-    <!-- Header -->
-      <div class="row">
-        <h1>Curso <small>Gerir cursos - Editar</small></h1>
-      </div>
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Editar Curso</span>
+        </h1><!-- End Title -->
 
-      <!-- Form -->
-      <div class="row">
-        <form class="form-chosen" method="post">
-          <div class="form-group">
-            <label for="id_degree_level">Nível do curso</label><br>
-            <select id="id_degree_level" name="id_degree_level" class="form-control chosen">
-              <?php
-                $l = $d->levels();
-                foreach ($l as $key => $value) {
-              ?>
-              <option value="<?php echo $value['id_degree_level']; ?>" <?php if ($value['id_degree_level'] == $degree['id_degree_level']) echo 'selected="true"'; ?>><?php echo $value['designation']; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="code">Código do Curso</label><br>
-            <input type="text" id="code" name="code" class="form-control" value="<?php echo $degree['code']; ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="fullName">Designação do Curso</label><br>
-            <input type="text" id="fullName" name="fullName" class="form-control" value="<?php echo $degree['fullName']; ?>" required>
-          </div>
-          <hr>
-          <input type="hidden" value='<?php echo $_GET['id']; ?>' name="id_degree" id="id_degree">
-          <button type="submit" class="btn btn-md btn-success">Editar</button>
-          <button type="submit" class="btn btn-md btn-default" onmousedown="history.back();">Voltar</button>
-        </form>
-      </div><!-- .Form -->
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Curso</a></li>
+          <li class="active">Editar Curso</li>
+        </ol><!--breadcrum end-->
 
-    </div><!-- .Container -->
+        <!-- Form -->
+        <div class="page-content profile-edit section-custom">
+          <div class="pmd-card pmd-z-depth">
+            <div class="pmd-card-body">
+
+              <form class="form-chosen form-horizontal" method="post">
+                <div class="row">
+
+                  <div class="col-lg-9 custom-col-9">
+
+                    <!-- Nivel de curso -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_degree_level" class="control-label col-sm-3">Nível do curso</label>
+                      <div class="col-sm-9">
+                        <select id="id_degree_level" name="id_degree_level" class="form-control chosen" data-placeholder="Escolha um nível de curso..">
+                          <option value=""></option>
+                          <?php
+                            $l = $d->levels();
+                            foreach ($l as $key => $value) {
+                          ?>
+                          <option value="<?= $value['id_degree_level']; ?>" <?= ($value['id_degree_level'] == $degree['id_degree_level']) ? 'selected="true"' : ''?>><?php echo $value['designation']; ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+                    <!-- .Nivel de curso -->
+
+                    <!-- Codigo de curso -->
+                    <div class="form-group pmd-textfield">
+                      <label class="col-sm-3 control-label" for="code">Código do Curso</label>
+                      <div class="col-sm-9">
+                        <input type="text" id="code" name="code" class="form-control empty" placeholder="" value="<?= $degree['code']; ?>" required>
+                      </div>
+                    </div>
+                    <!-- .Codigo de curso -->
+
+
+                    <!-- Designação curso -->
+                    <div class="form-group pmd-textfield">
+                      <label class="col-sm-3 control-label" for="fullName">Designação do Curso</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control empty" value="<?= $degree['fullName']; ?>" id="fullName" name="fullName" placeholder="" required>
+                      </div>
+                    </div>
+                    <!-- .Designação curso -->
+
+
+                    <div class="form-group btns margin-bot-30">
+
+                      <input type="hidden" value='<?php echo $_GET['id']; ?>' name="id_degree" id="id_degree">
+                      <div class="col-sm-9 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary pmd-ripple-effect">Atualizar</button>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- .Form -->
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>

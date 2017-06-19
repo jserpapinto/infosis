@@ -22,16 +22,22 @@
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
     <!-- Container -->
-    <div class="container">
+    <div id="content" class="pmd-content inner-page">
+      <div class="container-fluid full-width-container">
 
-    <!-- Header -->
-      <div class="row">
-        <h1>Sumários <small>Gerir Sumários</small></h1>
-      </div>
+        <!-- Title -->
+        <h1 class="section-title" id="services">
+          <span>Gerir Sumários</span>
+        </h1><!-- End Title -->
+
+        <!--breadcrum start-->
+        <ol class="breadcrumb text-left">
+          <li><a href="index.html">Sumários</a></li>
+          <li class="active">Gerir Sumários</li>
+        </ol><!--breadcrum end-->
 
       <!-- Filters -->
       <div class="row">
-        <h3>Lista de Sumários no Sistema</h3>
         <div class="col-sm-6">
           <label for="id_class">Cadeira</label>
           <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
@@ -81,6 +87,7 @@
         </table>
       </div><!-- .Datatable -->
 
+    </div><!-- .Container -->
     </div><!-- .Container -->
 
     <!-- Scripts -->
