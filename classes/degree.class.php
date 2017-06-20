@@ -9,7 +9,9 @@ class degree {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'INSERT INTO tDegrees (id_degree_level, code, fullName) VALUES ( :i, :c, :n)';
+        $sql = '
+          INSERT INTO tDegrees (id_degree_level, code, fullName) 
+          VALUES ( :i, :c, :n)';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_degree_level);
         $data->bindvalue(':c', $code);
@@ -33,7 +35,9 @@ class degree {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'INSERT INTO tDegreeLevels (designation) VALUES ( :d )';
+        $sql = '
+          INSERT INTO tDegreeLevels (designation) 
+          VALUES ( :d )';
         $data = $con->prepare($sql);
         $data->bindvalue(':d', $designation);
         $data->execute();
@@ -55,7 +59,12 @@ class degree {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'UPDATE tDegrees SET id_degree_level = :i, code = :c, fullName = :f WHERE id_degree = :id';
+        $sql = '
+          UPDATE tDegrees 
+          SET id_degree_level = :i, 
+            code = :c, 
+            fullName = :f 
+          WHERE id_degree = :id';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_degree_level);
         $data->bindvalue(':c', $code);
@@ -80,7 +89,10 @@ class degree {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'UPDATE tDegreeLevels SET designation = :d WHERE id_degree_level = :id';
+        $sql = '
+          UPDATE tDegreeLevels 
+          SET designation = :d 
+          WHERE id_degree_level = :id';
         $data = $con->prepare($sql);
         $data->bindvalue(':d', $designation);
         $data->bindvalue(':id', $id_degree_level);
@@ -102,7 +114,9 @@ class degree {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'DELETE FROM tDegrees WHERE id_degree = :i';
+      $sql = '
+        DELETE FROM tDegrees 
+        WHERE id_degree = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id);
       $data->execute();
@@ -122,7 +136,9 @@ class degree {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'DELETE FROM tDegreeLevels WHERE id_degree_level = :i';
+      $sql = '
+        DELETE FROM tDegreeLevels 
+        WHERE id_degree_level = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id);
       $data->execute();
@@ -142,7 +158,10 @@ class degree {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_degree_level, code, fullName FROM tDegrees WHERE id_degree = :i';
+      $sql = '
+        SELECT id_degree_level, code, fullName 
+        FROM tDegrees 
+        WHERE id_degree = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id);
       $data->execute();
@@ -162,7 +181,15 @@ class degree {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT tDegrees.id_degree, tDegreeLevels.designation, tDegrees.code, tDegrees.fullName FROM tDegrees, tDegreeLevels WHERE tDegrees.id_degree_level = tDegreeLevels.id_degree_level AND (tDegrees.id_degree_level = :idl OR :idl = -1) ORDER BY tDegrees.id_degree_level, tDegrees.fullName';
+      $sql = '
+        SELECT tDegrees.id_degree, 
+          tDegreeLevels.designation, 
+          tDegrees.code, 
+          tDegrees.fullName 
+        FROM tDegrees, tDegreeLevels 
+        WHERE tDegrees.id_degree_level = tDegreeLevels.id_degree_level 
+          AND (tDegrees.id_degree_level = :idl OR :idl = -1) 
+        ORDER BY tDegrees.id_degree_level, tDegrees.fullName';
       $data = $con->prepare($sql);
       $data->bindvalue(':idl', $id_degree_level);
       $data->execute();
@@ -182,7 +209,10 @@ class degree {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_degree FROM tDegrees WHERE id_degree_level = :id';
+      $sql = '
+        SELECT id_degree 
+        FROM tDegrees 
+        WHERE id_degree_level = :id';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_degree_level);
       $data->execute();
@@ -202,7 +232,10 @@ class degree {
     	require_once 'db.class.php';
     	$db = new database();
     	$con = $db->getCon();
-    	$sql = 'SELECT id_degree_level, designation FROM tDegreeLevels ORDER BY id_degree_level';
+    	$sql = '
+        SELECT id_degree_level, designation 
+        FROM tDegreeLevels 
+        ORDER BY id_degree_level';
     	$data = $con->prepare($sql);
     	$data->execute();
     	$levels = $data->fetchAll();

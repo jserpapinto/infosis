@@ -43,7 +43,7 @@
           <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
             <option value="0"></option>
             <?php
-                $classes = $c->classesUser($_SESSION['id_user']);
+                $classes = $c->classes();
                 foreach ($classes as $key => $value) {
               ?>
               <option value="<?= $value['id_class'] ?>"><?=  '(' . $value['code'] . ') - ' . $value['fullName'] ?></option>
