@@ -24,7 +24,7 @@
     <!-- Container -->
     <div class="container">
 
-    <!-- Header -->
+      <!-- Header -->
       <div class="row">
         <h1>Inscrições <small>Gerir Inscrições</small></h1>
       </div>

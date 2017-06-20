@@ -99,28 +99,24 @@ class summary {
   }
 
   //list
-  public function summarys($id_user = -1) {
+  public function summarys($id_class) {
     try {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
       $sql = '
-        SELECT tDegrees.code as dcode, 
-          tSummarys.id_summary, 
-          tClasses.code, 
-          tClasses.fullName, 
+        SELECT tSummarys.id_summary, 
           tUsers.name, 
           tSummarys.summary, 
           tSummarys.class_date
-        FROM tClasses, tDegrees, tUsers, tSummarys, tClassInscriptions
-        WHERE tSummarys.id_user = tUsers.id_user 
-          AND tSummarys.id_class = tClasses.id_class 
-          AND tClasses.id_degree = tDegrees.id_degree 
-          AND tSummarys.id_user = tClassInscriptions.id_user 
-          AND (tClassInscriptions.id_user = :i OR tClassInscriptions.id_user = -1)
-        ORDER BY tSummarys.class_date, tClasses.code';
+        FROM tClassInscriptions, tSummarys, tUsers
+        WHERE tClassInscriptions.id_class = :idc
+          AND tClassInscriptions.id_class = tSummarys.id_class
+          AND tSummarys.id_user = tUsers.id_user
+          OR tClassInscriptions.id_user = -1)
+        ORDER BY tSummarys.class_date';
       $data = $con->prepare($sql);
-      $data->bindvalue(':i', $id_user);
+      $data->bindvalue(':idc', $id_class);
       $data->execute();
       $summarys = $data->fetchAll();
       return $summarys;
