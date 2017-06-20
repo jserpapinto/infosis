@@ -9,7 +9,7 @@ class database {
       	$this->connection = $connection;
         if ($this->connection == null) {
             try{
-                $this->connection = new PDO('mysql:host=localhost;dbname=dbinfosis', 'root', 'mysql');
+                $this->connection = new PDO('mysql:host=localhost;dbname=dbinfosis', 'infosisuser', 'infosispass');
                 $this->connection->exec('SET NAMES "utf8"'); //UTF8 to support special characters
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //error reporting
             }
