@@ -28,7 +28,7 @@ class summary {
   }
 
   //update
-  public function update($id_summary, $summary, $class_date, $destination) {
+  public function update($id_summary, $summary, $id_user, $class_date, $destination) {
       try {
         require_once 'db.class.php';
         $db = new database();
@@ -36,12 +36,14 @@ class summary {
         $sql = '
           UPDATE tSummarys 
           SET summary = :s, 
-            class_date = :d 
+            class_date = :d,
+            id_user = :idu
           WHERE id_summary = :ids';
         $data = $con->prepare($sql);
         $data->bindvalue(':ids', $id_summary);
         $data->bindvalue(':s', $summary);
         $data->bindvalue(':d', $class_date);
+        $data->bindvalue(':idu', $id_user);
         $data->execute();
         if ($destination != null) header('Location:' . $destination);
         return true;

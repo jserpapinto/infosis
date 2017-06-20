@@ -7,7 +7,6 @@
   //page
   require_once 'classes/degree.class.php';
   $d = new degree();
-  $degrees = $d->degrees();
   require_once 'classes/classs.class.php';
   $c = new classs();
   require_once 'classes/summary.class.php';
@@ -31,14 +30,15 @@
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Gerir Sumários</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrumbs -->
         <ol class="breadcrumb text-left">
           <li><a href="index.html">Sumários</a></li>
           <li class="active">Gerir Sumários</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
+        <!-- Card degree -->
         <div class="row">
           <div class="col-sm-6">
             <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
@@ -50,8 +50,8 @@
                   <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
                     <option value=""></option>
                     <?php
-                        $classes = $c->classes();
-                        foreach ($degrees as $degree) {
+                      $degrees = $d->degrees();
+                      foreach ($degrees as $degree) {
                       ?>
                       <option value="<?= $degree['id_degree'] ?>"><?= $degree['fullName'] ?></option>
                       <?php } ?>
@@ -60,6 +60,7 @@
             </div>
           </div>
 
+          <!-- Card class -->
           <div class="col-sm-6">
             <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
                 <div class="pmd-card-title">
@@ -75,8 +76,6 @@
           </div>
         </div>
 
-
-        <!-- Datatable -->
         <!-- Table card -->
         <section class="row component-section">
           <div class="col-sm-12">
@@ -97,12 +96,7 @@
               </div>
             </div>
           </div>
-        </section>
-
-
-    <!-- NOT FOUND -->
-    
-    <!-- .NOT FOUND -->
+        </section><!-- .Table card -->
 
       </div>
     </div><!-- .Container -->
