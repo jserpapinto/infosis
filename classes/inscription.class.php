@@ -31,8 +31,8 @@ class inscription {
       $db = new database();
       $con = $db->getCon();
       $sql = 'SELECT tDegrees.code as dcode, tClasses.code, tClasses.fullName, tclassinscription.inscription_year
-        FROM tClasses, tDegrees, tusers, tclassinscription
-        WHERE tclassinscription.id_user = tusers.id_user AND tclassinscription.id_class = tClasses.id_class AND tClasses.id_degree = tDegrees.id_degree AND (tclassinscription.id_user = :i OR tclassinscription.id_user = -1) AND (YEAR(tclassinscription.inscription_year) = :y OR YEAR(tclassinscription.inscription_year) = -1)
+        FROM tClasses, tDegrees, tUsers, tclassinscription
+        WHERE tclassinscription.id_user = tUsers.id_user AND tclassinscription.id_class = tClasses.id_class AND tClasses.id_degree = tDegrees.id_degree AND (tclassinscription.id_user = :i OR tclassinscription.id_user = -1) AND (YEAR(tclassinscription.inscription_year) = :y OR YEAR(tclassinscription.inscription_year) = -1)
         ORDER BY tclassinscription.inscription_year, tClasses.code';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id_user);

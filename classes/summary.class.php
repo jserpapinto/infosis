@@ -95,8 +95,8 @@ class summary {
       $db = new database();
       $con = $db->getCon();
       $sql = 'SELECT tDegrees.code as dcode, tSummarys.id_summary, tClasses.code, tClasses.fullName, tUsers.name, tSummarys.summary, tSummarys.class_date
-        FROM tClasses, tDegrees, tusers, tsummarys, tClassInscription
-        WHERE tSummarys.id_user = tusers.id_user AND tSummarys.id_class = tClasses.id_class AND tClasses.id_degree = tDegrees.id_degree AND tSummarys.id_user = tClassInscription.id_user AND (tClassInscription.id_user = :i OR tClassInscription.id_user = -1)
+        FROM tClasses, tDegrees, tUsers, tSummarys, tClassInscription
+        WHERE tSummarys.id_user = tUsers.id_user AND tSummarys.id_class = tClasses.id_class AND tClasses.id_degree = tDegrees.id_degree AND tSummarys.id_user = tClassInscription.id_user AND (tClassInscription.id_user = :i OR tClassInscription.id_user = -1)
         ORDER BY tSummarys.class_date, tClasses.code';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id_user);

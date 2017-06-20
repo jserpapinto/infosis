@@ -1,6 +1,4 @@
 <?php
-require_once 'classes/error.class.php';
-
 //se o formulário foi submetido
 if (isset($_POST['username']) && $_POST['username'] != null) {
   require_once 'classes/user.class.php';

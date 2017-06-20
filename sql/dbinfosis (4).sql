@@ -135,10 +135,10 @@ INSERT INTO `troles` (`id_role`, `role`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tsummarys`
+-- Estrutura da tabela `tSummarys`
 --
 
-CREATE TABLE IF NOT EXISTS `tsummarys` (
+CREATE TABLE IF NOT EXISTS `tSummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -147,10 +147,10 @@ CREATE TABLE IF NOT EXISTS `tsummarys` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tsummarys`
+-- Extraindo dados da tabela `tSummarys`
 --
 
-INSERT INTO `tsummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_date`) VALUES
+INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_date`) VALUES
 (3, 1, 9, 'esta aula foi uma valente merda', '2001-06-03'),
 (4, 5, 9, 'ola e adeus aula curta', '2017-06-16'),
 (5, 5, 3, 'aula rapida', '2017-06-10'),
@@ -224,12 +224,12 @@ ALTER TABLE `troles`
   ADD PRIMARY KEY (`id_role`);
 
 --
--- Indexes for table `tsummarys`
+-- Indexes for table `tSummarys`
 --
-ALTER TABLE `tsummarys`
+ALTER TABLE `tSummarys`
   ADD PRIMARY KEY (`id_summary`),
-  ADD KEY `tsummarys_tclasses` (`id_class`),
-  ADD KEY `tsummarys_tusers` (`id_user`);
+  ADD KEY `tSummarys_tclasses` (`id_class`),
+  ADD KEY `tSummarys_tusers` (`id_user`);
 
 --
 -- Indexes for table `tusers`
@@ -268,9 +268,9 @@ ALTER TABLE `tdegrees`
 ALTER TABLE `troles`
   MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tipo de utilizador',AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `tsummarys`
+-- AUTO_INCREMENT for table `tSummarys`
 --
-ALTER TABLE `tsummarys`
+ALTER TABLE `tSummarys`
   MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tusers`
@@ -301,9 +301,9 @@ ALTER TABLE `tdegrees`
   ADD CONSTRAINT `fk_degrees_degreeLevels` FOREIGN KEY (`id_degree_level`) REFERENCES `tdegreelevels` (`id_degree_level`);
 
 --
--- Limitadores para a tabela `tsummarys`
+-- Limitadores para a tabela `tSummarys`
 --
-ALTER TABLE `tsummarys`
+ALTER TABLE `tSummarys`
   ADD CONSTRAINT `FK_summary_class` FOREIGN KEY (`id_class`) REFERENCES `tclasses` (`id_class`),
   ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tusers` (`id_user`);
 
