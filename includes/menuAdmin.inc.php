@@ -157,7 +157,7 @@
     <li class="dropdown pmd-dropdown">
       <a href="#" class="dropdown-toggle pmd-ripple-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         <i class="material-icons media-left pmd-sm">swap_calls</i> 
-        <span class="media-body">Sumário</span>
+        <span class="media-body">Sumários</span>
         <div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
       </a>
       <ul class="dropdown-menu">
