@@ -1,9 +1,9 @@
 <?php
-require_once "../classes/classs.class.php";
-require_once "../classes/degree.class.php";
+require_once "../classes/summary.class.php";
+require_once "../classes/user.class.php";
 
 // validate post
-$idl = (isset($_POST['idl']) && !empty($_POST['idl']) ? $_POST['idl'] : -1);
+$idl = (isset($_POST['idc']) && !empty($_POST['idc']) ? $_POST['idc'] : null);
 $id = (isset($_POST['id']) && !empty($_POST['id']) ? $_POST['id'] : -1);
 $type = (isset($_POST['type']) && !empty($_POST['type']) ? $_POST['type'] : null);
 

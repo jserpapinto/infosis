@@ -2,7 +2,6 @@
 //se o formulário foi submetido
 if (isset($_POST['username']) && $_POST['username'] != null) {
   require_once 'classes/user.class.php';
-  //faz login
   $user = $_POST['username'];
   $pass = $_POST['password'];
   $u = new user();
@@ -16,7 +15,9 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
   <head>
     <?php require_once('includes/head.inc.php'); ?>
   </head>
+
   <body>
+
     <!-- Container -->
     <div class="container">
 
@@ -26,11 +27,12 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
           <h1><?php echo $GLOBALS['appname']; ?></h1>
           <small>Sistema de Informação v<?php echo $GLOBALS['version']; ?></small>
         </div>
-      </div><!-- .Header -->
+      </div>
 
-      <!-- Login Form -->
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-offset-3 pmd-card pmd-z-depth pmd-card-default">
+
+          <!-- Login Form -->
           <form action="index.php" method="post">
             <div class="pmd-card-title">
               <h2 class="pmd-card-title-text">Autenticação</h2>
@@ -63,15 +65,17 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
                 <button type="reset" class="btn btn-warning pmd-btn-raised pmd-ripple-effect">Limpar</button>
               </div>
             </div>
-          </form>
+          </form><!-- .Login Form -->
+
           <!-- Errors -->
           <?php
             $e = new error();
             if (isset($_GET['error']) && $_GET['error']) echo $e->errorMessage('danger', 'ACESSO NEGADO!', 'Nome de utilizador ou palavra-passe errados, por favor reveja os dados...');
             if (isset($_GET['error2']) && $_GET['error2']) echo $e->errorMessage('warning', 'VIOLAÇÃO DE ACESSO!', 'Está a tentar entrar numa área reservada, contacte o administrador !!!');
           ?><!-- .Errors -->
+
         </div>
-      </div><!-- .Login Form -->
+      </div>
 
     </div><!-- .Container -->
 

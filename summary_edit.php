@@ -25,6 +25,7 @@
   </head>
 
   <body id="UpdateClass">
+  
     <!-- Menu -->
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 

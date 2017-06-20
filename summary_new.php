@@ -30,80 +30,99 @@
   </head>
 
   <body id="InsertSummary">
+
     <!-- Menu -->
     <?php require_once('includes/menuAdmin.inc.php'); ?>
     
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">
       <div class="container-fluid full-width-container">
+
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Novo Sumário</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrumb -->
         <ol class="breadcrumb text-left">
           <li><a href="index.html">Sumários</a></li>
           <li class="active">Novo Sumário</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
+        <!-- Card -->
         <div class="page-content profile-edit section-custom">
           <div class="pmd-card pmd-z-depth">
             <div class="pmd-card-body">
 
+              <!-- Form -->
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
 
-                    <!-- Cadeira -->
+                    <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_degree" class="control-label col-sm-3">Curso</label>
                       <div class="col-sm-9">
-                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um nível de curso..">
+                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Curso..">
                           <option value=""></option>
                           <?php
-                            $classes = $c->classesUser($_SESSION['id_user']);
+                            $classes = $c->classes();
                             foreach ($classes as $class) {
                           ?>
                             <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div>
-                    <!-- .Cadeira --> 
+                    </div><!-- .Class -->
 
-                    <!-- Sumário -->
+                    <!-- Professor -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_degree" class="control-label col-sm-3">Professor</label>
+                      <div class="col-sm-9">
+                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Professor..">
+                          <option value=""></option>
+                          <?php
+                            $users = $c->classes();
+                            foreach ($classes as $class) {
+                          ?>
+                            <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div><!-- .Professor -->
+
+                    <!-- Summary -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="summary">Sumário</label>
                       <div class="col-sm-9">
                         <textarea rows="4" id="summary" name="summary" class="form-control empty"  required></textarea>
                       </div>
+                    </div><!-- .Summary -->
+                    
+                    <!-- Date -->
+                    <div class="form-group pmd-textfield ">
+                      <label for="regular1" class="control-label col-sm-3 control-label">Data</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                      </div>
+                    </div><!-- .Date -->
+
+                    <div class="form-group btns margin-bot-30">
+                      <div class="col-sm-9 col-sm-offset-3">
+                        <button type="submit" class="btn btn-primary pmd-ripple-effect">Inserir</button>
+                      </div>
                     </div>
-                    <!-- .Sumário -->
 
-
-                  <div class="form-group pmd-textfield ">
-                    <label for="regular1" class="control-label col-sm-3 control-label">Data</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
-                    </div>
-                  </div>
-
-
-                  <div class="form-group btns margin-bot-30">
-                    <div class="col-sm-9 col-sm-offset-3">
-                      <button type="submit" class="btn btn-primary pmd-ripple-effect">Inserir</button>
-                    </div>
-                  </div>
                   </div>
                 </div>
-              </form>
+              </form><!-- .Form -->
+
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </div><!-- .Card -->
 
+      </div>
+    </div><!-- .Container -->
 
    
 
@@ -114,7 +133,6 @@
     <!-- Custom scripts -->
     <script> 
       $(".chosen").chosen(); 
-
       $('.datetimepicker').datetimepicker();
     </script>
   </body>

@@ -24,27 +24,31 @@
   </head>
 
   <body id="InsertDegree">
+
     <!-- Menu -->
     <?php require_once('includes/menuAdmin.inc.php'); ?>
     
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">
       <div class="container-fluid full-width-container">
+
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Novo Curso</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrumb -->
         <ol class="breadcrumb text-left">
           <li><a href="index.html">Curso</a></li>
           <li class="active">Novo Curso</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
+        <!-- Card -->
         <div class="page-content profile-edit section-custom">
           <div class="pmd-card pmd-z-depth">
             <div class="pmd-card-body">
 
+              <!-- Form -->
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
@@ -59,32 +63,28 @@
                             $l = $d->levels();
                             foreach ($l as $key => $value) {
                           ?>
-                          <option value="<?php echo $value['id_degree_level']; ?>"><?php echo $value['designation']; ?></option>
+                          <option value="<?= $value['id_degree_level'] ?>"><?= $value['designation'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div>
-                    <!-- .Nivel de curso -->
+                    </div><!-- .Nivel de curso -->
+                    
 
                     <!-- Codigo de curso -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="code">Código do Curso</label>
                       <div class="col-sm-9">
-                        <input type="text" id="code" name="code" class="form-control empty" placeholder="" required>
+                        <input type="text" id="code" name="code" class="form-control empty" required>
                       </div>
-                    </div>
-                    <!-- .Codigo de curso -->
-
+                    </div><!-- .Codigo de curso -->
 
                     <!-- Designação curso -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="fullName">Designação do Curso</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control empty" id="fullName" name="fullName" placeholder="" required>
+                        <input type="text" class="form-control empty" id="fullName" name="fullName" required>
                       </div>
-                    </div>
-                    <!-- .Designação curso -->
-
+                    </div><!-- .Designação curso -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
@@ -94,13 +94,14 @@
 
                   </div>
                 </div>
-              </form>
+              </form><!-- .Form -->
+
             </div>
           </div>
-        </div>
+        </div><!-- .Card -->
 
-      </div><!-- .Container -->
-    </div>
+      </div>
+    </div><!-- .Container -->
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
