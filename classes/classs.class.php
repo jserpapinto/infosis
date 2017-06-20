@@ -9,7 +9,9 @@ class classs {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'INSERT INTO tClasses (id_degree, code, fullName, credits, hours, active) VALUES ( :i, :c, :n, :cd, :h, :a)';
+        $sql = '
+          INSERT INTO tClasses (id_degree, code, fullName, credits, hours, active) 
+          VALUES ( :i, :c, :n, :cd, :h, :a)';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_degree);
         $data->bindvalue(':c', $code);
@@ -36,7 +38,15 @@ class classs {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'UPDATE tClasses SET id_degree = :i, code = :c, fullName = :n, credits = :cd, hours = :h, active = :a WHERE id_class = :id';
+        $sql = '
+          UPDATE tClasses 
+          SET id_degree = :i, 
+            code = :c, 
+            fullName = :n, 
+            credits = :cd, 
+            hours = :h, 
+            active = :a 
+          WHERE id_class = :id';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_degree);
         $data->bindvalue(':c', $code);
@@ -63,7 +73,9 @@ class classs {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'DELETE FROM tClasses WHERE id_class = :i';
+      $sql = '
+        DELETE FROM tClasses 
+        WHERE id_class = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id_class);
       $data->execute();
@@ -83,7 +95,15 @@ class classs {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_degree, code, fullName, credits, hours, active FROM tClasses WHERE id_class = :i';
+      $sql = '
+        SELECT id_degree, 
+          code, 
+          fullName, 
+          credits, 
+          hours, 
+          active 
+        FROM tClasses 
+        WHERE id_class = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id_degree);
       $data->execute();
@@ -103,9 +123,18 @@ class classs {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT tClasses.id_class, tDegrees.code as dcode, tClasses.code, tClasses.fullName, tClasses.credits, tClasses.hours, tClasses.active 
+      $sql = '
+        SELECT tClasses.id_class, 
+          tDegrees.code as dcode, 
+          tClasses.code, 
+          tClasses.fullName, 
+          tClasses.credits, 
+          tClasses.hours, 
+          tClasses.active 
         FROM tClasses, tDegrees
-        WHERE tDegrees.id_degree = tClasses.id_degree AND (tClasses.id_degree = :id OR :id = -1) AND (tDegrees.id_degree_level = :idl OR :idl = -1)
+        WHERE tDegrees.id_degree = tClasses.id_degree 
+          AND (tClasses.id_degree = :id OR :id = -1) 
+          AND (tDegrees.id_degree_level = :idl OR :idl = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_degree);
@@ -127,9 +156,16 @@ class classs {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT tClasses.id_class, tClasses.code, tClasses.fullName, tClasses.credits, tClasses.hours, tClasses.active
+      $sql = '
+        SELECT tClasses.id_class, 
+          tClasses.code, 
+          tClasses.fullName, 
+          tClasses.credits, 
+          tClasses.hours, 
+          tClasses.active
         FROM tClasses, tClassInscription
-        WHERE tClasses.id_class = tClassInscription.id_class AND (tClassInscription.id_user = :id OR :id = -1)
+        WHERE tClasses.id_class = tClassInscription.id_class 
+          AND (tClassInscription.id_user = :id OR :id = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_user);

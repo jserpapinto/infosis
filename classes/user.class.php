@@ -9,7 +9,9 @@ class user {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'INSERT INTO tUsers (id_role, username, password, name, picture ,active) VALUES ( :i, :u, :p, :n, :pic, :a)';
+        $sql = '
+          INSERT INTO tUsers (id_role, username, password, name, picture ,active) 
+          VALUES ( :i, :u, :p, :n, :pic, :a)';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_role);
         $data->bindvalue(':u', $username);
@@ -42,7 +44,15 @@ class user {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
-        $sql = 'UPDATE tUsers SET id_role = :i, username = :u, password = :p, name = :n, picture = :pic, active = :a WHERE id_user = :id';
+        $sql = '
+          UPDATE tUsers 
+          SET id_role = :i, 
+            username = :u, 
+            password = :p, 
+            name = :n, 
+            picture = :pic, 
+            active = :a 
+          WHERE id_user = :id';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_role);
         $data->bindvalue(':u', $username);
@@ -75,7 +85,9 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'DELETE FROM tUsers WHERE id_user = :i';
+      $sql = '
+        DELETE FROM tUsers 
+        WHERE id_user = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id);
       $data->execute();
@@ -95,7 +107,10 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_role, username, name, password, picture, active FROM tUsers WHERE id_user = :i';
+      $sql = '
+        SELECT id_role, username, name, password, picture, active 
+        FROM tUsers 
+        WHERE id_user = :i';
       $data = $con->prepare($sql);
       $data->bindvalue(':i', $id);
       $data->execute();
@@ -115,7 +130,17 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT tUsers.id_user, tRoles.role, tUsers.username, tUsers.name, tUsers.picture, tUsers.active FROM tUsers, tRoles WHERE tUsers.id_role = tRoles.id_role AND (tUsers.id_role = :id OR :id = -1) ORDER BY tRoles.role, tUsers.name';
+      $sql = '
+        SELECT tUsers.id_user, 
+          tRoles.role, 
+          tUsers.username, 
+          tUsers.name, 
+          tUsers.picture, 
+          tUsers.active 
+        FROM tUsers, tRoles 
+        WHERE tUsers.id_role = tRoles.id_role 
+          AND (tUsers.id_role = :id OR :id = -1) 
+        ORDER BY tRoles.role, tUsers.name';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_role);
       $data->execute();
@@ -135,7 +160,17 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT tUsers.id_user, tUsers.name, tUsers.picture, tUsers.active FROM tUsers, tRoles, tClassInscriptions WHERE tClassInscriptions.id_class = :idc AND tClassInscriptions.id_user = tUsers.id_user AND tUsers.id_role = tRoles.id_role AND (tUsers.id_role = :id OR :id = -1) ORDER BY tRoles.role, tUsers.name';
+      $sql = '
+        SELECT tUsers.id_user, 
+          tUsers.name, 
+          tUsers.picture, 
+          tUsers.active 
+        FROM tUsers, tRoles, tClassInscriptions 
+        WHERE tClassInscriptions.id_class = :idc 
+          AND tClassInscriptions.id_user = tUsers.id_user 
+          AND tUsers.id_role = tRoles.id_role 
+          AND (tUsers.id_role = :id OR :id = -1) 
+        ORDER BY tRoles.role, tUsers.name';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_role);
       $data->bindvalue(':idc', $id_class);
@@ -156,7 +191,12 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-  	  $sql = 'SELECT name, id_user, picture FROM tUsers WHERE username LIKE :u AND password LIKE :p AND active = true';
+  	  $sql = '
+        SELECT name, id_user, picture 
+        FROM tUsers 
+        WHERE username LIKE :u 
+          AND password LIKE :p 
+          AND active = true';
       $data = $con->prepare($sql);
  	    $data->bindvalue(':u', $username);
   	  $data->bindvalue(':p', $password);
@@ -203,7 +243,10 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_user FROM tUsers WHERE username LIKE :u';
+      $sql = '
+        SELECT id_user 
+        FROM tUsers 
+        WHERE username LIKE :u';
       $data = $con->prepare($sql);
       $data->bindvalue(':u', $username);
       $data->execute();
@@ -223,7 +266,11 @@ class user {
       require_once 'db.class.php';
       $db = new database();
       $con = $db->getCon();
-      $sql = 'SELECT id_role, role FROM tRoles WHERE active = true ORDER BY id_role';
+      $sql = '
+        SELECT id_role, role 
+        FROM tRoles 
+        WHERE active = true 
+        ORDER BY id_role';
       $data = $con->prepare($sql);
       $data->execute();
       $roles = $data->fetchAll();
