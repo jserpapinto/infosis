@@ -38,21 +38,24 @@
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">
       <div class="container-fluid full-width-container">
+
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Editar Cadeira</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrum start-->
         <ol class="breadcrumb text-left">
           <li><a>Cadeiras</a></li>
           <li class="active">Editar Cadeira</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
-         <div class="page-content profile-edit section-custom">
+        <!-- Card -->
+        <div class="page-content profile-edit section-custom">
           <div class="pmd-card pmd-z-depth">
             <div class="pmd-card-body">
 
+              <!-- Form -->
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
@@ -66,7 +69,7 @@
                           <?php
                             foreach ($degrees as $degree) {
                           ?>
-                          <option <?= ($degree['id_degree'] == $class['id_degree']) ? 'selected="true"' : '' ?> value="<?php echo $degree['id_degree']; ?>"><?php echo $degree['designation'] . '(' . $degree['code'] . ') - ' . $degree['fullName']; ?></option>
+                          <option <?= ($degree['id_degree'] == $class['id_degree']) ? 'selected="true"' : '' ?> value="<?= $degree['id_degree'] ?>"><?= $degree['designation'] . '(' . $degree['code'] . ') - ' . $degree['fullName'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
@@ -80,8 +83,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" placeholder="" required value="<?= $class['code'] ?>">
                       </div>
-                    </div>
-                    <!-- .Codigo de disciplina -->
+                    </div><!-- .Codigo de disciplina -->
 
                     <!-- Designação da cadeira -->
                     <div class="form-group pmd-textfield">
@@ -89,8 +91,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="fullName" name="fullName" class="form-control empty" placeholder="" required value="<?= $class['fullName'] ?>">
                       </div>
-                    </div>
-                    <!-- .Designação da cadeira -->
+                    </div><!-- .Designação da cadeira -->
 
                     <!-- Número total de horas -->
                     <div class="form-group pmd-textfield  col-sm-6">
@@ -98,8 +99,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="hours" name="hours" class="form-control" min="0" max="1000" required value="<?= $class['hours'] ?>">
                       </div>
-                    </div>
-                    <!-- .Número total de horas -->
+                    </div><!-- .Número total de horas -->
 
 
                     <!-- Créditos -->
@@ -108,19 +108,17 @@
                       <div class="col-sm-6">
                         <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="1000" required value="<?= $class['credits'] ?>">
                       </div>
-                    </div>
-                    <!-- .Créditos -->
+                    </div><!-- .Créditos -->
 
                     <!-- Activo -->
                     <div class="form-group checkbox pmd-default-theme pmd-textfield col-sm-12">
                       <label for="active" class="pmd-checkbox pmd-checkbox-ripple-effect col-sm-12">
                         <span class="col-sm-3 text-right ">Ativa</span>
                         <div class="col-sm-9">
-                          <input type="checkbox" id="active" name="active" checked="true">
+                          <input type="checkbox" id="active" name="active" <?= ($class['active']) ? 'checked="true"' : '' ?>>
                         </div>
                       </label>
-                    </div>
-                    <!-- .Activo -->
+                    </div><!-- .Activo -->
 
 
                     <div class="form-group btns margin-bot-30">
@@ -130,60 +128,17 @@
                       </div>
                     </div>
 
-
-
                   </div>
                 </div>
-              </form>
+              </form><!-- .Form -->
+
             </div>
           </div>
-        </div>
+        </div><!-- .Card -->
+
       </div>
-    </div>
-
-      <!-- Form -->
-      <div class="row">
-        <form class="form-chosen" action="class_edit.php" method="post">
-          <div class="form-group">
-            <label for="id_degree">Curso</label><br>
-            <select id="id_degree" name="id_degree" class="form-control chosen">
-              <?php
-                $degrees = $d->degrees();
-                foreach ($degrees as $key => $value) {
-              ?>
-              <option value="<?php echo $value['id_degree']; ?>" <?php if($value['id_degree'] == $class['id_degree']) echo 'selected="true"'; ?>><?php echo $value['designation'] . '(' . $value['code'] . ') - ' . $value['fullName']; ?></option>
-              <?php } ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="code">Código</label><br>
-            <input type="text" id="code" name="code" class="form-control" value="<?php echo $class['code']; ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="fullName">Designação da cadeira</label><br>
-            <input type="text" id="fullName" name="fullName" class="form-control" value="<?php echo $class['fullName']; ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="hours">Número total de horas</label><br>
-            <input type="number" id="hours" name="hours" class="form-control" min="0" max="1000" value="<?php echo $class['hours']; ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="credits">Créditos</label><br>
-            <input type="number" id="credits" name="credits" class="form-control" min="0" max="20" value="<?php echo $class['credits']; ?>" required>
-          </div>
-          <div class="form-group">
-            <label for="active">Cadeira ativa</label>
-            <input type="checkbox" id="active" name="active" <?php if ($class['active']) echo 'checked="true"'; ?>>
-          </div>
-          <hr>
-          <input type="hidden" value='<?= $_GET['id'] ?>' name="id_class" id="id_class">
-          <button type="submit" class="btn btn-md btn-success">Editar</button>
-          <button type="submit" class="btn btn-md btn-default" onmousedown="history.back();">Voltar</button>
-        </form>
-      </div><!-- .Form -->
-
     </div><!-- .Container -->
-
+    
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
 

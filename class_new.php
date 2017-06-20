@@ -7,11 +7,9 @@
   //page
   require_once 'classes/degree.class.php';
   $d = new degree();
+  $degrees = $d->degrees();
   require_once 'classes/classs.class.php';
   $c = new classs();
-
-
-  $degrees = $d->degrees();
 
   //form
   if (isset($_POST['fullName']) && $_POST['fullName'] != null) {
@@ -38,21 +36,24 @@
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">
       <div class="container-fluid full-width-container">
+
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Nova Cadeira</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrumb -->
         <ol class="breadcrumb text-left">
           <li><a href="index.html">Cadeiras</a></li>
           <li class="active">Nova Cadeira</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
+        <!-- Card -->
         <div class="page-content profile-edit section-custom">
           <div class="pmd-card pmd-z-depth">
             <div class="pmd-card-body">
 
+            <!-- Form -->
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
@@ -61,17 +62,16 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_degree" class="control-label col-sm-3">Curso</label>
                       <div class="col-sm-9">
-                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um nível de curso..">
+                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Curso..">
                           <option value=""></option>
                           <?php
                             foreach ($degrees as $degree) {
                           ?>
-                          <option value="<?php echo $degree['id_degree']; ?>"><?php echo $degree['designation'] . '(' . $degree['code'] . ') - ' . $degree['fullName']; ?></option>
+                          <option value="<?= $degree['id_degree'] ?>"><?= $degree['designation'] . '(' . $degree['code'] . ') - ' . $degree['fullName'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div>
-                    <!-- .Curso --> 
+                    </div><!-- .Curso --> 
 
                     <!-- Codigo de disciplina -->
                     <div class="form-group pmd-textfield">
@@ -79,8 +79,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" placeholder="" required>
                       </div>
-                    </div>
-                    <!-- .Codigo de disciplina -->
+                    </div><!-- .Codigo de disciplina -->
 
                     <!-- Designação da cadeira -->
                     <div class="form-group pmd-textfield">
@@ -88,8 +87,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="fullName" name="fullName" class="form-control empty" placeholder="" required>
                       </div>
-                    </div>
-                    <!-- .Designação da cadeira -->
+                    </div><!-- .Designação da cadeira -->
 
                     <!-- Número total de horas -->
                     <div class="form-group pmd-textfield  col-sm-6">
@@ -97,8 +95,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="hours" name="hours" class="form-control" min="0" max="1000" required>
                       </div>
-                    </div>
-                    <!-- .Número total de horas -->
+                    </div><!-- .Número total de horas -->
 
 
                     <!-- Créditos -->
@@ -107,8 +104,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="1000" required>
                       </div>
-                    </div>
-                    <!-- .Créditos -->
+                    </div><!-- .Créditos -->
 
                     <!-- Activo -->
                     <div class="form-group checkbox pmd-default-theme pmd-textfield col-sm-12">
@@ -118,26 +114,24 @@
                           <input type="checkbox" id="active" name="active" checked="true">
                         </div>
                       </label>
-                    </div>
-                    <!-- .Activo -->
-
+                    </div><!-- .Activo -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary pmd-ripple-effect">Inserir</button>
                       </div>
                     </div>
-
-
-
+                    
                   </div>
                 </div>
-              </form>
+              </form><!-- .Form -->
+
             </div>
           </div>
-        </div>
+        </div><!-- .Card -->
+
       </div>
-    </div>
+    </div><!-- .Container -->
 
 
     <!-- Scripts -->

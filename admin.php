@@ -27,8 +27,8 @@
         </div>
       </div><!-- .Header -->
 
-      </div><!-- .Container -->
-    </div>
+      </div>
+    </div><!-- .Container -->
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>

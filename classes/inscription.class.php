@@ -2,8 +2,7 @@
 
 class inscription {
 
-
-//insert
+  //insert
   public function insert($id_user, $id_class, $inscription_year, $destination) {
       try {
         require_once 'db.class.php';
@@ -25,7 +24,7 @@ class inscription {
       }
     }
 
-//list by user
+  //list by user
   public function inscription($id_user = -1, $year = -1) {
     try {
       require_once 'db.class.php';

@@ -2,7 +2,7 @@
 
 //Dados da aplicação
 $GLOBALS['appname'] = 'ISTEC@infosis';
-$GLOBALS['version'] = '0.0.5';
+$GLOBALS['version'] = '0.0.6';
 $GLOBALS['upload'] = 'uploads/';
 $GLOBALS['root'] = '';
 

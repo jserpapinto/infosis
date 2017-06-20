@@ -26,6 +26,7 @@
   </head>
 
   <body id="UpdateDegree">
+
     <!-- Menu -->
     <?php require_once('includes/menuAdmin.inc.php'); ?>
 
@@ -36,13 +37,13 @@
         <!-- Title -->
         <h1 class="section-title" id="services">
           <span>Editar Curso</span>
-        </h1><!-- End Title -->
+        </h1>
 
-        <!--breadcrum start-->
+        <!-- Breadcrumb -->
         <ol class="breadcrumb text-left">
           <li><a href="index.html">Curso</a></li>
           <li class="active">Editar Curso</li>
-        </ol><!--breadcrum end-->
+        </ol>
 
         <!-- Form -->
         <div class="page-content profile-edit section-custom">
@@ -51,7 +52,6 @@
 
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
-
                   <div class="col-lg-9 custom-col-9">
 
                     <!-- Nivel de curso -->
@@ -64,49 +64,46 @@
                             $l = $d->levels();
                             foreach ($l as $key => $value) {
                           ?>
-                          <option value="<?= $value['id_degree_level']; ?>" <?= ($value['id_degree_level'] == $degree['id_degree_level']) ? 'selected="true"' : ''?>><?php echo $value['designation']; ?></option>
+                          <option value="<?= $value['id_degree_level']; ?>" <?= ($value['id_degree_level'] == $degree['id_degree_level']) ? 'selected="true"' : ''?>><?= $value['designation'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div>
-                    <!-- .Nivel de curso -->
+                    </div><!-- .Nivel de curso -->
 
                     <!-- Codigo de curso -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="code">Código do Curso</label>
                       <div class="col-sm-9">
-                        <input type="text" id="code" name="code" class="form-control empty" placeholder="" value="<?= $degree['code']; ?>" required>
+                        <input type="text" id="code" name="code" class="form-control empty" placeholder="" value="<?= $degree['code'] ?>" required>
                       </div>
-                    </div>
-                    <!-- .Codigo de curso -->
+                    </div><!-- .Codigo de curso -->
 
 
                     <!-- Designação curso -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="fullName">Designação do Curso</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control empty" value="<?= $degree['fullName']; ?>" id="fullName" name="fullName" placeholder="" required>
+                        <input type="text" class="form-control empty" value="<?= $degree['fullName'] ?>" id="fullName" name="fullName" placeholder="" required>
                       </div>
-                    </div>
-                    <!-- .Designação curso -->
+                    </div><!-- .Designação curso -->
 
 
                     <div class="form-group btns margin-bot-30">
-
-                      <input type="hidden" value='<?php echo $_GET['id']; ?>' name="id_degree" id="id_degree">
+                      <input type="hidden" value='<?= $_GET['id'] ?>' name="id_degree" id="id_degree">
                       <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary pmd-ripple-effect">Atualizar</button>
                       </div>
                     </div>
 
                   </div>
-
                 </div>
               </form>
             </div>
           </div>
-        </div>
-        <!-- .Form -->
+        </div><!-- .Form -->
+
+      </div>
+    </div><!-- .Container -->
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
