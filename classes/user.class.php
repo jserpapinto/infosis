@@ -129,6 +129,27 @@ class user {
     }
   }
 
+  //list by class
+  public function usersClass($id_role = -1, $id_class) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = 'SELECT tUsers.id_user, tUsers.name, tUsers.picture, tUsers.active FROM tUsers, tRoles, tClassInscriptions WHERE tClassInscriptions.id_class = :idc AND tClassInscriptions.id_user = tUsers.id_user AND tUsers.id_role = tRoles.id_role AND (tUsers.id_role = :id OR :id = -1) ORDER BY tRoles.role, tUsers.name';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':id', $id_role);
+      $data->bindvalue(':idc', $id_class);
+      $data->execute();
+      $users = $data->fetchAll();
+      return $users;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
   //login
   public function login($username, $password) {
     try {
