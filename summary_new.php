@@ -81,12 +81,6 @@
                       <div class="col-sm-9">
                         <select id="id_teacher" name="id_teacher" class="form-control chosen" data-placeholder="Escolha um Professor.." disabled="">
                           <option value=""></option>
-                          <?php
-                            $users = $c->classes();
-                            foreach ($classes as $class) {
-                          ?>
-                            <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
-                          <?php } ?>
                         </select>
                       </div>
                     </div><!-- .Professor -->
@@ -152,7 +146,25 @@
             id_degree: idDegree
           }
         }).done(function(res) {
-          console.log(res);
+
+          $('#id_teacher').html('');
+
+          // iterate and add as option
+          res.forEach(function(el, i) {
+            $('#id_teacher').append($('<option>', {
+              value: el.id_user,
+              text: el.name
+            }));
+          });
+
+          // enable/disable
+          if (res.length > 0) $('#id_teacher').prop('disabled', false);
+          else $('#id_teacher').prop('disabled', true);
+          
+          // update select box
+          $('#id_teacher').trigger('chosen:updated');
+          
+
         }).fail(function(xhr) {
           console.log(xhr, xhr.statusText);
         });
