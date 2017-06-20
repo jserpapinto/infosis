@@ -207,7 +207,6 @@
         $('#id_class').on('change', function() {
 
           var idClass = $(this).val();
-          console.log("idclass", idClass);
 
           if (idClass == "") {
             // clear and update datatable 
@@ -225,7 +224,6 @@
               type: 'get_summarys'
             }
           }).done(function(res) {
-            console.log(res);
 
             // clear table
             summaryTable.clear();
@@ -238,7 +236,6 @@
 
             // Iterate all results
             res.forEach(function(el, i) {
-              console.log(el, i)
               // Add each result to table
               summaryTable.row.add([
                 el.class_date,
@@ -249,7 +246,6 @@
                   <button data-destination="summary_delete.php?id=${el.id_summary}" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
                 `
               ]);
-
             })
 
             // udpate table
@@ -261,14 +257,6 @@
         });
     });
 
-    //myTable.row.add([data.name, data.address,...]);
-
-    /*
-
-    <a href="summary_edit.php?id=<?= $value['id_summary'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
-    <button data-destination="summary_delete.php?id=<?= $value['id_summary'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
-
-    */
     </script>
   </body>
 </html>

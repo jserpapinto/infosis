@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$(".sweet-delete").on('click', function() {
+	$(document).on('click', ".sweet-delete", function() {
 		var destination = $(this).data('destination');
 		swal({
 		  title: 'Tem a certeza?',

@@ -169,9 +169,13 @@
 
     <!-- Inscrições -->
     <li class="dropdown pmd-dropdown">
-      <a href="#" class="dropdown-toggle pmd-ripple-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Inscrições <span class="caret"></span></a>
+      <a href="#" class="dropdown-toggle pmd-ripple-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <i class="material-icons media-left pmd-sm">swap_calls</i> 
+        <span class="media-body">Inscrições</span>
+        <div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
+      </a>
       <ul class="dropdown-menu">
-        <li><a href="inscription_new.php">Inserir Nova Inscrições</a></li>
+        <li><a href="inscription_new.php">Inserir Novas Inscrições</a></li>
         <li><a href="inscription_manage.php">Gerir Inscrições</a></li>
       </ul>
     </li>
