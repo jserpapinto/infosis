@@ -77,9 +77,9 @@
 
                     <!-- Professor -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="id_degree" class="control-label col-sm-3">Professor</label>
+                      <label for="id_teacher" class="control-label col-sm-3">Professor</label>
                       <div class="col-sm-9">
-                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Professor..">
+                        <select id="id_teacher" name="id_teacher" class="form-control chosen" data-placeholder="Escolha um Professor.." disabled="">
                           <option value=""></option>
                           <?php
                             $users = $c->classes();
@@ -134,6 +134,29 @@
     <script> 
       $(".chosen").chosen(); 
       $('.datetimepicker').datetimepicker();
+
+      // AJAX get professores associados a curso
+      $('#id_degree').on('change', function() {
+        console.log("Hey", $(this).val())
+
+        var idDegree = $(this).val();
+
+        if (idDegree == "") return false;
+
+
+        $.ajax({
+          url: "ajax/summary_new.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_degree: idDegree
+          }
+        }).done(function(res) {
+          console.log(res);
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      })
     </script>
   </body>
 </html>
