@@ -130,7 +130,7 @@ class user {
   }
 
   //list by class
-  public function usersClass($id_role = -1, $id_class) {
+  public function usersClass($id_class, $id_role = -1) {
     try {
       require_once 'db.class.php';
       $db = new database();

@@ -104,7 +104,7 @@
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="username">Username</label>
                       <div class="col-sm-9">
-                        <input type="text" id="username" name="username" value="<?= $user['username'] ?>" class="form-control empty" required="required">
+                        <input type="text" id="username" name="username" value="<?= $user['username'] ?>" class="readonly form-control empty" readonly required="required">
                         <p class="help-block"></p>
                       </div>
                     </div>
