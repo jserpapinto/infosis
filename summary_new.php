@@ -131,7 +131,6 @@
 
       // AJAX get professores associados a curso
       $('#id_degree').on('change', function() {
-        console.log("Hey", $(this).val())
 
         var idDegree = $(this).val();
 
@@ -160,7 +159,7 @@
           // enable/disable
           if (res.length > 0) $('#id_teacher').prop('disabled', false);
           else $('#id_teacher').prop('disabled', true);
-          
+
           // update select box
           $('#id_teacher').trigger('chosen:updated');
           

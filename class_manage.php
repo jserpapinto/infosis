@@ -125,6 +125,9 @@
               "sPrevious": " "
             },
           },
+          "language": {
+            "emptyTable": nodataTemplate
+          },
           dom:
             "<'pmd-card-title'<'data-table-responsive pull-left'><'search-paper pmd-textfield'f>>" +
             "<'row'<'col-sm-12'tr>>" +

@@ -5,6 +5,9 @@
   $u->logged();
 
   //page
+  require_once 'classes/degree.class.php';
+  $d = new degree();
+  $degrees = $d->degrees();
   require_once 'classes/classs.class.php';
   $c = new classs();
   require_once 'classes/summary.class.php';
@@ -36,66 +39,247 @@
           <li class="active">Gerir Sumários</li>
         </ol><!--breadcrum end-->
 
-      <!-- Filters -->
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="id_class">Cadeira</label>
-          <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
-            <option value="0"></option>
-            <?php
-                $classes = $c->classesUser($_SESSION['id_user']);
-                foreach ($classes as $key => $value) {
-              ?>
-              <option value="<?= $value['id_class'] ?>"><?=  '(' . $value['code'] . ') - ' . $value['fullName'] ?></option>
-              <?php } ?>
-          </select>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">Curso</h2>
+                    <span class="pmd-card-subtitle-text">Filtre por curso</span>
+                </div>
+                <div class="pmd-card-body">
+                  <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
+                    <option value=""></option>
+                    <?php
+                        $classes = $c->classes();
+                        foreach ($degrees as $degree) {
+                      ?>
+                      <option value="<?= $degree['id_degree'] ?>"><?= $degree['fullName'] ?></option>
+                      <?php } ?>
+                  </select>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">Cadeira</h2>
+                    <span class="pmd-card-subtitle-text">Filtre por cadeira</span>
+                </div>
+                <div class="pmd-card-body">
+                  <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma disciplina..." disabled>
+                    <option value=""></option>
+                  </select>
+                </div>
+            </div>
+          </div>
         </div>
-      </div><!-- .Filters -->
 
-      <!-- Datatable -->
-      <div class="row">
-        <table class="table table-hover">
-          <thead>
-            <th>Curso</th>
-            <th>Código</th>
-            <th>Designação</th>
-            <th>Professor</th>
-            <th>Sumário</th>
-            <th>Data</th>
-            <th>Opções</th>
-          </thead>
-          <tbody class="summarys">
-            <?php
-              $summarys = $s->summarys($_SESSION['id_user']);
-              foreach($summarys as $key => $value) {
-            ?>
-            <!-- Class item -->
-            <tr>
-              <td><?= $value['dcode'] ?></td>
-              <td><?= $value['code'] ?></td>
-              <td><?= $value['fullName'] ?></td>
-              <td><?= $value['name'] ?></td>
-              <td><?= $value['summary'] ?></td>
-              <td><?= $value['class_date'] ?></td>
-              <td>
-                <a href="summary_edit.php?id=<?= $value['id_summary'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
-                <button data-destination="summary_delete.php?id=<?= $value['id_summary'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
-              </td>
-            </tr><!-- .Class item -->
-            <?php } ?>
-          </tbody>
-        </table>
-      </div><!-- .Datatable -->
 
-    </div><!-- .Container -->
+        <!-- Datatable -->
+        <!-- Table card -->
+        <section class="row component-section">
+          <div class="col-sm-12">
+            <div class="component-box">
+              <div  class="pmd-card pmd-z-depth pmd-card-custom-view">
+                <div class="table-responsive">
+                  <table id="table-summarys" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                      <th>Curso</th>
+                      <th>Código</th>
+                      <th>Designação</th>
+                      <th>Professor</th>
+                      <th>Sumário</th>
+                      <th>Data</th>
+                      <th>Opções</th>
+                    </thead>
+                    <tbody class="summarys">
+                      <?php
+                        $summarys = $s->summarys($_SESSION['id_user']);
+                        foreach($summarys as $key => $value) {
+                      ?>
+                      <!-- Class item -->
+                      <tr>
+                        <td><?= $value['dcode'] ?></td>
+                        <td><?= $value['code'] ?></td>
+                        <td><?= $value['fullName'] ?></td>
+                        <td><?= $value['name'] ?></td>
+                        <td><?= $value['summary'] ?></td>
+                        <td><?= $value['class_date'] ?></td>
+                        <td>
+                          <a href="summary_edit.php?id=<?= $value['id_summary'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
+                          <button data-destination="summary_delete.php?id=<?= $value['id_summary'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
+                        </td>
+                      </tr><!-- .Class item -->
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+    <!-- NOT FOUND -->
+    
+    <!-- .NOT FOUND -->
+
+      </div>
     </div><!-- .Container -->
 
     <!-- Scripts -->
     <?php require_once('includes/scripts.inc.php'); ?>
+    <script type="text/javascript" src="js/dataTable.js"></script>
 
     <!-- Custom scripts -->
     <script> 
       $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
+
+      $(document).ready(function() {
+
+        // trigger data table 
+        var summaryTable = $('#table-summarys').DataTable({
+          responsive: {
+            details: {
+              type: 'column',
+              target: 'tr'
+            }
+          },
+          order: [ 1, 'asc' ],
+          bFilter: true,
+          bLengthChange: true,
+          pagingType: "simple",
+          "paging": true,
+          "searching": true,
+          "language": {
+            "info": " _START_ - _END_ of _TOTAL_ ",
+            "sLengthMenu": "<span class='custom-select-title'>Rows per page:</span> <span class='custom-select'> _MENU_ </span>",
+            "sSearch": "",
+            "sSearchPlaceholder": "Search",
+            "paginate": {
+              "sNext": " ",
+              "sPrevious": " "
+            },
+          },
+          "language": {
+            "emptyTable": nodataTemplate
+          },
+          dom:
+            "<'pmd-card-title'<'data-table-responsive pull-left'><'search-paper pmd-textfield'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
+        });
+      });
+
+      $('#id_degree').on('change', function() {
+
+        var idDegree = $(this).val();
+        console.log("iddegree", idDegree);
+
+        if (idDegree == "") {
+          $('#id_class').html('');
+
+          $('#id_class').prop('disabled', true);
+
+          // update select box
+          $('#id_class').trigger('chosen:updated');
+
+          return false;
+        }
+
+        // AJAX fetch classes from degree
+        $.ajax({
+          url: "ajax/summary_manage.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_degree: idDegree,
+            type: 'get_classes'
+          }
+        }).done(function(res) {
+          console.log(res);
+
+          $('#id_class').html('');
+
+          // Default option
+          $('#id_class').append($('<option>', {
+            value: "",
+            text: ""
+          }));
+
+          // iterate and add as option
+          res.forEach(function(el, i) {
+            $('#id_class').append($('<option>', {
+              value: el.id_class,
+              text: el.fullName
+            }));
+          });
+
+          // enable/disable
+          if (res.length > 0) $('#id_class').prop('disabled', false);
+          else $('#id_class').prop('disabled', true);
+
+          // update select box
+          $('#id_class').trigger('chosen:updated');
+          
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      });
+
+      // AJAX fetch summarys from class
+      $('#id_class').on('change', function() {
+
+        var idClass = $(this).val();
+        console.log("idclass", idClass);
+
+        if (idClass == "") {
+          // clear and update datatable 
+          summaryTable.clear().draw();
+
+          return false;
+        }
+
+        // AJAX fetch classes from degree
+        $.ajax({
+          url: "ajax/summary_manage.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_degree: idDegree,
+            type: 'get_summarys'
+          }
+        }).done(function(res) {
+          console.log(res);
+
+          // clear table
+          summaryTable.clear();
+
+          // Iterate all results
+          res.forEach(function(el, i) {
+
+            // Add each result to table
+            summaryTable.row.add([
+
+            ]);
+
+          })
+
+
+
+          // enable/disable
+          if (res.length > 0) summaryTable.clear();
+
+          // udpate table
+          summaryTable.draw();
+          
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      });
+
+    //myTable.row.add([data.name, data.address,...]);
     </script>
   </body>
 </html>
