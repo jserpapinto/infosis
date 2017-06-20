@@ -15,10 +15,10 @@
   //form
   if (isset($_POST['summary']) && $_POST['summary'] != null) {
     $id_class = $_POST['id_class'];
-    $id_user = $_SESSION['id_user'];
+    $id_user = $_POST['id_user']; // porque é admin, senao tem de ser o da session
     $summary = $_POST['summary'];
     $class_date = $_POST['class_date'];
-    $s->insert($id_class, $id_user, $summary, $class_date, 'summary_new.php');
+    $s->insert($id_class, $id_user, $summary, $class_date, 'summary_manage.php');
   }
 ?>
 
@@ -61,9 +61,9 @@
 
                     <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="id_degree" class="control-label col-sm-3">Curso</label>
+                      <label for="id_class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Curso..">
+                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha um Curso..">
                           <option value=""></option>
                           <?php
                             $classes = $c->classes();
@@ -77,9 +77,9 @@
 
                     <!-- Professor -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="id_teacher" class="control-label col-sm-3">Professor</label>
+                      <label for="id_user" class="control-label col-sm-3">Professor</label>
                       <div class="col-sm-9">
-                        <select id="id_teacher" name="id_teacher" class="form-control chosen" data-placeholder="Escolha um Professor.." disabled="">
+                        <select id="id_user" name="id_user" class="form-control chosen" data-placeholder="Escolha um Professor.." disabled="">
                           <option value=""></option>
                         </select>
                       </div>
@@ -95,9 +95,9 @@
                     
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
-                      <label for="regular1" class="control-label col-sm-3 control-label">Data</label>
+                      <label for="class_date" class="control-label col-sm-3 control-label">Data</label>
                       <div class="col-sm-9">
-                        <input type="text" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                        <input type="text" name="class_date" id="class_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
                     </div><!-- .Date -->
 
@@ -130,7 +130,7 @@
       $('.datetimepicker').datetimepicker();
 
       // AJAX get professores associados a curso
-      $('#id_degree').on('change', function() {
+      $('#id_class').on('change', function() {
 
         var idDegree = $(this).val();
 
@@ -146,22 +146,22 @@
           }
         }).done(function(res) {
 
-          $('#id_teacher').html('');
+          $('#id_user').html('');
 
           // iterate and add as option
           res.forEach(function(el, i) {
-            $('#id_teacher').append($('<option>', {
+            $('#id_user').append($('<option>', {
               value: el.id_user,
               text: el.name
             }));
           });
 
           // enable/disable
-          if (res.length > 0) $('#id_teacher').prop('disabled', false);
-          else $('#id_teacher').prop('disabled', true);
+          if (res.length > 0) $('#id_user').prop('disabled', false);
+          else $('#id_user').prop('disabled', true);
 
           // update select box
-          $('#id_teacher').trigger('chosen:updated');
+          $('#id_user').trigger('chosen:updated');
           
 
         }).fail(function(xhr) {

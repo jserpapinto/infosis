@@ -15,7 +15,12 @@ class summary {
         $data->bindvalue(':idc', $id_class);
         $data->bindvalue(':idu', $id_user);
         $data->bindvalue(':s', $summary);
-        $data->bindvalue(':d', $class_date);
+
+        // handle date
+        $date = date("Y-m-d H:i:s", strtotime($class_date));
+
+        $data->bindvalue(':d', $date);
+
         $data->execute();
         if ($destination != null) header('Location:' . $destination);
         return true;
@@ -84,9 +89,10 @@ class summary {
       $db = new database();
       $con = $db->getCon();
       $sql = '
-        SELECT id_class, id_user, summary, class_date 
-        FROM tSummarys 
-        WHERE id_summary = :ids';
+        SELECT ts.id_class, ts.id_user, ts.summary, ts.class_date, tc.fullName, tc.code
+        FROM tSummarys ts, tClasses tc
+        WHERE tc.id_class = ts.id_class
+          AND ts.id_summary = :ids';
       $data = $con->prepare($sql);
       $data->bindvalue(':ids', $id_summary);
       $data->execute();
