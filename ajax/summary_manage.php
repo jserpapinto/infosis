@@ -19,7 +19,7 @@ if ($id_degree && $type == "get_classes") {
 
 	echo json_encode($classes);
 
-} elseif($id_class && $type == "get_classes") {
+} elseif($id_class && $type == "get_summarys") {
 
 	$s = new summary();
 	$summarys = $s->summarys($id_class);

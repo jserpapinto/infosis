@@ -85,33 +85,12 @@
                 <div class="table-responsive">
                   <table id="table-summarys" class="table pmd-table table-hover table-striped display responsive nowrap" cellspacing="0" width="100%">
                     <thead>
-                      <th>Curso</th>
-                      <th>Código</th>
-                      <th>Designação</th>
+                      <th>Data</th>
                       <th>Professor</th>
                       <th>Sumário</th>
-                      <th>Data</th>
                       <th>Opções</th>
                     </thead>
                     <tbody class="summarys">
-                      <?php
-                        $summarys = $s->summarys($_SESSION['id_user']);
-                        foreach($summarys as $key => $value) {
-                      ?>
-                      <!-- Class item -->
-                      <tr>
-                        <td><?= $value['dcode'] ?></td>
-                        <td><?= $value['code'] ?></td>
-                        <td><?= $value['fullName'] ?></td>
-                        <td><?= $value['name'] ?></td>
-                        <td><?= $value['summary'] ?></td>
-                        <td><?= $value['class_date'] ?></td>
-                        <td>
-                          <a href="summary_edit.php?id=<?= $value['id_summary'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
-                          <button data-destination="summary_delete.php?id=<?= $value['id_summary'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
-                        </td>
-                      </tr><!-- .Class item -->
-                      <?php } ?>
                     </tbody>
                   </table>
                 </div>
@@ -170,116 +149,126 @@
             "<'row'<'col-sm-12'tr>>" +
             "<'pmd-card-footer' <'pmd-datatable-pagination' l i p>>",
         });
-      });
 
-      $('#id_degree').on('change', function() {
 
-        var idDegree = $(this).val();
-        console.log("iddegree", idDegree);
 
-        if (idDegree == "") {
-          $('#id_class').html('');
+        $('#id_degree').on('change', function() {
 
-          $('#id_class').prop('disabled', true);
+          var idDegree = $(this).val();
 
-          // update select box
-          $('#id_class').trigger('chosen:updated');
-
-          return false;
-        }
-
-        // AJAX fetch classes from degree
-        $.ajax({
-          url: "ajax/summary_manage.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            id_degree: idDegree,
-            type: 'get_classes'
+          if (idDegree == "") {
+            $('#id_class').html('');
+            $('#id_class').prop('disabled', true);
+            // update select box
+            $('#id_class').trigger('chosen:updated');
+            summaryTable.clear().draw();
+            return false;
           }
-        }).done(function(res) {
-          console.log(res);
 
-          $('#id_class').html('');
+          // AJAX fetch classes from degree
+          $.ajax({
+            url: "ajax/summary_manage.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+              id_degree: idDegree,
+              type: 'get_classes'
+            }
+          }).done(function(res) {
+            $('#id_class').html('');
 
-          // Default option
-          $('#id_class').append($('<option>', {
-            value: "",
-            text: ""
-          }));
-
-          // iterate and add as option
-          res.forEach(function(el, i) {
+            // Default option
             $('#id_class').append($('<option>', {
-              value: el.id_class,
-              text: el.fullName
+              value: "",
+              text: ""
             }));
+
+            // iterate and add as option
+            res.forEach(function(el, i) {
+              $('#id_class').append($('<option>', {
+                value: el.id_class,
+                text: el.fullName
+              }));
+            });
+
+            // enable/disable
+            if (res.length > 0) $('#id_class').prop('disabled', false);
+            else $('#id_class').prop('disabled', true);
+
+            // update select box
+            $('#id_class').trigger('chosen:updated');
+            
+          }).fail(function(xhr) {
+            console.log(xhr, xhr.statusText);
           });
-
-          // enable/disable
-          if (res.length > 0) $('#id_class').prop('disabled', false);
-          else $('#id_class').prop('disabled', true);
-
-          // update select box
-          $('#id_class').trigger('chosen:updated');
-          
-        }).fail(function(xhr) {
-          console.log(xhr, xhr.statusText);
         });
-      });
 
-      // AJAX fetch summarys from class
-      $('#id_class').on('change', function() {
+        // AJAX fetch summarys from class
+        $('#id_class').on('change', function() {
 
-        var idClass = $(this).val();
-        console.log("idclass", idClass);
+          var idClass = $(this).val();
+          console.log("idclass", idClass);
 
-        if (idClass == "") {
-          // clear and update datatable 
-          summaryTable.clear().draw();
-
-          return false;
-        }
-
-        // AJAX fetch classes from degree
-        $.ajax({
-          url: "ajax/summary_manage.php",
-          method: "POST",
-          dataType: "json",
-          data: {
-            id_degree: idDegree,
-            type: 'get_summarys'
+          if (idClass == "") {
+            // clear and update datatable 
+            summaryTable.clear().draw();
+            return false;
           }
-        }).done(function(res) {
-          console.log(res);
 
-          // clear table
-          summaryTable.clear();
+          // AJAX fetch classes from degree
+          $.ajax({
+            url: "ajax/summary_manage.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+              id_class: idClass,
+              type: 'get_summarys'
+            }
+          }).done(function(res) {
+            console.log(res);
 
-          // Iterate all results
-          res.forEach(function(el, i) {
+            // clear table
+            summaryTable.clear();
 
-            // Add each result to table
-            summaryTable.row.add([
+            // enable/disable
+            if (res.length == 0) {
+              summaryTable.clear().draw();
+              return false;
+            }
 
-            ]);
+            // Iterate all results
+            res.forEach(function(el, i) {
+              console.log(el, i)
+              // Add each result to table
+              summaryTable.row.add([
+                el.class_date,
+                el.name,
+                el.summary,
+                `
+                  <a href="summary_edit.php?id=${el.id_summary}"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
+                  <button data-destination="summary_delete.php?id=${el.id_summary}" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
+                `
+              ]);
 
-          })
+            })
 
-
-
-          // enable/disable
-          if (res.length > 0) summaryTable.clear();
-
-          // udpate table
-          summaryTable.draw();
-          
-        }).fail(function(xhr) {
-          console.log(xhr, xhr.statusText);
+            // udpate table
+            summaryTable.draw();
+            
+          }).fail(function(xhr) {
+            console.log(xhr, xhr.statusText);
+          });
         });
-      });
+    });
 
     //myTable.row.add([data.name, data.address,...]);
+
+    /*
+
+    <a href="summary_edit.php?id=<?= $value['id_summary'] ?>"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
+    <button data-destination="summary_delete.php?id=<?= $value['id_summary'] ?>" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
+
+    */
     </script>
   </body>
 </html>
