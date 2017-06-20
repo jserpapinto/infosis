@@ -1,5 +1,5 @@
 <?php
-//se o formulário foi submetido
+ //se o formulário foi submetido
 if (isset($_POST['username']) && $_POST['username'] != null) {
   require_once 'classes/user.class.php';
   $user = $_POST['username'];
