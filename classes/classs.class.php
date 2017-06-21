@@ -3,21 +3,23 @@
 class classs {
 
 	//insert
-  public function insert($id_degree, $code, $fullName, $credits, $hours, $active, $destination) {
+  public function insert($id_degree, $code, $fullName, $credits, $hours, $semester, $n_classes, $active, $destination) {
     if ($this->valid($code, $fullName)) {
       try {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
         $sql = '
-          INSERT INTO tClasses (id_degree, code, fullName, credits, hours, active) 
-          VALUES ( :i, :c, :n, :cd, :h, :a)';
+          INSERT INTO tClasses (id_degree, code, fullName, credits, hours, semester, n_classes, active) 
+          VALUES ( :i, :c, :n, :cd, :h, :s, :nc, :a)';
         $data = $con->prepare($sql);
         $data->bindvalue(':i', $id_degree);
         $data->bindvalue(':c', $code);
         $data->bindvalue(':n', $fullName);
         $data->bindvalue(':cd', $credits);
         $data->bindvalue(':h', $hours);
+        $data->bindvalue(':s', $semester);
+        $data->bindvalue(':nc', $n_classes);
         $data->bindvalue(':a', $active);
         $data->execute();
         if ($destination != null) header('Location:' . $destination);
@@ -32,7 +34,7 @@ class classs {
   }
 
   //update
-  public function update($id_class, $id_degree, $code, $fullName, $credits, $hours, $active, $destination) {
+  public function update($id_class, $id_degree, $code, $fullName, $credits, $hours, $semester, $n_classes, $active, $destination) {
     if ($this->valid($code, $fullName)) {
       try {
         require_once 'db.class.php';
@@ -45,6 +47,8 @@ class classs {
             fullName = :n, 
             credits = :cd, 
             hours = :h, 
+            semester = :s, 
+            n_classes = :nc, 
             active = :a 
           WHERE id_class = :id';
         $data = $con->prepare($sql);
@@ -53,6 +57,8 @@ class classs {
         $data->bindvalue(':n', $fullName);
         $data->bindvalue(':cd', $credits);
         $data->bindvalue(':h', $hours);
+        $data->bindvalue(':s', $semester);
+        $data->bindvalue(':nc', $n_classes);
         $data->bindvalue(':a', (isset($active) ? true : false));
         $data->bindvalue(':id', $id_class);
         $data->execute();
@@ -101,7 +107,9 @@ class classs {
           fullName, 
           credits, 
           hours, 
-          active 
+          active,
+          semester,
+          n_classes
         FROM tClasses 
         WHERE id_class = :i';
       $data = $con->prepare($sql);
@@ -130,12 +138,57 @@ class classs {
           tClasses.fullName, 
           tClasses.credits, 
           tClasses.hours, 
+          tClasses.semester, 
+          tClasses.n_classes, 
           tClasses.active 
         FROM tClasses, tDegrees
         WHERE tDegrees.id_degree = tClasses.id_degree 
           AND (tClasses.id_degree = :id OR :id = -1) 
           AND (tDegrees.id_degree_level = :idl OR :idl = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':id', $id_degree);
+      $data->bindvalue(':idl', $id_degree_level);
+      $data->execute();
+      $classes = $data->fetchAll();
+      return $classes;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
+  //list 
+  // Vai buscar pela inscriçao do professor 
+  public function classesYear($id_year) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT 
+          tClasses.id_class, 
+          tClasses.code, 
+          tClasses.fullName, 
+          tClasses.credits, 
+          tClasses.hours, 
+          tClasses.semester, 
+          tClasses.n_classes, 
+          tClasses.active 
+        FROM tClasses 
+        WHERE tClasses.id_class 
+          IN (
+            SELECT tci.id_class 
+            FROM tClassInscriptions tci 
+              LEFT JOIN tUsers tu 
+                ON tci.id_user = tu.id_user 
+            WHERE tu.id_role = 3 
+              AND tci.id_year = 1
+            GROUP BY tci.id_class) 
+        ORDER BY `tClasses`.`fullName` ASC
+      ';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_degree);
       $data->bindvalue(':idl', $id_degree_level);

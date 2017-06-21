@@ -5,6 +5,8 @@
   $u->logged("AdminProfessor");
 
   //page
+  require_once 'classes/year.class.php';
+  $y = new year();
   require_once 'classes/degree.class.php';
   $d = new degree();
   require_once 'classes/classs.class.php';
@@ -59,18 +61,29 @@
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
 
+                    <!-- Year -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_year" class="control-label col-sm-3">Ano Lectivo</label>
+                      <div class="col-sm-9">
+                        <select id="id_year" name="id_year" class="form-control chosen" data-placeholder="Escolha um ano lectivo..">
+                          <option value=""></option>
+                          <?php
+                            $years = $y->years();
+                            foreach ($years as $year) {
+                          ?>
+                            <option <?= ($year['current'] ? "selected" : "") ?> value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+
+
                     <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma Cadeira..">
+                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma Cadeira.." disabled="">
                           <option value=""></option>
-                          <?php
-                            $classes = ($_SESSION['role'] == "Professor") ? $c->classesUser($_SESSION['id_user']) : $c->classes();
-                            foreach ($classes as $class) {
-                          ?>
-                            <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
-                          <?php } ?>
                         </select>
                       </div>
                     </div>
@@ -130,11 +143,68 @@
       $('.datetimepicker').datetimepicker();
 
       // AJAX get professores associados a curso
+      $('#id_year').on('change', function() {
+
+        var idYear = $(this).val();
+          console.log(idYear);
+
+        if (idYear == "") {
+          $('#id_class').html('');
+          $('#id_class').prop('disabled', true);
+          $('#id_class').trigger('chosen:updated');
+          $('#id_user').html('');
+          $('#id_user').prop('disabled', true);
+          $('#id_user').trigger('chosen:updated');
+          return false;
+        }
+
+        $.ajax({
+          url: "ajax/summary_new.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_year: idYear
+          }
+        }).done(function(res) {
+          console.log(res);
+          $('#id_class').html('');
+
+          // iterate and add as option
+          $('#id_class').append($('<option>', {
+            value: "",
+            text: ""
+          }));
+          res.forEach(function(el, i) {
+            $('#id_class').append($('<option>', {
+              value: el.id_class,
+              text: el.fullName
+            }));
+          });
+
+          // enable/disable
+          if (res.length > 0) $('#id_class').prop('disabled', false);
+          else $('#id_class').prop('disabled', true);
+
+          // update select box
+          $('#id_class').trigger('chosen:updated');
+          
+
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      })
+
+      // AJAX get professores associados a curso
       $('#id_class').on('change', function() {
 
         var idClass = $(this).val();
 
-        if (idClass == "") return false;
+        if (idClass == "") {
+          $('#id_user').html('');
+          $('#id_user').prop('disabled', true);
+          $('#id_user').trigger('chosen:updated');
+          return false;
+        }
 
         $.ajax({
           url: "ajax/summary_new.php",
@@ -148,6 +218,10 @@
           $('#id_user').html('');
 
           // iterate and add as option
+          $('#id_user').append($('<option>', {
+            value: "",
+            text: ""
+          }));
           res.forEach(function(el, i) {
             $('#id_user').append($('<option>', {
               value: el.id_user,

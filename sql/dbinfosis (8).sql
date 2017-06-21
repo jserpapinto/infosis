@@ -604,7 +604,7 @@ ALTER TABLE `tClasses`
 ALTER TABLE `tClassInscriptions`
   ADD CONSTRAINT `FK_classInscription_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
   ADD CONSTRAINT `FK_classInscription_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`),
-  ADD CONSTRAINT `FK_tClassInscriptions_tYear` FOREIGN KEY (`id_year`) REFERENCES `tyears` (`id_year`);
+  ADD CONSTRAINT `FK_tClassInscriptions_tYear` FOREIGN KEY (`id_year`) REFERENCES `tYears` (`id_year`);
 
 --
 -- Limitadores para a tabela `tDegrees`
@@ -618,7 +618,7 @@ ALTER TABLE `tDegrees`
 ALTER TABLE `tSummarys`
   ADD CONSTRAINT `FK_summary_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
   ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`),
-  ADD CONSTRAINT `FK_tSummarys_tYear` FOREIGN KEY (`id_year`) REFERENCES `tYear` (`id_year`);
+  ADD CONSTRAINT `FK_tSummarys_tYear` FOREIGN KEY (`id_year`) REFERENCES `tYears` (`id_year`);
 
 --
 -- Limitadores para a tabela `tUsers`

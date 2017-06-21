@@ -20,8 +20,10 @@
     $fullName = $_POST['fullName'];
     $credits = $_POST['credits'];
     $hours = $_POST['hours'];
+    $semester = $_POST['semester'];
+    $n_classes = $_POST['n_classes'];
     $active = ($_POST['active']) ? true : false;
-    $c->update($id_class, $id_degree, $code, $fullName, $credits, $hours, $active, 'class_manage.php');
+    $c->update($id_class, $id_degree, $code, $fullName, $credits, $hours, $semester, $n_classes, $active, 'class_manage.php');
   }
 ?>
 
@@ -110,6 +112,30 @@
                       </div>
                     </div><!-- .Créditos -->
 
+                    <!-- Semester -->
+                    <div class="form-group pmd-textfield col-sm-6">
+                      <label class="col-sm-6 control-label" for="semester">Semestre</label>
+                      <div class="col-sm-6">
+                        <select id="semester" name="semester" class="chosen">
+                          <?php 
+                          for ($i = 1; $i <= $degree['semesters']; $i++) {
+                          ?>
+                            <option <?= ($class['semester'] == $i) ? "selected" : "" ?> value="<?=$i?>"><?=$i?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div><!-- .Semester -->
+
+
+                    <!-- Créditos -->
+                    <div class="form-group pmd-textfield col-sm-6">
+                      <label class="col-sm-6 control-label" for="n_classes">Nº Aulas</label>
+                      <div class="col-sm-6">
+                        <input type="number" value="<?= $class['n_classes'] ?>" id="n_classes" name="n_classes" class="form-control empty" min="0" max="50" required>
+                      </div>
+                    </div><!-- .Créditos -->
+
+
                     <!-- Activo -->
                     <div class="form-group checkbox pmd-default-theme pmd-textfield col-sm-12">
                       <label for="active" class="pmd-checkbox pmd-checkbox-ripple-effect col-sm-12">
@@ -143,6 +169,59 @@
     <?php require_once('includes/scripts.inc.php'); ?>
 
     <!-- Custom scripts -->
-    <script> $(".chosen").chosen({width:'85%', allow_single_deselect:true}); </script>
+    <script> 
+
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
+
+       // AJAX get professores associados a curso
+      $('#id_degree').on('change', function() {
+
+        var idDegree = $(this).val();
+
+        if (idDegree == "") {
+          $('#semester').html('');
+          $('#semester').prop('disabled', true);
+          $('#semester').trigger('chosen:updated');
+
+          return false;
+        }
+
+        $.ajax({
+          url: "ajax/class_new.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_degree: idDegree
+          }
+        }).done(function(res) {
+
+          $('#semester').html('');
+
+          $('#semester').append($('<option>', {
+              value: "",
+              text: ""
+          }));
+
+          // iterate and add as option
+          for (var i = 1; i <= res; i++) {
+            $('#semester').append($('<option>', {
+              value: i,
+              text: i
+            }));
+          }
+
+          // enable/disable
+          $('#semester').prop('disabled', false);
+
+          // update select box
+          $('#semester').trigger('chosen:updated');
+          
+
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      })
+
+    </script>
   </body>
 </html>

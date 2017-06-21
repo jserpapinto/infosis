@@ -18,8 +18,10 @@
     $fullName = $_POST['fullName'];
     $credits = $_POST['credits'];
     $hours = $_POST['hours'];
+    $semester = $_POST['semester'];
+    $n_classes = $_POST['n_classes'];
     $active = ($_POST['active']) ? true : false;
-    $c->insert($id_degree, $code, $fullName, $credits, $hours, $active, 'class_manage.php');
+    $c->insert($id_degree, $code, $fullName, $credits, $hours, $semester, $n_classes, $active, 'class_manage.php');
   }
 ?>
 
@@ -102,7 +104,27 @@
                     <div class="form-group pmd-textfield col-sm-6">
                       <label class="col-sm-6 control-label" for="credits">Créditos</label>
                       <div class="col-sm-6">
-                        <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="1000" required>
+                        <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="20" required>
+                      </div>
+                    </div><!-- .Créditos -->
+
+
+                    <!-- Semester -->
+                    <div class="form-group pmd-textfield col-sm-6">
+                      <label class="col-sm-6 control-label" for="semester">Semestre</label>
+                      <div class="col-sm-6">
+                        <select id="semester" name="semester" class="chosen" disabled required="">
+                            <option value=""></option>
+                        </select>
+                      </div>
+                    </div><!-- .Semester -->
+
+
+                    <!-- Créditos -->
+                    <div class="form-group pmd-textfield col-sm-6">
+                      <label class="col-sm-6 control-label" for="n_classes">Nº Aulas</label>
+                      <div class="col-sm-6">
+                        <input type="number" id="n_classes" name="n_classes" class="form-control empty" min="0" max="50" required>
                       </div>
                     </div><!-- .Créditos -->
 
@@ -138,6 +160,58 @@
     <?php require_once('includes/scripts.inc.php'); ?>
 
     <!-- Custom scripts -->
-    <script> $(".chosen").chosen({width:'85%', allow_single_deselect:true}); </script>
+    <script> 
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
+
+       // AJAX get professores associados a curso
+      $('#id_degree').on('change', function() {
+
+        var idDegree = $(this).val();
+
+        if (idDegree == "") {
+          $('#semester').html('');
+          $('#semester').prop('disabled', true);
+          $('#semester').trigger('chosen:updated');
+
+          return false;
+        }
+
+        $.ajax({
+          url: "ajax/class_new.php",
+          method: "POST",
+          dataType: "json",
+          data: {
+            id_degree: idDegree
+          }
+        }).done(function(res) {
+
+          $('#semester').html('');
+
+          $('#semester').append($('<option>', {
+              value: "",
+              text: ""
+          }));
+
+          // iterate and add as option
+          for (var i = 1; i <= res; i++) {
+            $('#semester').append($('<option>', {
+              value: i,
+              text: i
+            }));
+          }
+
+          // enable/disable
+          $('#semester').prop('disabled', false);
+
+          // update select box
+          $('#semester').trigger('chosen:updated');
+          
+
+        }).fail(function(xhr) {
+          console.log(xhr, xhr.statusText);
+        });
+      })
+
+    </script>
   </body>
 </html>

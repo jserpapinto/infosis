@@ -48,7 +48,9 @@
                         <th>Curso</th>
                         <th>Código</th>
                         <th>Designação</th>
+                        <th>Semestre</th>
                         <th>Horas</th>
+                        <th>Nº Aulas</th>
                         <th>Créditos</th>
                         <th>Estado</th>
                         <th>Opções</th>
@@ -65,7 +67,9 @@
                         <td><?= $class['dcode'] ?></td>
                         <td><?= $class['code'] ?></td>
                         <td><?= $class['fullName'] ?></td>
+                        <td><strong><?= $class['semester'] ?></strong> <small>(<?= ceil($class['semester'] / 2) ?>º ano)</small></td>
                         <td><?= $class['hours'] ?></td>
+                        <td><?= $class['n_classes'] ?></td>
                         <td><?= $class['credits'] ?></td>
                         <td><input type="checkbox" id="active" name="active" <?= ($class['active']) ? 'checked="true"' : '' ?> disabled="true"></td>
                         <td>

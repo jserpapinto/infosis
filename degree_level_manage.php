@@ -12,14 +12,16 @@
   //form crate
   if(isset($_POST['designationCreate']) && $_POST['designationCreate'] != null){
     $designation = $_POST['designationCreate'];
-    $d->insertLevel($designation, 'degree_level_manage.php');
+    $semesters = $_POST['semestersCreate'];
+    $d->insertLevel($designation, $semesters, 'degree_level_manage.php');
   }
   
   //form edit
   elseif (isset($_POST['designationEdit']) && $_POST['designationEdit'] != null) {
     $id_degree_level = $_POST['id_degree_level'];
     $designation = $_POST['designationEdit'];
-    $d->updateLevel($id_degree_level, $designation, 'degree_level_manage.php');
+    $semesters = $_POST['semestersEdit'];
+    $d->updateLevel($id_degree_level, $designation, $semesters, 'degree_level_manage.php');
   }
 
   //delete error
@@ -80,7 +82,7 @@
 
                     <!-- Card action -->
                     <div class="pmd-card-actions">
-                        <button data-target="#modal-edit-level" data-id="<?= $level['id_degree_level'] ?>" data-designation="<?= $level['designation'] ?>" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Editar</button>
+                        <button data-target="#modal-edit-level" data-id="<?= $level['id_degree_level'] ?>" data-designation="<?= $level['designation'] ?>" data-semesters="<?= $level['semesters'] ?>" data-toggle="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Editar</button>
                         <button data-destination="degree_level_delete.php?id=<?= $level['id_degree_level'] ?>" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-default sweet-delete">Apagar</button>
                     </div>
 
@@ -122,6 +124,12 @@
                   <input type="text" class="mat-input form-control" id="designationCreate" name="designationCreate" required>
                 </div>
             </div>
+            <div class="modal-body">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                  <label for="semestersCreate">Nº de Semestres</label>
+                  <input type="number" min="2" max="6" class="mat-input form-control" id="semestersCreate" name="semestersCreate" required>
+                </div>
+            </div>
             <div class="pmd-modal-action">
               <button class="btn pmd-ripple-effect btn-primary" type="submit">Criar</button>
               <button data-dismiss="modal"  class="btn pmd-ripple-effect btn-default" type="button">Cancelar</button>
@@ -149,6 +157,12 @@
                   <input type="text" class="mat-input form-control" id="designationEdit" name="designationEdit" value="" required>
                 </div>
             </div>
+            <div class="modal-body">
+                <div class="form-group pmd-textfield">
+                  <label for="semestersEdit">Nº de Semestres</label>
+                  <input type="number" min="2" max="6" class="mat-input form-control" id="semestersEdit" name="semestersEdit" required>
+                </div>
+            </div>
             <div class="pmd-modal-action">
               <input type="hidden" id="id_degree_level" name="id_degree_level">
               <button class="btn pmd-ripple-effect btn-primary" type="submit">Editar</button>
@@ -168,6 +182,7 @@
     $('#modal-edit-level').on('show.bs.modal', function(e) {
       var $btn = $(e.relatedTarget);
       $(this).find('#designationEdit').val($btn.data('designation'));
+      $(this).find('#semestersEdit').val($btn.data('semesters'));
       $(this).find('#id_degree_level').val($btn.data('id'));
     });
     </script>
