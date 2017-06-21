@@ -154,6 +154,6 @@
     <script src="js/upload-file.js"></script>
 
     <!-- Custom scripts -->
-    <script> $(".chosen").chosen(); </script>
+    <script> $(".chosen").chosen({width:'85%', allow_single_deselect:true}); </script>
   </body>
 </html>

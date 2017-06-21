@@ -126,7 +126,7 @@
 
     <!-- Custom scripts -->
     <script>
-      $(".chosen").chosen(); 
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
       $('.datetimepicker').datetimepicker({
         date: new Date('<?= $summary['class_date'] ?>')
       });
