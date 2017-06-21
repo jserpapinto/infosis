@@ -192,11 +192,15 @@ class user {
       $db = new database();
       $con = $db->getCon();
   	  $sql = '
-        SELECT name, id_user, picture 
-        FROM tUsers 
-        WHERE username LIKE :u 
-          AND password LIKE :p 
-          AND active = true';
+        SELECT tUsers.name, 
+          tUsers.id_user, 
+          tUsers.picture, 
+          tRoles.role
+        FROM tUsers, tRoles
+        WHERE tUsers.id_role = tRoles.id_role
+          AND tUsers.username LIKE :u 
+          AND tUsers.password LIKE :p 
+          AND tUsers.active = true';
       $data = $con->prepare($sql);
  	    $data->bindvalue(':u', $username);
   	  $data->bindvalue(':p', $password);
@@ -208,6 +212,7 @@ class user {
         $_SESSION['id_user'] = $user['id_user'];
         $_SESSION['name'] = $user['name'];
         $_SESSION['picture'] = $user['picture'];
+        $_SESSION['role'] = $user['role'];
       }
   	  return (isset($user['id_user'])) ? true : false;
     }
@@ -228,9 +233,9 @@ class user {
   }
   
   //verify login
-  public function logged() {
+  public function logged($role = "-1") {
     session_start();
-    if (isset($_SESSION['login']) && $_SESSION['login']) return true;
+    if (isset($_SESSION['login']) && $_SESSION['login'] && (strpos($role, $_SESSION['role']) !== false || $role == "-1")) return true;
     else {
       $this->logout('index.php?error2=true');
       return false;

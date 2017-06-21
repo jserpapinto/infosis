@@ -31,7 +31,7 @@
   <body id="UpdateUser">
 
     <!-- Menu -->
-    <?php require_once('includes/menuAdmin.inc.php'); ?>
+    <?php require_once('includes/menuManager.inc.php'); ?>
 
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">

@@ -32,7 +32,7 @@
   <body id="UpdateClass">
   
     <!-- Menu -->
-    <?php require_once('includes/menuAdmin.inc.php'); ?>
+    <?php require_once('includes/menuManager.inc.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/datetime.css">
     
     <!-- Container -->

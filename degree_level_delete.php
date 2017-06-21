@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
+  $u->logged("Admin");
 
   //delete degree level
   require_once 'classes/degree.class.php';

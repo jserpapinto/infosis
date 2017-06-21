@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
+  $u->logged("Admin");
 
   //page
   require_once 'classes/degree.class.php';
@@ -28,8 +28,9 @@
   </head>
 
   <body id="InsertSummary">
+  
     <!-- Menu -->
-    <?php require_once('includes/menuAdmin.inc.php'); ?>
+    <?php require_once('includes/menuManager.inc.php'); ?>
 
     <!-- Container -->
     <div class="container">

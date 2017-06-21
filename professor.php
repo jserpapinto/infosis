@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged("Admin");
+  $u->logged("Professor");
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
   <body>
     <!-- Menu -->
     <?php require_once('includes/menuManager.inc.php'); ?>
-    
+
     <!-- Container -->
     <div id="content" class="pmd-content content-area dashboard">
       <div class="container-fluid">

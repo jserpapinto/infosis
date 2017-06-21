@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
+  $u->logged("Admin");
 
   //page
   require_once 'classes/degree.class.php';
@@ -40,7 +40,7 @@
   <body>
 
     <!-- Menu -->
-    <?php require_once('includes/menuAdmin.inc.php'); ?>
+    <?php require_once('includes/menuManager.inc.php'); ?>
 
     <!-- Page -->
     <div id="content" class="pmd-content inner-page">

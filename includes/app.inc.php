@@ -2,7 +2,7 @@
 
 //Dados da aplicação
 $GLOBALS['appname'] = 'ISTEC@infosis';
-$GLOBALS['version'] = '0.0.6';
+$GLOBALS['version'] = '0.0.7';
 $GLOBALS['upload'] = 'uploads/';
 $GLOBALS['root'] = '';
 
@@ -11,6 +11,7 @@ $GLOBALS['root'] = '';
 //$_SESSION['id_user'] = $user['id_user']; 
 //$_SESSION['name'] = $user['name'];
 //$_SESSION['picture'] = $user['picture'];
+//$_SESSION['role'] = $user['role'];
 
 //ID's
 //<body id="InsertUser">

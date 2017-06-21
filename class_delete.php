@@ -2,8 +2,8 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
-
+  $u->logged("Admin");
+  
   //delete class
   require_once 'classes/classs.class.php';
   $c = new classs();

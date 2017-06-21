@@ -1,11 +1,11 @@
 <?php
- //se o formulário foi submetido
+//form
 if (isset($_POST['username']) && $_POST['username'] != null) {
   require_once 'classes/user.class.php';
   $user = $_POST['username'];
   $pass = $_POST['password'];
   $u = new user();
-  if ($u->login($user, $pass)) header('Location:admin.php');
+  if ($u->login($user, $pass)) header('Location:' . strtolower($_SESSION['role']) . '.php');
   else header('Location:index.php?error=true');
 }
 ?>
@@ -24,8 +24,8 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
       <!-- Header -->
       <div class="row">
         <div class="jumbotron">
-          <h1><?php echo $GLOBALS['appname']; ?></h1>
-          <small>Sistema de Informação v<?php echo $GLOBALS['version']; ?></small>
+          <h1><?= $GLOBALS['appname'] ?></h1>
+          <small>Sistema de Informação v<?= $GLOBALS['version'] ?></small>
         </div>
       </div>
 
@@ -69,6 +69,7 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
 
           <!-- Errors -->
           <?php
+            require_once 'classes/error.class.php';
             $e = new error();
             if (isset($_GET['error']) && $_GET['error']) echo $e->errorMessage('danger', 'ACESSO NEGADO!', 'Nome de utilizador ou palavra-passe errados, por favor reveja os dados...');
             if (isset($_GET['error2']) && $_GET['error2']) echo $e->errorMessage('warning', 'VIOLAÇÃO DE ACESSO!', 'Está a tentar entrar numa área reservada, contacte o administrador !!!');
