@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 21-Jun-2017 às 20:47
+-- Generation Time: 21-Jun-2017 às 20:50
 -- Versão do servidor: 5.6.31
 -- PHP Version: 5.6.25
 
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `tAttendancies`
 --
 
+DROP TABLE IF EXISTS `tAttendancies`;
 CREATE TABLE IF NOT EXISTS `tAttendancies` (
   `id_attendacie` int(11) NOT NULL,
   `id_summary` int(11) NOT NULL,
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `tAttendancies` (
 -- Estrutura da tabela `tClasses`
 --
 
+DROP TABLE IF EXISTS `tClasses`;
 CREATE TABLE IF NOT EXISTS `tClasses` (
   `id_class` int(11) NOT NULL,
   `id_degree` int(11) NOT NULL,
@@ -133,6 +135,7 @@ INSERT INTO `tClasses` (`id_class`, `id_degree`, `semester`, `code`, `fullName`,
 -- Estrutura da tabela `tClassInscriptions`
 --
 
+DROP TABLE IF EXISTS `tClassInscriptions`;
 CREATE TABLE IF NOT EXISTS `tClassInscriptions` (
   `id_class_inscription` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -292,6 +295,7 @@ INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`,
 -- Estrutura da tabela `tDegreeLevels`
 --
 
+DROP TABLE IF EXISTS `tDegreeLevels`;
 CREATE TABLE IF NOT EXISTS `tDegreeLevels` (
   `id_degree_level` int(11) NOT NULL,
   `designation` varchar(100) NOT NULL,
@@ -313,6 +317,7 @@ INSERT INTO `tDegreeLevels` (`id_degree_level`, `designation`, `semesters`) VALU
 -- Estrutura da tabela `tDegrees`
 --
 
+DROP TABLE IF EXISTS `tDegrees`;
 CREATE TABLE IF NOT EXISTS `tDegrees` (
   `id_degree` int(11) NOT NULL COMMENT 'id do curso',
   `code` varchar(12) NOT NULL COMMENT 'código do curso',
@@ -336,6 +341,7 @@ INSERT INTO `tDegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALU
 -- Estrutura da tabela `tRoles`
 --
 
+DROP TABLE IF EXISTS `tRoles`;
 CREATE TABLE IF NOT EXISTS `tRoles` (
   `id_role` int(11) NOT NULL COMMENT 'id de tipo de utilizador',
   `role` varchar(64) NOT NULL COMMENT 'designação do tipo de utilizador',
@@ -358,6 +364,7 @@ INSERT INTO `tRoles` (`id_role`, `role`, `active`) VALUES
 -- Estrutura da tabela `tSummarys`
 --
 
+DROP TABLE IF EXISTS `tSummarys`;
 CREATE TABLE IF NOT EXISTS `tSummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
@@ -391,6 +398,7 @@ INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `n_aula`, `summary
 -- Estrutura da tabela `tUsers`
 --
 
+DROP TABLE IF EXISTS `tUsers`;
 CREATE TABLE IF NOT EXISTS `tUsers` (
   `id_user` int(11) NOT NULL COMMENT 'id de utilizador',
   `id_role` int(11) NOT NULL COMMENT 'chave secundaria indicando o tipo de utilizador',
@@ -440,6 +448,7 @@ INSERT INTO `tUsers` (`id_user`, `id_role`, `username`, `password`, `name`, `pic
 -- Estrutura da tabela `tYears`
 --
 
+DROP TABLE IF EXISTS `tYears`;
 CREATE TABLE IF NOT EXISTS `tYears` (
   `id_year` int(11) NOT NULL,
   `beginning` date NOT NULL,
