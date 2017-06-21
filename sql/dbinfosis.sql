@@ -2,10 +2,10 @@
 -- version 4.4.15.8
 -- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: 21-Jun-2017 às 19:03
--- Versão do servidor: 5.6.31
--- PHP Version: 5.6.25
+-- Host: 127.0.0.1
+-- Generation Time: Jun 21, 2017 at 06:08 PM
+-- Server version: 5.6.31
+-- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tclasses`
+-- Table structure for table `tClasses`
 --
 
-CREATE TABLE IF NOT EXISTS `tclasses` (
+CREATE TABLE IF NOT EXISTS `tClasses` (
   `id_class` int(11) NOT NULL,
   `id_degree` int(11) NOT NULL,
   `code` varchar(16) NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `tclasses` (
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tclasses`
+-- Dumping data for table `tClasses`
 --
 
-INSERT INTO `tclasses` (`id_class`, `id_degree`, `code`, `fullName`, `credits`, `hours`, `active`) VALUES
+INSERT INTO `tClasses` (`id_class`, `id_degree`, `code`, `fullName`, `credits`, `hours`, `active`) VALUES
 (1, 3, '41022', 'Tecnologias da Internet IV', 4, 108, 1),
 (3, 2, 'asdasd', 'asdsda', 7, 5, 1),
 (4, 2, 'asdasdasdsdad', 'asdasdasdasd', 6, 6, 1),
@@ -115,7 +115,7 @@ INSERT INTO `tclasses` (`id_class`, `id_degree`, `code`, `fullName`, `credits`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tClassInscriptions`
+-- Table structure for table `tClassInscriptions`
 --
 
 CREATE TABLE IF NOT EXISTS `tClassInscriptions` (
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `tClassInscriptions` (
 ) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tClassInscriptions`
+-- Dumping data for table `tClassInscriptions`
 --
 
 INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`, `inscription_year`) VALUES
@@ -274,19 +274,19 @@ INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tdegreelevels`
+-- Table structure for table `tDegreeLevels`
 --
 
-CREATE TABLE IF NOT EXISTS `tdegreelevels` (
+CREATE TABLE IF NOT EXISTS `tDegreeLevels` (
   `id_degree_level` int(11) NOT NULL,
   `designation` varchar(100) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tdegreelevels`
+-- Dumping data for table `tDegreeLevels`
 --
 
-INSERT INTO `tdegreelevels` (`id_degree_level`, `designation`) VALUES
+INSERT INTO `tDegreeLevels` (`id_degree_level`, `designation`) VALUES
 (1, 'CTESP'),
 (2, 'Licenciatura'),
 (3, 'Pós-Graduação');
@@ -294,10 +294,10 @@ INSERT INTO `tdegreelevels` (`id_degree_level`, `designation`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tdegrees`
+-- Table structure for table `tDegrees`
 --
 
-CREATE TABLE IF NOT EXISTS `tdegrees` (
+CREATE TABLE IF NOT EXISTS `tDegrees` (
   `id_degree` int(11) NOT NULL COMMENT 'id do curso',
   `code` varchar(12) NOT NULL COMMENT 'código do curso',
   `fullName` varchar(140) NOT NULL COMMENT 'designação completa do curso',
@@ -305,10 +305,10 @@ CREATE TABLE IF NOT EXISTS `tdegrees` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tdegrees`
+-- Dumping data for table `tDegrees`
 --
 
-INSERT INTO `tdegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALUES
+INSERT INTO `tDegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALUES
 (1, 'CTESP - DPM', 'Desenvolvimento de Produtos Multimédia', 1),
 (2, 'CTESP - RSI', 'Redes e Sistemas Informáticos', 1),
 (3, 'LI', 'Informática', 2),
@@ -317,20 +317,20 @@ INSERT INTO `tdegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `troles`
+-- Table structure for table `tRoles`
 --
 
-CREATE TABLE IF NOT EXISTS `troles` (
+CREATE TABLE IF NOT EXISTS `tRoles` (
   `id_role` int(11) NOT NULL COMMENT 'id de tipo de utilizador',
   `role` varchar(64) NOT NULL COMMENT 'designação do tipo de utilizador',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'estado do tipo de utilizador'
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `troles`
+-- Dumping data for table `tRoles`
 --
 
-INSERT INTO `troles` (`id_role`, `role`, `active`) VALUES
+INSERT INTO `tRoles` (`id_role`, `role`, `active`) VALUES
 (1, 'Admin', 1),
 (2, 'Secretaria', 1),
 (3, 'Professor', 1),
@@ -339,10 +339,10 @@ INSERT INTO `troles` (`id_role`, `role`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tsummarys`
+-- Table structure for table `tSummarys`
 --
 
-CREATE TABLE IF NOT EXISTS `tsummarys` (
+CREATE TABLE IF NOT EXISTS `tSummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
@@ -351,10 +351,10 @@ CREATE TABLE IF NOT EXISTS `tsummarys` (
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tsummarys`
+-- Dumping data for table `tSummarys`
 --
 
-INSERT INTO `tsummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_date`) VALUES
+INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_date`) VALUES
 (3, 1, 9, 'esta aula foi muito boa', '2001-06-03'),
 (4, 5, 9, 'ola e adeus aula curta', '2017-06-16'),
 (5, 5, 3, 'aula rapida', '2017-06-10'),
@@ -370,10 +370,10 @@ INSERT INTO `tsummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tusers`
+-- Table structure for table `tUsers`
 --
 
-CREATE TABLE IF NOT EXISTS `tusers` (
+CREATE TABLE IF NOT EXISTS `tUsers` (
   `id_user` int(11) NOT NULL COMMENT 'id de utilizador',
   `id_role` int(11) NOT NULL COMMENT 'chave secundaria indicando o tipo de utilizador',
   `username` varchar(32) NOT NULL COMMENT 'nome para login',
@@ -384,10 +384,10 @@ CREATE TABLE IF NOT EXISTS `tusers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tusers`
+-- Dumping data for table `tUsers`
 --
 
-INSERT INTO `tusers` (`id_user`, `id_role`, `username`, `password`, `name`, `picture`, `active`) VALUES
+INSERT INTO `tUsers` (`id_user`, `id_role`, `username`, `password`, `name`, `picture`, `active`) VALUES
 (1, 1, 'admin', 'admin', 'Administrador', 'uploads/admin/594036236e0b2.png', 1),
 (2, 2, 'secretaria', 'istec', 'Secretaria', 'uploads/user_default.png', 1),
 (3, 3, 'professor', 'istec', 'Professor', 'uploads/user_default.png', 1),
@@ -421,9 +421,9 @@ INSERT INTO `tusers` (`id_user`, `id_role`, `username`, `password`, `name`, `pic
 --
 
 --
--- Indexes for table `tclasses`
+-- Indexes for table `tClasses`
 --
-ALTER TABLE `tclasses`
+ALTER TABLE `tClasses`
   ADD PRIMARY KEY (`id_class`),
   ADD KEY `class_degree` (`id_degree`);
 
@@ -436,36 +436,36 @@ ALTER TABLE `tClassInscriptions`
   ADD KEY `tclassInscription_tclass` (`id_class`) USING BTREE;
 
 --
--- Indexes for table `tdegreelevels`
+-- Indexes for table `tDegreeLevels`
 --
-ALTER TABLE `tdegreelevels`
+ALTER TABLE `tDegreeLevels`
   ADD PRIMARY KEY (`id_degree_level`);
 
 --
--- Indexes for table `tdegrees`
+-- Indexes for table `tDegrees`
 --
-ALTER TABLE `tdegrees`
+ALTER TABLE `tDegrees`
   ADD PRIMARY KEY (`id_degree`),
   ADD KEY `degrees_degreeLevels` (`id_degree_level`);
 
 --
--- Indexes for table `troles`
+-- Indexes for table `tRoles`
 --
-ALTER TABLE `troles`
+ALTER TABLE `tRoles`
   ADD PRIMARY KEY (`id_role`);
 
 --
--- Indexes for table `tsummarys`
+-- Indexes for table `tSummarys`
 --
-ALTER TABLE `tsummarys`
+ALTER TABLE `tSummarys`
   ADD PRIMARY KEY (`id_summary`),
   ADD KEY `tSummarys_tclasses` (`id_class`),
   ADD KEY `tSummarys_tusers` (`id_user`);
 
 --
--- Indexes for table `tusers`
+-- Indexes for table `tUsers`
 --
-ALTER TABLE `tusers`
+ALTER TABLE `tUsers`
   ADD PRIMARY KEY (`id_user`),
   ADD KEY `users_roles` (`id_role`);
 
@@ -474,9 +474,9 @@ ALTER TABLE `tusers`
 --
 
 --
--- AUTO_INCREMENT for table `tclasses`
+-- AUTO_INCREMENT for table `tClasses`
 --
-ALTER TABLE `tclasses`
+ALTER TABLE `tClasses`
   MODIFY `id_class` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `tClassInscriptions`
@@ -484,65 +484,65 @@ ALTER TABLE `tclasses`
 ALTER TABLE `tClassInscriptions`
   MODIFY `id_class_inscription` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=141;
 --
--- AUTO_INCREMENT for table `tdegreelevels`
+-- AUTO_INCREMENT for table `tDegreeLevels`
 --
-ALTER TABLE `tdegreelevels`
+ALTER TABLE `tDegreeLevels`
   MODIFY `id_degree_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `tdegrees`
+-- AUTO_INCREMENT for table `tDegrees`
 --
-ALTER TABLE `tdegrees`
+ALTER TABLE `tDegrees`
   MODIFY `id_degree` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id do curso',AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `troles`
+-- AUTO_INCREMENT for table `tRoles`
 --
-ALTER TABLE `troles`
+ALTER TABLE `tRoles`
   MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tipo de utilizador',AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `tsummarys`
+-- AUTO_INCREMENT for table `tSummarys`
 --
-ALTER TABLE `tsummarys`
+ALTER TABLE `tSummarys`
   MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
--- AUTO_INCREMENT for table `tusers`
+-- AUTO_INCREMENT for table `tUsers`
 --
-ALTER TABLE `tusers`
+ALTER TABLE `tUsers`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de utilizador',AUTO_INCREMENT=30;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `tclasses`
+-- Constraints for table `tClasses`
 --
-ALTER TABLE `tclasses`
-  ADD CONSTRAINT `FK_classDegree` FOREIGN KEY (`id_degree`) REFERENCES `tdegrees` (`id_degree`);
+ALTER TABLE `tClasses`
+  ADD CONSTRAINT `FK_classDegree` FOREIGN KEY (`id_degree`) REFERENCES `tDegrees` (`id_degree`);
 
 --
--- Limitadores para a tabela `tClassInscriptions`
+-- Constraints for table `tClassInscriptions`
 --
 ALTER TABLE `tClassInscriptions`
-  ADD CONSTRAINT `FK_classInscriptionProfessor_class` FOREIGN KEY (`id_class`) REFERENCES `tclasses` (`id_class`),
-  ADD CONSTRAINT `FK_classInscriptionProfessor_user` FOREIGN KEY (`id_user`) REFERENCES `tusers` (`id_user`);
+  ADD CONSTRAINT `FK_classInscriptionProfessor_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
+  ADD CONSTRAINT `FK_classInscriptionProfessor_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`);
 
 --
--- Limitadores para a tabela `tdegrees`
+-- Constraints for table `tDegrees`
 --
-ALTER TABLE `tdegrees`
-  ADD CONSTRAINT `fk_degrees_degreeLevels` FOREIGN KEY (`id_degree_level`) REFERENCES `tdegreelevels` (`id_degree_level`);
+ALTER TABLE `tDegrees`
+  ADD CONSTRAINT `fk_degrees_degreeLevels` FOREIGN KEY (`id_degree_level`) REFERENCES `tDegreeLevels` (`id_degree_level`);
 
 --
--- Limitadores para a tabela `tsummarys`
+-- Constraints for table `tSummarys`
 --
-ALTER TABLE `tsummarys`
-  ADD CONSTRAINT `FK_summary_class` FOREIGN KEY (`id_class`) REFERENCES `tclasses` (`id_class`),
-  ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tusers` (`id_user`);
+ALTER TABLE `tSummarys`
+  ADD CONSTRAINT `FK_summary_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
+  ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`);
 
 --
--- Limitadores para a tabela `tusers`
+-- Constraints for table `tUsers`
 --
-ALTER TABLE `tusers`
-  ADD CONSTRAINT `tusers_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `troles` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tUsers`
+  ADD CONSTRAINT `tUsers_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `tRoles` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
