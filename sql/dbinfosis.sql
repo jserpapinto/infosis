@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 21-Jun-2017 às 15:17
--- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 7.0.6
+-- Host: localhost
+-- Generation Time: 21-Jun-2017 às 19:03
+-- Versão do servidor: 5.6.31
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `tclasses`
 --
 
-CREATE TABLE `tclasses` (
+CREATE TABLE IF NOT EXISTS `tclasses` (
   `id_class` int(11) NOT NULL,
   `id_degree` int(11) NOT NULL,
   `code` varchar(16) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `tclasses` (
   `credits` int(11) NOT NULL,
   `hours` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tclasses`
@@ -115,21 +115,21 @@ INSERT INTO `tclasses` (`id_class`, `id_degree`, `code`, `fullName`, `credits`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tclassinscription`
+-- Estrutura da tabela `tClassInscriptions`
 --
 
-CREATE TABLE `tclassinscription` (
+CREATE TABLE IF NOT EXISTS `tClassInscriptions` (
   `id_class_inscription` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `inscription_year` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `tclassinscription`
+-- Extraindo dados da tabela `tClassInscriptions`
 --
 
-INSERT INTO `tclassinscription` (`id_class_inscription`, `id_user`, `id_class`, `inscription_year`) VALUES
+INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`, `inscription_year`) VALUES
 (1, 9, 3, '2017-06-14'),
 (2, 3, 5, '2017-06-21'),
 (3, 14, 6, '2016-10-03'),
@@ -277,10 +277,10 @@ INSERT INTO `tclassinscription` (`id_class_inscription`, `id_user`, `id_class`, 
 -- Estrutura da tabela `tdegreelevels`
 --
 
-CREATE TABLE `tdegreelevels` (
+CREATE TABLE IF NOT EXISTS `tdegreelevels` (
   `id_degree_level` int(11) NOT NULL,
   `designation` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tdegreelevels`
@@ -297,12 +297,12 @@ INSERT INTO `tdegreelevels` (`id_degree_level`, `designation`) VALUES
 -- Estrutura da tabela `tdegrees`
 --
 
-CREATE TABLE `tdegrees` (
+CREATE TABLE IF NOT EXISTS `tdegrees` (
   `id_degree` int(11) NOT NULL COMMENT 'id do curso',
   `code` varchar(12) NOT NULL COMMENT 'código do curso',
   `fullName` varchar(140) NOT NULL COMMENT 'designação completa do curso',
   `id_degree_level` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tdegrees`
@@ -320,11 +320,11 @@ INSERT INTO `tdegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALU
 -- Estrutura da tabela `troles`
 --
 
-CREATE TABLE `troles` (
+CREATE TABLE IF NOT EXISTS `troles` (
   `id_role` int(11) NOT NULL COMMENT 'id de tipo de utilizador',
   `role` varchar(64) NOT NULL COMMENT 'designação do tipo de utilizador',
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'estado do tipo de utilizador'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `troles`
@@ -342,13 +342,13 @@ INSERT INTO `troles` (`id_role`, `role`, `active`) VALUES
 -- Estrutura da tabela `tsummarys`
 --
 
-CREATE TABLE `tsummarys` (
+CREATE TABLE IF NOT EXISTS `tsummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `summary` varchar(255) NOT NULL,
   `class_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tsummarys`
@@ -360,11 +360,12 @@ INSERT INTO `tsummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_
 (5, 5, 3, 'aula rapida', '2017-06-10'),
 (6, 5, 3, 'aula fantastica', '2017-05-01'),
 (9, 6, 14, 'Aenean fermentum mauris dolor, in feugiat tellus blandit sed. Mauris vulputate egestas congue. Etiam et.', '2016-11-01'),
-(10, 7, 10, 'Duis maximus enim non venenatis viverra. Integer cursus magna lectus. Suspendisse suscipit mauris dolor, ut.', '2016-11-01'),
+(10, 7, 10, 'ai ai', '2017-06-30'),
 (11, 8, 11, 'Cras condimentum rhoncus semper. Nullam vitae accumsan risus. Vestibulum tincidunt massa sit amet nulla luctus.', '2016-11-01'),
 (12, 9, 19, 'Donec condimentum imperdiet auctor. Aliquam dignissim erat sit amet ex lobortis, vel pretium diam blandit.', '2016-11-01'),
 (13, 10, 12, 'Suspendisse ac lobortis sapien. Pellentesque vel sagittis nunc, in imperdiet massa. Etiam eget justo aliquet.', '2016-11-01'),
-(14, 11, 13, 'Aenean eu semper purus. Maecenas interdum felis nisl, nec elementum tortor hendrerit nec. Duis iaculis.', '2016-11-01');
+(14, 11, 13, 'Aenean eu semper purus. Maecenas interdum felis nisl, nec elementum tortor hendrerit nec. Duis iaculis.', '2016-11-01'),
+(24, 33, 18, 'bela merda', '2017-06-21');
 
 -- --------------------------------------------------------
 
@@ -372,7 +373,7 @@ INSERT INTO `tsummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_
 -- Estrutura da tabela `tusers`
 --
 
-CREATE TABLE `tusers` (
+CREATE TABLE IF NOT EXISTS `tusers` (
   `id_user` int(11) NOT NULL COMMENT 'id de utilizador',
   `id_role` int(11) NOT NULL COMMENT 'chave secundaria indicando o tipo de utilizador',
   `username` varchar(32) NOT NULL COMMENT 'nome para login',
@@ -380,7 +381,7 @@ CREATE TABLE `tusers` (
   `name` varchar(64) NOT NULL COMMENT 'nome',
   `picture` varchar(256) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'estado da conta'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tusers`
@@ -427,12 +428,12 @@ ALTER TABLE `tclasses`
   ADD KEY `class_degree` (`id_degree`);
 
 --
--- Indexes for table `tclassinscription`
+-- Indexes for table `tClassInscriptions`
 --
-ALTER TABLE `tclassinscription`
+ALTER TABLE `tClassInscriptions`
   ADD PRIMARY KEY (`id_class_inscription`),
-  ADD KEY `tclassInscriptionProfessor_tuser` (`id_user`),
-  ADD KEY `tclassInscriptionProfessor_tclass` (`id_class`);
+  ADD KEY `tclassInscription_tuser` (`id_user`) USING BTREE,
+  ADD KEY `tclassInscription_tclass` (`id_class`) USING BTREE;
 
 --
 -- Indexes for table `tdegreelevels`
@@ -476,37 +477,37 @@ ALTER TABLE `tusers`
 -- AUTO_INCREMENT for table `tclasses`
 --
 ALTER TABLE `tclasses`
-  MODIFY `id_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_class` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
--- AUTO_INCREMENT for table `tclassinscription`
+-- AUTO_INCREMENT for table `tClassInscriptions`
 --
-ALTER TABLE `tclassinscription`
-  MODIFY `id_class_inscription` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+ALTER TABLE `tClassInscriptions`
+  MODIFY `id_class_inscription` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=141;
 --
 -- AUTO_INCREMENT for table `tdegreelevels`
 --
 ALTER TABLE `tdegreelevels`
-  MODIFY `id_degree_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_degree_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tdegrees`
 --
 ALTER TABLE `tdegrees`
-  MODIFY `id_degree` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id do curso', AUTO_INCREMENT=5;
+  MODIFY `id_degree` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id do curso',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `troles`
 --
 ALTER TABLE `troles`
-  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tipo de utilizador', AUTO_INCREMENT=5;
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de tipo de utilizador',AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tsummarys`
 --
 ALTER TABLE `tsummarys`
-  MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `tusers`
 --
 ALTER TABLE `tusers`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de utilizador', AUTO_INCREMENT=30;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de utilizador',AUTO_INCREMENT=30;
 --
 -- Constraints for dumped tables
 --
@@ -518,9 +519,9 @@ ALTER TABLE `tclasses`
   ADD CONSTRAINT `FK_classDegree` FOREIGN KEY (`id_degree`) REFERENCES `tdegrees` (`id_degree`);
 
 --
--- Limitadores para a tabela `tclassinscription`
+-- Limitadores para a tabela `tClassInscriptions`
 --
-ALTER TABLE `tclassinscription`
+ALTER TABLE `tClassInscriptions`
   ADD CONSTRAINT `FK_classInscriptionProfessor_class` FOREIGN KEY (`id_class`) REFERENCES `tclasses` (`id_class`),
   ADD CONSTRAINT `FK_classInscriptionProfessor_user` FOREIGN KEY (`id_user`) REFERENCES `tusers` (`id_user`);
 
