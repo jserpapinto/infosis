@@ -78,7 +78,7 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="role" class="control-label col-sm-3">Tipo de utilizador</label>
                       <div class="col-sm-9">
-                        <select id="role" name="role" class="form-control chosen" data-placeholder="Escolha um tipo de utilizador..">
+                        <select id="role" name="role" class="form-control chosen" data-placeholder="Escolha um tipo de utilizador.." <?= ($_SESSION('role') != "Admin") ? 'readonly' : '' ?>>
                           <option value=""></option>
                           <?php
                             $r = $u->roles();

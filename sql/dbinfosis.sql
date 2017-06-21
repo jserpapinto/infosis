@@ -2,10 +2,10 @@
 -- version 4.4.15.8
 -- https://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 21, 2017 at 06:08 PM
--- Server version: 5.6.31
--- PHP Version: 7.0.10
+-- Host: localhost
+-- Generation Time: 21-Jun-2017 às 20:47
+-- Versão do servidor: 5.6.31
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,278 +23,294 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tClasses`
+-- Estrutura da tabela `tAttendancies`
+--
+
+CREATE TABLE IF NOT EXISTS `tAttendancies` (
+  `id_attendacie` int(11) NOT NULL,
+  `id_summary` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `attendancy` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tClasses`
 --
 
 CREATE TABLE IF NOT EXISTS `tClasses` (
   `id_class` int(11) NOT NULL,
   `id_degree` int(11) NOT NULL,
+  `semester` int(11) NOT NULL,
   `code` varchar(16) NOT NULL,
   `fullName` varchar(140) NOT NULL,
   `credits` int(11) NOT NULL,
   `hours` int(11) NOT NULL,
+  `aulas` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tClasses`
+-- Extraindo dados da tabela `tClasses`
 --
 
-INSERT INTO `tClasses` (`id_class`, `id_degree`, `code`, `fullName`, `credits`, `hours`, `active`) VALUES
-(1, 3, '41022', 'Tecnologias da Internet IV', 4, 108, 1),
-(3, 2, 'asdasd', 'asdsda', 7, 5, 1),
-(4, 2, 'asdasdasdsdad', 'asdasdasdasd', 6, 6, 1),
-(5, 4, 'sadsadadsadsdads', 'asdasdasd', 13, 12, 1),
-(6, 3, 'INF-AC', 'Arquitetura de Computadores', 4, 48, 1),
-(7, 3, 'INF-ICC II', 'Introdução à Ciência dos Computadores', 6, 48, 1),
-(8, 3, 'INF-P I', 'Programação I', 6, 48, 1),
-(9, 3, 'INF-RC1', 'Redes e Comunicações I', 4, 48, 1),
-(10, 3, 'INF-M I', 'Matemática I', 6, 48, 1),
-(11, 3, 'INF-TI I', 'Tecnologias da Internet I', 4, 48, 1),
-(12, 3, 'INF-TI II', 'Tecnologias da Internet II', 4, 48, 1),
-(13, 3, 'INF-RC II', 'Redes e Comunicações II', 4, 48, 1),
-(14, 3, 'INF-AED', 'Algoritmos e Estruturas de Dados', 6, 48, 1),
-(15, 3, 'INF-P II', 'Programação II', 6, 48, 1),
-(16, 3, 'INF-M II', 'Matemática II', 6, 48, 1),
-(17, 3, 'INF-ED', 'Estatística Descritiva', 4, 48, 1),
-(18, 3, 'INF-AR I', 'Administração de Redes I', 4, 48, 1),
-(19, 3, 'INF-BD', 'Bases de Dados', 4, 48, 1),
-(20, 3, 'INF-P III', 'Programação III', 6, 48, 1),
-(21, 3, 'INF-SM I', 'Sistemas Multimédia I', 6, 48, 1),
-(22, 3, 'INF-TI III', 'Tecnologias de Internet III', 4, 48, 1),
-(23, 3, 'INF-TPMS', 'Teoria das Probabilidades e Modelos de Simulação', 6, 48, 1),
-(24, 3, 'INF-AR II', 'Administração de Redes II', 4, 48, 1),
-(25, 3, 'INF-SGBD', 'Sistemas de Gestão de Bases de Dados', 6, 48, 1),
-(26, 3, 'INF-P IV', 'Programação IV', 6, 48, 1),
-(27, 3, 'INF-SM II', 'Sistemas Multimédia II', 6, 48, 1),
-(28, 3, 'INF-TI IV', 'Tecnologias de Internet IV', 4, 48, 1),
-(29, 3, 'INF-CF', 'Cálculo Financeiro', 4, 48, 1),
-(30, 3, 'INF-DI', 'Direito da Informática', 4, 48, 1),
-(31, 3, 'INF-ATSIE', 'Arquitetura Técnica de Sistemas de Informação Empresarial', 6, 48, 1),
-(32, 3, 'INF-C', 'Criptografia', 6, 48, 1),
-(33, 3, 'INF-GE', 'Gestão Empresarial', 4, 48, 1),
-(34, 3, 'INF-HCT', 'História da Ciência e das Técnicas', 4, 48, 1),
-(35, 3, 'INF-P V', 'Programação V', 6, 48, 1),
-(36, 3, 'INF-MSC', 'Modelos de Simulação Computacionais', 6, 48, 1),
-(37, 3, 'INF-SI', 'Segurança Informática', 4, 48, 1),
-(38, 3, 'INF-PG', 'Projeto Global (Anual)', 20, 96, 1),
-(39, 4, 'MUL-AFC', 'Arquitectura e Funcionamento dos Computadores', 4, 48, 1),
-(40, 4, 'MUL-MDI', 'Multimédia Digital Interactiva', 6, 48, 1),
-(41, 4, 'MUL-PC', 'Programação de Computadores', 6, 48, 1),
-(42, 4, 'MUL-RI I', 'Redes e Internet I', 4, 48, 1),
-(43, 4, 'MUL-MQ', 'Métodos Quantitativos', 6, 48, 1),
-(44, 4, 'MUL-WM I', 'Web e Multimédia I', 4, 48, 1),
-(45, 4, 'MUL-WM II', 'Web e Multimédia II', 4, 48, 1),
-(46, 4, 'MUL-RI II', 'Redes e Internet II', 4, 48, 1),
-(47, 4, 'MUL-TAG I', 'Técnicas de Animação Gráfica I', 6, 48, 1),
-(48, 4, 'MUL-PC II', 'Programação de Computadores II', 6, 48, 1),
-(49, 4, 'MUL-MQ II', 'Métodos Quantitativos II', 6, 48, 1),
-(50, 4, 'MUL-ED', 'Estatística Descritiva', 4, 48, 1),
-(51, 4, 'MUL-TAG II', 'Técnicas de Animação Gráfica II', 6, 48, 1),
-(52, 4, 'MUL-BD', 'Bases de Dados', 4, 48, 1),
-(53, 4, 'MUL-PC III I', 'Programação de Computadores III', 6, 48, 1),
-(54, 4, 'MUL-DAW', 'Desenvolvimento de Aplicações Web', 6, 48, 1),
-(55, 4, 'MUL-TIAVI I', 'Tecnologias de Imagem, Audio e Video na Internet I', 4, 48, 1),
-(56, 4, 'MUL-NBPE', 'Noções Básicas de Probabilidades e Estatística', 4, 48, 1),
-(57, 4, 'MUL-MS', 'Multimédia Scriptwriting', 4, 48, 1),
-(58, 4, 'MUL-SGBD', 'Sistemas de Gestão de Bases de Dados', 6, 48, 1),
-(59, 4, 'MUL-ADM', 'Aplicações para Dispositivos Móveis', 6, 48, 1),
-(60, 4, 'MUL-TML', 'Tecnologias Multimédia para E-Learning', 6, 48, 1),
-(61, 4, 'MUL-TIAVI II', 'Tecnologias de Imagem, Audio e Video na Internet II', 4, 48, 1),
-(62, 4, 'MUL-CF', 'Cálculo Financeiro', 4, 48, 1),
-(63, 4, 'MUL-DI', 'Direito da Informática', 4, 48, 1),
-(64, 4, 'MUL-DP', 'Desktop Publishing', 6, 48, 1),
-(65, 4, 'MUL-C', 'Criptografia', 6, 48, 1),
-(66, 4, 'MUL-GE', 'Gestão Empresarial', 4, 48, 1),
-(67, 4, 'MUL-PG', 'Projeto Global (Anual)', 20, 96, 1),
-(68, 4, 'MUL-HCT', 'História da Ciência e das Técnicas', 4, 48, 1),
-(69, 4, 'MUL-EMI', 'Edições Multimédia Interactivas', 6, 48, 1),
-(70, 4, 'MUL-TS', 'Técnicas de Simulação', 6, 48, 1),
-(71, 4, 'MUL-GCO', 'Gestão de Conteúdos On-Line', 4, 48, 1);
+INSERT INTO `tClasses` (`id_class`, `id_degree`, `semester`, `code`, `fullName`, `credits`, `hours`, `aulas`, `active`) VALUES
+(1, 3, 0, '41022', 'Tecnologias da Internet IV', 4, 108, 0, 1),
+(3, 2, 0, 'asdasd', 'asdsda', 7, 5, 0, 1),
+(4, 2, 0, 'asdasdasdsdad', 'asdasdasdasd', 6, 6, 0, 1),
+(5, 4, 0, 'sadsadadsadsdads', 'asdasdasd', 13, 12, 0, 1),
+(6, 3, 0, 'INF-AC', 'Arquitetura de Computadores', 4, 48, 0, 1),
+(7, 3, 0, 'INF-ICC II', 'Introdução à Ciência dos Computadores', 6, 48, 0, 1),
+(8, 3, 0, 'INF-P I', 'Programação I', 6, 48, 0, 1),
+(9, 3, 0, 'INF-RC1', 'Redes e Comunicações I', 4, 48, 0, 1),
+(10, 3, 0, 'INF-M I', 'Matemática I', 6, 48, 0, 1),
+(11, 3, 0, 'INF-TI I', 'Tecnologias da Internet I', 4, 48, 0, 1),
+(12, 3, 0, 'INF-TI II', 'Tecnologias da Internet II', 4, 48, 0, 1),
+(13, 3, 0, 'INF-RC II', 'Redes e Comunicações II', 4, 48, 0, 1),
+(14, 3, 0, 'INF-AED', 'Algoritmos e Estruturas de Dados', 6, 48, 0, 1),
+(15, 3, 0, 'INF-P II', 'Programação II', 6, 48, 0, 1),
+(16, 3, 0, 'INF-M II', 'Matemática II', 6, 48, 0, 1),
+(17, 3, 0, 'INF-ED', 'Estatística Descritiva', 4, 48, 0, 1),
+(18, 3, 0, 'INF-AR I', 'Administração de Redes I', 4, 48, 0, 1),
+(19, 3, 0, 'INF-BD', 'Bases de Dados', 4, 48, 0, 1),
+(20, 3, 0, 'INF-P III', 'Programação III', 6, 48, 0, 1),
+(21, 3, 0, 'INF-SM I', 'Sistemas Multimédia I', 6, 48, 0, 1),
+(22, 3, 0, 'INF-TI III', 'Tecnologias de Internet III', 4, 48, 0, 1),
+(23, 3, 0, 'INF-TPMS', 'Teoria das Probabilidades e Modelos de Simulação', 6, 48, 0, 1),
+(24, 3, 0, 'INF-AR II', 'Administração de Redes II', 4, 48, 0, 1),
+(25, 3, 0, 'INF-SGBD', 'Sistemas de Gestão de Bases de Dados', 6, 48, 0, 1),
+(26, 3, 0, 'INF-P IV', 'Programação IV', 6, 48, 0, 1),
+(27, 3, 0, 'INF-SM II', 'Sistemas Multimédia II', 6, 48, 0, 1),
+(28, 3, 0, 'INF-TI IV', 'Tecnologias de Internet IV', 4, 48, 0, 1),
+(29, 3, 0, 'INF-CF', 'Cálculo Financeiro', 4, 48, 0, 1),
+(30, 3, 0, 'INF-DI', 'Direito da Informática', 4, 48, 0, 1),
+(31, 3, 0, 'INF-ATSIE', 'Arquitetura Técnica de Sistemas de Informação Empresarial', 6, 48, 0, 1),
+(32, 3, 0, 'INF-C', 'Criptografia', 6, 48, 0, 1),
+(33, 3, 0, 'INF-GE', 'Gestão Empresarial', 4, 48, 0, 1),
+(34, 3, 0, 'INF-HCT', 'História da Ciência e das Técnicas', 4, 48, 0, 1),
+(35, 3, 0, 'INF-P V', 'Programação V', 6, 48, 0, 1),
+(36, 3, 0, 'INF-MSC', 'Modelos de Simulação Computacionais', 6, 48, 0, 1),
+(37, 3, 0, 'INF-SI', 'Segurança Informática', 4, 48, 0, 1),
+(38, 3, 0, 'INF-PG', 'Projeto Global (Anual)', 20, 96, 0, 1),
+(39, 4, 0, 'MUL-AFC', 'Arquitectura e Funcionamento dos Computadores', 4, 48, 0, 1),
+(40, 4, 0, 'MUL-MDI', 'Multimédia Digital Interactiva', 6, 48, 0, 1),
+(41, 4, 0, 'MUL-PC', 'Programação de Computadores', 6, 48, 0, 1),
+(42, 4, 0, 'MUL-RI I', 'Redes e Internet I', 4, 48, 0, 1),
+(43, 4, 0, 'MUL-MQ', 'Métodos Quantitativos', 6, 48, 0, 1),
+(44, 4, 0, 'MUL-WM I', 'Web e Multimédia I', 4, 48, 0, 1),
+(45, 4, 0, 'MUL-WM II', 'Web e Multimédia II', 4, 48, 0, 1),
+(46, 4, 0, 'MUL-RI II', 'Redes e Internet II', 4, 48, 0, 1),
+(47, 4, 0, 'MUL-TAG I', 'Técnicas de Animação Gráfica I', 6, 48, 0, 1),
+(48, 4, 0, 'MUL-PC II', 'Programação de Computadores II', 6, 48, 0, 1),
+(49, 4, 0, 'MUL-MQ II', 'Métodos Quantitativos II', 6, 48, 0, 1),
+(50, 4, 0, 'MUL-ED', 'Estatística Descritiva', 4, 48, 0, 1),
+(51, 4, 0, 'MUL-TAG II', 'Técnicas de Animação Gráfica II', 6, 48, 0, 1),
+(52, 4, 0, 'MUL-BD', 'Bases de Dados', 4, 48, 0, 1),
+(53, 4, 0, 'MUL-PC III I', 'Programação de Computadores III', 6, 48, 0, 1),
+(54, 4, 0, 'MUL-DAW', 'Desenvolvimento de Aplicações Web', 6, 48, 0, 1),
+(55, 4, 0, 'MUL-TIAVI I', 'Tecnologias de Imagem, Audio e Video na Internet I', 4, 48, 0, 1),
+(56, 4, 0, 'MUL-NBPE', 'Noções Básicas de Probabilidades e Estatística', 4, 48, 0, 1),
+(57, 4, 0, 'MUL-MS', 'Multimédia Scriptwriting', 4, 48, 0, 1),
+(58, 4, 0, 'MUL-SGBD', 'Sistemas de Gestão de Bases de Dados', 6, 48, 0, 1),
+(59, 4, 0, 'MUL-ADM', 'Aplicações para Dispositivos Móveis', 6, 48, 0, 1),
+(60, 4, 0, 'MUL-TML', 'Tecnologias Multimédia para E-Learning', 6, 48, 0, 1),
+(61, 4, 0, 'MUL-TIAVI II', 'Tecnologias de Imagem, Audio e Video na Internet II', 4, 48, 0, 1),
+(62, 4, 0, 'MUL-CF', 'Cálculo Financeiro', 4, 48, 0, 1),
+(63, 4, 0, 'MUL-DI', 'Direito da Informática', 4, 48, 0, 1),
+(64, 4, 0, 'MUL-DP', 'Desktop Publishing', 6, 48, 0, 1),
+(65, 4, 0, 'MUL-C', 'Criptografia', 6, 48, 0, 1),
+(66, 4, 0, 'MUL-GE', 'Gestão Empresarial', 4, 48, 0, 1),
+(67, 4, 0, 'MUL-PG', 'Projeto Global (Anual)', 20, 96, 0, 1),
+(68, 4, 0, 'MUL-HCT', 'História da Ciência e das Técnicas', 4, 48, 0, 1),
+(69, 4, 0, 'MUL-EMI', 'Edições Multimédia Interactivas', 6, 48, 0, 1),
+(70, 4, 0, 'MUL-TS', 'Técnicas de Simulação', 6, 48, 0, 1),
+(71, 4, 0, 'MUL-GCO', 'Gestão de Conteúdos On-Line', 4, 48, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tClassInscriptions`
+-- Estrutura da tabela `tClassInscriptions`
 --
 
 CREATE TABLE IF NOT EXISTS `tClassInscriptions` (
   `id_class_inscription` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
-  `inscription_year` date NOT NULL
+  `id_year` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tClassInscriptions`
+-- Extraindo dados da tabela `tClassInscriptions`
 --
 
-INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`, `inscription_year`) VALUES
-(1, 9, 3, '2017-06-14'),
-(2, 3, 5, '2017-06-21'),
-(3, 14, 6, '2016-10-03'),
-(4, 14, 6, '2017-10-03'),
-(5, 10, 7, '2016-10-03'),
-(6, 10, 7, '2017-10-03'),
-(7, 11, 8, '2016-10-03'),
-(8, 11, 8, '2017-10-03'),
-(9, 19, 9, '2016-10-03'),
-(10, 19, 9, '2017-10-03'),
-(11, 12, 10, '2016-10-03'),
-(12, 12, 10, '2017-10-03'),
-(13, 13, 11, '2016-10-03'),
-(14, 13, 11, '2017-10-03'),
-(15, 20, 12, '2016-10-03'),
-(16, 20, 12, '2017-10-03'),
-(17, 16, 13, '2017-10-03'),
-(18, 16, 13, '2016-10-03'),
-(19, 11, 14, '2017-10-03'),
-(20, 11, 14, '2016-10-03'),
-(21, 11, 15, '2017-10-03'),
-(22, 11, 15, '2016-10-03'),
-(23, 12, 16, '2017-10-03'),
-(24, 12, 16, '2016-10-03'),
-(25, 12, 17, '2017-10-03'),
-(26, 12, 17, '2016-10-03'),
-(27, 16, 18, '2017-10-03'),
-(28, 16, 18, '2016-10-03'),
-(29, 16, 19, '2016-10-03'),
-(30, 16, 19, '2017-10-03'),
-(31, 11, 20, '2016-10-03'),
-(32, 11, 20, '2017-10-03'),
-(33, 10, 21, '2017-10-03'),
-(34, 10, 21, '2016-10-03'),
-(35, 11, 22, '2017-10-03'),
-(36, 11, 22, '2016-10-03'),
-(37, 12, 23, '2017-10-03'),
-(38, 12, 23, '2016-10-03'),
-(39, 16, 24, '2017-10-03'),
-(40, 16, 24, '2016-10-03'),
-(41, 16, 25, '2017-10-03'),
-(42, 16, 25, '2016-10-03'),
-(43, 29, 26, '2017-10-03'),
-(44, 29, 26, '2016-10-03'),
-(45, 17, 27, '2016-10-03'),
-(46, 17, 27, '2017-10-03'),
-(47, 13, 28, '2016-10-03'),
-(48, 13, 28, '2017-10-03'),
-(49, 18, 29, '2017-10-03'),
-(50, 18, 29, '2016-10-03'),
-(51, 18, 30, '2016-10-03'),
-(52, 18, 30, '2017-10-03'),
-(53, 16, 31, '2016-10-03'),
-(54, 16, 31, '2017-10-03'),
-(55, 19, 32, '2017-10-03'),
-(56, 19, 32, '2016-10-03'),
-(57, 18, 33, '2017-10-03'),
-(58, 18, 33, '2016-10-03'),
-(59, 14, 34, '2017-10-03'),
-(60, 14, 34, '2016-10-03'),
-(61, 11, 35, '2017-10-03'),
-(62, 11, 35, '2016-10-03'),
-(63, 12, 36, '2017-10-03'),
-(64, 12, 36, '2016-10-03'),
-(65, 19, 37, '2017-10-03'),
-(66, 19, 37, '2016-10-03'),
-(67, 17, 38, '2016-10-03'),
-(68, 17, 38, '2017-10-03'),
-(69, 23, 6, '2016-10-03'),
-(70, 24, 6, '2016-10-03'),
-(71, 25, 6, '2016-10-03'),
-(72, 23, 7, '2016-10-03'),
-(73, 24, 7, '2016-10-03'),
-(74, 25, 7, '2016-10-03'),
-(75, 23, 8, '2016-10-03'),
-(76, 24, 8, '2016-10-03'),
-(77, 25, 8, '2016-10-03'),
-(78, 23, 9, '2016-10-03'),
-(79, 24, 9, '2016-10-03'),
-(80, 25, 9, '2016-10-03'),
-(81, 23, 10, '2016-10-03'),
-(82, 24, 10, '2016-10-03'),
-(83, 25, 10, '2016-10-03'),
-(84, 23, 11, '2016-10-03'),
-(85, 24, 11, '2016-10-03'),
-(86, 25, 11, '2016-10-03'),
-(87, 23, 12, '2016-10-03'),
-(88, 24, 12, '2016-10-03'),
-(89, 25, 12, '2016-10-03'),
-(90, 23, 13, '2016-10-03'),
-(91, 24, 13, '2016-10-03'),
-(92, 25, 13, '2016-10-03'),
-(93, 23, 14, '2016-10-03'),
-(94, 24, 14, '2016-10-03'),
-(95, 25, 14, '2016-10-03'),
-(96, 23, 15, '2016-10-03'),
-(97, 24, 15, '2016-10-03'),
-(98, 25, 15, '2016-10-03'),
-(99, 23, 16, '2016-10-03'),
-(100, 24, 16, '2016-10-03'),
-(101, 25, 16, '2016-10-03'),
-(102, 23, 17, '2016-10-03'),
-(103, 24, 17, '2016-10-03'),
-(104, 25, 17, '2016-10-03'),
-(105, 23, 18, '2017-10-03'),
-(106, 24, 18, '2017-10-03'),
-(107, 25, 18, '2017-10-03'),
-(108, 23, 19, '2017-10-03'),
-(109, 24, 19, '2017-10-03'),
-(110, 25, 19, '2017-10-03'),
-(111, 23, 20, '2017-10-03'),
-(112, 24, 20, '2017-10-03'),
-(113, 25, 20, '2017-10-03'),
-(114, 23, 21, '2017-10-03'),
-(115, 24, 21, '2017-10-03'),
-(116, 25, 21, '2017-10-03'),
-(117, 23, 22, '2017-10-03'),
-(118, 24, 22, '2017-10-03'),
-(119, 25, 22, '2017-10-03'),
-(120, 23, 23, '2017-10-03'),
-(121, 24, 23, '2017-10-03'),
-(122, 25, 23, '2017-10-03'),
-(123, 23, 24, '2017-10-03'),
-(124, 24, 24, '2017-10-03'),
-(125, 25, 24, '2017-10-03'),
-(126, 23, 25, '2017-10-03'),
-(127, 24, 25, '2017-10-03'),
-(128, 25, 25, '2017-10-03'),
-(129, 23, 26, '2017-10-03'),
-(130, 24, 26, '2017-10-03'),
-(131, 25, 26, '2017-10-03'),
-(132, 23, 27, '2017-10-03'),
-(133, 24, 27, '2017-10-03'),
-(134, 25, 27, '2017-10-03'),
-(135, 23, 28, '2017-10-03'),
-(136, 24, 28, '2017-10-03'),
-(137, 25, 28, '2017-10-03'),
-(138, 23, 29, '2017-10-03'),
-(139, 24, 29, '2017-10-03'),
-(140, 25, 29, '2017-10-03');
+INSERT INTO `tClassInscriptions` (`id_class_inscription`, `id_user`, `id_class`, `id_year`) VALUES
+(1, 9, 3, 1),
+(2, 3, 5, 1),
+(3, 14, 6, 1),
+(4, 14, 6, 1),
+(5, 10, 7, 1),
+(6, 10, 7, 1),
+(7, 11, 8, 1),
+(8, 11, 8, 1),
+(9, 19, 9, 1),
+(10, 19, 9, 1),
+(11, 12, 10, 1),
+(12, 12, 10, 1),
+(13, 13, 11, 1),
+(14, 13, 11, 1),
+(15, 20, 12, 1),
+(16, 20, 12, 1),
+(17, 16, 13, 1),
+(18, 16, 13, 1),
+(19, 11, 14, 1),
+(20, 11, 14, 1),
+(21, 11, 15, 1),
+(22, 11, 15, 1),
+(23, 12, 16, 1),
+(24, 12, 16, 1),
+(25, 12, 17, 1),
+(26, 12, 17, 1),
+(27, 16, 18, 1),
+(28, 16, 18, 1),
+(29, 16, 19, 1),
+(30, 16, 19, 1),
+(31, 11, 20, 1),
+(32, 11, 20, 1),
+(33, 10, 21, 1),
+(34, 10, 21, 1),
+(35, 11, 22, 1),
+(36, 11, 22, 1),
+(37, 12, 23, 1),
+(38, 12, 23, 1),
+(39, 16, 24, 1),
+(40, 16, 24, 1),
+(41, 16, 25, 1),
+(42, 16, 25, 1),
+(43, 29, 26, 1),
+(44, 29, 26, 1),
+(45, 17, 27, 1),
+(46, 17, 27, 1),
+(47, 13, 28, 1),
+(48, 13, 28, 1),
+(49, 18, 29, 1),
+(50, 18, 29, 1),
+(51, 18, 30, 1),
+(52, 18, 30, 1),
+(53, 16, 31, 1),
+(54, 16, 31, 1),
+(55, 19, 32, 1),
+(56, 19, 32, 1),
+(57, 18, 33, 1),
+(58, 18, 33, 1),
+(59, 14, 34, 1),
+(60, 14, 34, 1),
+(61, 11, 35, 1),
+(62, 11, 35, 1),
+(63, 12, 36, 1),
+(64, 12, 36, 1),
+(65, 19, 37, 1),
+(66, 19, 37, 1),
+(67, 17, 38, 1),
+(68, 17, 38, 1),
+(69, 23, 6, 1),
+(70, 24, 6, 1),
+(71, 25, 6, 1),
+(72, 23, 7, 1),
+(73, 24, 7, 1),
+(74, 25, 7, 1),
+(75, 23, 8, 1),
+(76, 24, 8, 1),
+(77, 25, 8, 1),
+(78, 23, 9, 1),
+(79, 24, 9, 1),
+(80, 25, 9, 1),
+(81, 23, 10, 1),
+(82, 24, 10, 1),
+(83, 25, 10, 1),
+(84, 23, 11, 1),
+(85, 24, 11, 1),
+(86, 25, 11, 1),
+(87, 23, 12, 1),
+(88, 24, 12, 1),
+(89, 25, 12, 1),
+(90, 23, 13, 1),
+(91, 24, 13, 1),
+(92, 25, 13, 1),
+(93, 23, 14, 1),
+(94, 24, 14, 1),
+(95, 25, 14, 1),
+(96, 23, 15, 1),
+(97, 24, 15, 1),
+(98, 25, 15, 1),
+(99, 23, 16, 1),
+(100, 24, 16, 1),
+(101, 25, 16, 1),
+(102, 23, 17, 1),
+(103, 24, 17, 1),
+(104, 25, 17, 1),
+(105, 23, 18, 1),
+(106, 24, 18, 1),
+(107, 25, 18, 1),
+(108, 23, 19, 1),
+(109, 24, 19, 1),
+(110, 25, 19, 1),
+(111, 23, 20, 1),
+(112, 24, 20, 1),
+(113, 25, 20, 1),
+(114, 23, 21, 1),
+(115, 24, 21, 1),
+(116, 25, 21, 1),
+(117, 23, 22, 1),
+(118, 24, 22, 1),
+(119, 25, 22, 1),
+(120, 23, 23, 1),
+(121, 24, 23, 1),
+(122, 25, 23, 1),
+(123, 23, 24, 1),
+(124, 24, 24, 1),
+(125, 25, 24, 1),
+(126, 23, 25, 1),
+(127, 24, 25, 1),
+(128, 25, 25, 1),
+(129, 23, 26, 1),
+(130, 24, 26, 1),
+(131, 25, 26, 1),
+(132, 23, 27, 1),
+(133, 24, 27, 1),
+(134, 25, 27, 1),
+(135, 23, 28, 1),
+(136, 24, 28, 1),
+(137, 25, 28, 1),
+(138, 23, 29, 1),
+(139, 24, 29, 1),
+(140, 25, 29, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tDegreeLevels`
+-- Estrutura da tabela `tDegreeLevels`
 --
 
 CREATE TABLE IF NOT EXISTS `tDegreeLevels` (
   `id_degree_level` int(11) NOT NULL,
-  `designation` varchar(100) NOT NULL
+  `designation` varchar(100) NOT NULL,
+  `semesters` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tDegreeLevels`
+-- Extraindo dados da tabela `tDegreeLevels`
 --
 
-INSERT INTO `tDegreeLevels` (`id_degree_level`, `designation`) VALUES
-(1, 'CTESP'),
-(2, 'Licenciatura'),
-(3, 'Pós-Graduação');
+INSERT INTO `tDegreeLevels` (`id_degree_level`, `designation`, `semesters`) VALUES
+(1, 'CTESP', 4),
+(2, 'Licenciatura', 6),
+(3, 'Pós-Graduação', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tDegrees`
+-- Estrutura da tabela `tDegrees`
 --
 
 CREATE TABLE IF NOT EXISTS `tDegrees` (
@@ -305,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `tDegrees` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tDegrees`
+-- Extraindo dados da tabela `tDegrees`
 --
 
 INSERT INTO `tDegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALUES
@@ -317,7 +333,7 @@ INSERT INTO `tDegrees` (`id_degree`, `code`, `fullName`, `id_degree_level`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tRoles`
+-- Estrutura da tabela `tRoles`
 --
 
 CREATE TABLE IF NOT EXISTS `tRoles` (
@@ -327,7 +343,7 @@ CREATE TABLE IF NOT EXISTS `tRoles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tRoles`
+-- Extraindo dados da tabela `tRoles`
 --
 
 INSERT INTO `tRoles` (`id_role`, `role`, `active`) VALUES
@@ -339,38 +355,40 @@ INSERT INTO `tRoles` (`id_role`, `role`, `active`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tSummarys`
+-- Estrutura da tabela `tSummarys`
 --
 
 CREATE TABLE IF NOT EXISTS `tSummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
+  `n_aula` int(11) NOT NULL,
+  `summary_date` date NOT NULL,
   `summary` varchar(255) NOT NULL,
-  `class_date` date NOT NULL
+  `id_year` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tSummarys`
+-- Extraindo dados da tabela `tSummarys`
 --
 
-INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `summary`, `class_date`) VALUES
-(3, 1, 9, 'esta aula foi muito boa', '2001-06-03'),
-(4, 5, 9, 'ola e adeus aula curta', '2017-06-16'),
-(5, 5, 3, 'aula rapida', '2017-06-10'),
-(6, 5, 3, 'aula fantastica', '2017-05-01'),
-(9, 6, 14, 'Aenean fermentum mauris dolor, in feugiat tellus blandit sed. Mauris vulputate egestas congue. Etiam et.', '2016-11-01'),
-(10, 7, 10, 'ai ai', '2017-06-30'),
-(11, 8, 11, 'Cras condimentum rhoncus semper. Nullam vitae accumsan risus. Vestibulum tincidunt massa sit amet nulla luctus.', '2016-11-01'),
-(12, 9, 19, 'Donec condimentum imperdiet auctor. Aliquam dignissim erat sit amet ex lobortis, vel pretium diam blandit.', '2016-11-01'),
-(13, 10, 12, 'Suspendisse ac lobortis sapien. Pellentesque vel sagittis nunc, in imperdiet massa. Etiam eget justo aliquet.', '2016-11-01'),
-(14, 11, 13, 'Aenean eu semper purus. Maecenas interdum felis nisl, nec elementum tortor hendrerit nec. Duis iaculis.', '2016-11-01'),
-(24, 33, 18, 'bela merda', '2017-06-21');
+INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `n_aula`, `summary_date`, `summary`, `id_year`) VALUES
+(3, 1, 9, 0, '0000-00-00', 'esta aula foi muito boa', 1),
+(4, 5, 9, 0, '0000-00-00', 'ola e adeus aula curta', 1),
+(5, 5, 3, 0, '0000-00-00', 'aula rapida', 1),
+(6, 5, 3, 0, '0000-00-00', 'aula fantastica', 1),
+(9, 6, 14, 0, '0000-00-00', 'Aenean fermentum mauris dolor, in feugiat tellus blandit sed. Mauris vulputate egestas congue. Etiam et.', 1),
+(10, 7, 10, 0, '0000-00-00', 'ai ai', 1),
+(11, 8, 11, 0, '0000-00-00', 'Cras condimentum rhoncus semper. Nullam vitae accumsan risus. Vestibulum tincidunt massa sit amet nulla luctus.', 1),
+(12, 9, 19, 0, '0000-00-00', 'Donec condimentum imperdiet auctor. Aliquam dignissim erat sit amet ex lobortis, vel pretium diam blandit.', 1),
+(13, 10, 12, 0, '0000-00-00', 'Suspendisse ac lobortis sapien. Pellentesque vel sagittis nunc, in imperdiet massa. Etiam eget justo aliquet.', 1),
+(14, 11, 13, 0, '0000-00-00', 'Aenean eu semper purus. Maecenas interdum felis nisl, nec elementum tortor hendrerit nec. Duis iaculis.', 1),
+(24, 33, 18, 0, '0000-00-00', 'bela merda', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tUsers`
+-- Estrutura da tabela `tUsers`
 --
 
 CREATE TABLE IF NOT EXISTS `tUsers` (
@@ -384,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `tUsers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tUsers`
+-- Extraindo dados da tabela `tUsers`
 --
 
 INSERT INTO `tUsers` (`id_user`, `id_role`, `username`, `password`, `name`, `picture`, `active`) VALUES
@@ -416,9 +434,37 @@ INSERT INTO `tUsers` (`id_user`, `id_role`, `username`, `password`, `name`, `pic
 (28, 4, 'pedroM', '123', 'Pedro Macedo', 'uploads/user_default.png', 1),
 (29, 3, 'joãoP', '123', 'João Pires', 'uploads/user_default.png', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tYears`
+--
+
+CREATE TABLE IF NOT EXISTS `tYears` (
+  `id_year` int(11) NOT NULL,
+  `beginning` date NOT NULL,
+  `ending` date DEFAULT NULL,
+  `current` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tYears`
+--
+
+INSERT INTO `tYears` (`id_year`, `beginning`, `ending`, `current`) VALUES
+(1, '2016-09-01', '2017-07-29', 1);
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tAttendancies`
+--
+ALTER TABLE `tAttendancies`
+  ADD PRIMARY KEY (`id_attendacie`),
+  ADD KEY `tAttendancy_tSummary` (`id_summary`),
+  ADD KEY `tAttendancy_tUser` (`id_user`);
 
 --
 -- Indexes for table `tClasses`
@@ -433,7 +479,8 @@ ALTER TABLE `tClasses`
 ALTER TABLE `tClassInscriptions`
   ADD PRIMARY KEY (`id_class_inscription`),
   ADD KEY `tclassInscription_tuser` (`id_user`) USING BTREE,
-  ADD KEY `tclassInscription_tclass` (`id_class`) USING BTREE;
+  ADD KEY `tclassInscription_tclass` (`id_class`) USING BTREE,
+  ADD KEY `tClassInscription_tYear` (`id_year`) USING BTREE;
 
 --
 -- Indexes for table `tDegreeLevels`
@@ -460,7 +507,8 @@ ALTER TABLE `tRoles`
 ALTER TABLE `tSummarys`
   ADD PRIMARY KEY (`id_summary`),
   ADD KEY `tSummarys_tclasses` (`id_class`),
-  ADD KEY `tSummarys_tusers` (`id_user`);
+  ADD KEY `tSummarys_tusers` (`id_user`),
+  ADD KEY `tSummary_tYear` (`id_year`) USING BTREE;
 
 --
 -- Indexes for table `tUsers`
@@ -470,9 +518,20 @@ ALTER TABLE `tUsers`
   ADD KEY `users_roles` (`id_role`);
 
 --
+-- Indexes for table `tYears`
+--
+ALTER TABLE `tYears`
+  ADD PRIMARY KEY (`id_year`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `tAttendancies`
+--
+ALTER TABLE `tAttendancies`
+  MODIFY `id_attendacie` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tClasses`
 --
@@ -509,37 +568,51 @@ ALTER TABLE `tSummarys`
 ALTER TABLE `tUsers`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de utilizador',AUTO_INCREMENT=30;
 --
+-- AUTO_INCREMENT for table `tYears`
+--
+ALTER TABLE `tYears`
+  MODIFY `id_year` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `tClasses`
+-- Limitadores para a tabela `tAttendancies`
+--
+ALTER TABLE `tAttendancies`
+  ADD CONSTRAINT `FK_tAttendancies_tSummary` FOREIGN KEY (`id_summary`) REFERENCES `tSummarys` (`id_summary`),
+  ADD CONSTRAINT `FK_tAttendancies_tUser` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`);
+
+--
+-- Limitadores para a tabela `tClasses`
 --
 ALTER TABLE `tClasses`
   ADD CONSTRAINT `FK_classDegree` FOREIGN KEY (`id_degree`) REFERENCES `tDegrees` (`id_degree`);
 
 --
--- Constraints for table `tClassInscriptions`
+-- Limitadores para a tabela `tClassInscriptions`
 --
 ALTER TABLE `tClassInscriptions`
-  ADD CONSTRAINT `FK_classInscriptionProfessor_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
-  ADD CONSTRAINT `FK_classInscriptionProfessor_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`);
+  ADD CONSTRAINT `FK_classInscription_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
+  ADD CONSTRAINT `FK_classInscription_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`),
+  ADD CONSTRAINT `FK_tClassInscriptions_tYear` FOREIGN KEY (`id_year`) REFERENCES `tyears` (`id_year`);
 
 --
--- Constraints for table `tDegrees`
+-- Limitadores para a tabela `tDegrees`
 --
 ALTER TABLE `tDegrees`
   ADD CONSTRAINT `fk_degrees_degreeLevels` FOREIGN KEY (`id_degree_level`) REFERENCES `tDegreeLevels` (`id_degree_level`);
 
 --
--- Constraints for table `tSummarys`
+-- Limitadores para a tabela `tSummarys`
 --
 ALTER TABLE `tSummarys`
   ADD CONSTRAINT `FK_summary_class` FOREIGN KEY (`id_class`) REFERENCES `tClasses` (`id_class`),
-  ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`);
+  ADD CONSTRAINT `FK_summary_user` FOREIGN KEY (`id_user`) REFERENCES `tUsers` (`id_user`),
+  ADD CONSTRAINT `FK_tSummarys_tYear` FOREIGN KEY (`id_year`) REFERENCES `tYear` (`id_year`);
 
 --
--- Constraints for table `tUsers`
+-- Limitadores para a tabela `tUsers`
 --
 ALTER TABLE `tUsers`
   ADD CONSTRAINT `tUsers_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `tRoles` (`id_role`) ON DELETE NO ACTION ON UPDATE NO ACTION;
