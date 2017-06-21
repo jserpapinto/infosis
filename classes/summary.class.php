@@ -18,7 +18,6 @@ class summary {
 
         // handle date
         $date = date("Y-m-d H:i:s", strtotime($class_date));
-
         $data->bindvalue(':d', $date);
 
         $data->execute();
@@ -47,7 +46,11 @@ class summary {
         $data = $con->prepare($sql);
         $data->bindvalue(':ids', $id_summary);
         $data->bindvalue(':s', $summary);
-        $data->bindvalue(':d', $class_date);
+
+        // handle date
+        $date = date("Y-m-d H:i:s", strtotime($class_date));
+        
+        $data->bindvalue(':d', $date);
         $data->bindvalue(':idu', $id_user);
         $data->execute();
         if ($destination != null) header('Location:' . $destination);

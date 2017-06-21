@@ -63,17 +63,17 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha um Curso..">
+                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma Cadeira..">
                           <option value=""></option>
                           <?php
-                            $classes = $c->classes();
+                            $classes = ($_SESSION['role'] == "Professor") ? $c->classesUser($_SESSION['id_user']) : $c->classes();
                             foreach ($classes as $class) {
                           ?>
                             <option value="<?= $class['id_class'] ?>"><?=  '(' . $class['code'] . ') - ' . $class['fullName'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Class -->
+                    </div>
 
                     <!-- Professor -->
                     <div class="form-group prousername pmd-textfield">
@@ -83,7 +83,7 @@
                           <option value=""></option>
                         </select>
                       </div>
-                    </div><!-- .Professor -->
+                    </div>
 
                     <!-- Summary -->
                     <div class="form-group pmd-textfield">
@@ -91,7 +91,7 @@
                       <div class="col-sm-9">
                         <textarea rows="4" id="summary" name="summary" class="form-control empty"  required></textarea>
                       </div>
-                    </div><!-- .Summary -->
+                    </div>
                     
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
@@ -132,9 +132,9 @@
       // AJAX get professores associados a curso
       $('#id_class').on('change', function() {
 
-        var idDegree = $(this).val();
+        var idClass = $(this).val();
 
-        if (idDegree == "") return false;
+        if (idClass == "") return false;
 
 
         $.ajax({
@@ -142,7 +142,7 @@
           method: "POST",
           dataType: "json",
           data: {
-            id_degree: idDegree
+            id_class: idClass
           }
         }).done(function(res) {
 

@@ -27,6 +27,19 @@
         </div>
       </div><!-- .Header -->
 
+
+
+<br>
+<a href="user_edit.php?id=<?= $_SESSION['id_user'] ?>">Editar Perfil</a>
+<br>
+<a href="logout.php">Sair</a>
+<br>
+<a href="summary_new.php">Inserir Novo Sumário</a>
+<br>
+<a href="summary_manage.php">Gerir Sumários</a>
+<br>
+
+
       </div>
     </div><!-- .Container -->
 

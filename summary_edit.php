@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
+  $u->logged("AdminProfessor");
 
   //page
   require_once 'classes/summary.class.php';
@@ -62,12 +62,11 @@
 
                     <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="id_degree" class="control-label col-sm-3">Cadeira</label>
+                      <label for="class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <input type="text" id="id_degree" name="id_degree" value="<?= $summary['fullName'] ?> [<?= $summary['code'] ?>]" class="form-control empty" required="required">
-                        
+                        <input type="text" id="class" name="class" value="(<?= $summary['code'] ?>) <?= $summary['fullName'] ?>" class="form-control empty" readonly>
                       </div>
-                    </div><!-- .Class -->
+                    </div>
 
                     <!-- Professor -->
                     <div class="form-group prousername pmd-textfield">
@@ -82,7 +81,7 @@
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Professor -->
+                    </div>
 
                     <!-- Summary -->
                     <div class="form-group pmd-textfield">
@@ -90,7 +89,7 @@
                       <div class="col-sm-9">
                         <textarea rows="4" id="summary" name="summary" class="form-control empty"  required><?= $summary['summary'] ?></textarea>
                       </div>
-                    </div><!-- .Summary -->
+                    </div>
                     
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
@@ -98,7 +97,9 @@
                       <div class="col-sm-9">
                         <input type="text" name="class_date" id="class_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
-                    </div><!-- .Date -->
+                    </div>
+
+                    <input type="hidden" name="id_summary" id="id_summary" value="<?= $_GET['id'] ?>">
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">

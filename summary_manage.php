@@ -2,7 +2,7 @@
   //protected page
   require_once 'classes/user.class.php';
   $u = new user();
-  $u->logged();
+  $u->logged("AdminProfessor");
 
   //page
   require_once 'classes/degree.class.php';
@@ -165,6 +165,7 @@
             method: "POST",
             dataType: "json",
             data: {
+              id_user: <?= ($_SESSION['role'] == "Professor") ? $_SESSION['id_user'] : -1 ?>,
               id_degree: idDegree,
               type: 'get_classes'
             }

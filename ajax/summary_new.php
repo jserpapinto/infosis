@@ -2,11 +2,11 @@
 require_once "../classes/user.class.php";
 
 // validate post
-$id_degree = (isset($_POST['id_degree']) && !empty($_POST['id_degree']) ? $_POST['id_degree'] : null);
+$id_class = (isset($_POST['id_class']) && !empty($_POST['id_class']) ? $_POST['id_class'] : null);
 
-if ($id_degree) {
+if ($id_class) {
 	$u = new user();
-	$users = $u->usersClass($id_degree);
+	$users = $u->usersClass($id_class, 3);
 	echo json_encode($users);
 } else {
 	echo json_encode("NADA");

@@ -151,7 +151,7 @@ class classs {
   }
 
   //list for professors students
-  public function classesUser($id_user = -1) {
+  public function classesUser($id_user = -1, $id_degree = -1) {
     try {
       require_once 'db.class.php';
       $db = new database();
@@ -163,12 +163,14 @@ class classs {
           tClasses.credits, 
           tClasses.hours, 
           tClasses.active
-        FROM tClasses, tClassInscription
-        WHERE tClasses.id_class = tClassInscription.id_class 
-          AND (tClassInscription.id_user = :id OR :id = -1)
+        FROM tClasses, tClassInscriptions
+        WHERE tClasses.id_class = tClassInscriptions.id_class 
+          AND (tClassInscriptions.id_user = :id OR :id = -1)
+          AND (tClasses.id_degree = :idd OR :idd = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_user);
+      $data->bindvalue(':idd', $id_degree);
       $data->execute();
       $classes = $data->fetchAll();
       return $classes;
