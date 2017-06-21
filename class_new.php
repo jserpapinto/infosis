@@ -138,6 +138,6 @@
     <?php require_once('includes/scripts.inc.php'); ?>
 
     <!-- Custom scripts -->
-    <script> $(".chosen").chosen(); </script>
+    <script> $(".chosen").chosen({width:'85%', allow_single_deselect:true}); </script>
   </body>
 </html>

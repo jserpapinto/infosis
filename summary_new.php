@@ -126,7 +126,7 @@
 
     <!-- Custom scripts -->
     <script> 
-      $(".chosen").chosen(); 
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
       $('.datetimepicker').datetimepicker();
 
       // AJAX get professores associados a curso
@@ -135,7 +135,6 @@
         var idClass = $(this).val();
 
         if (idClass == "") return false;
-
 
         $.ajax({
           url: "ajax/summary_new.php",

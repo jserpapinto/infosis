@@ -145,7 +145,7 @@
 
     <!-- Custom scripts -->
     <script> 
-      $(".chosen").chosen(); 
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
 
       //Username verify
       $('#username').on('keyup', function() {
