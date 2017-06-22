@@ -4,7 +4,6 @@ class year {
  
   //insert
   public function insert($beginning, $ending, $current, $destination) {
-    if ($this->valid($code, $fullName)) {
       try {
         require_once 'db.class.php';
         $db = new database();
@@ -42,7 +41,6 @@ class year {
         exit();
         return false;
       }
-    }
   }
 
   //update
@@ -152,6 +150,29 @@ class year {
       $data->execute();
       $years = $data->fetchAll();
       return $years;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
+  //verify years class_inscription dependencies
+  public function yearDepend($id_year) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT id_class_inscription
+        FROM tclassinscriptions
+        WHERE id_year = :id';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':id', $id_year);
+      $data->execute();
+      $degree = $data->fetch();
+      return ($degree);
     }
     catch (PDOException $e) {
       echo("Erro de ligação:" . $e);

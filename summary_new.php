@@ -16,17 +16,15 @@
 
   //form
   if (isset($_POST['summary']) && $_POST['summary'] != null) {
-    print_r($_POST);
-    die();
     $id_class = $_POST['id_class'];
     $id_user = $_POST['id_user']; // porque é admin, senao tem de ser o da session
-    $summary = $_POST['class_n'];
+    $class_n = $_POST['class_n'];
     $summary = $_POST['summary'];
-    $class_date = $_POST['class_date'];
-    $summary = $_POST['id_year'];
-    $attendencies = $_POST['attendencies'];
-    $student = $_POST['student'];
-    $s->insert($id_class, $id_user, $class_n, $summary, $class_date, $id_year, $attendencies, $students, 'summary_manage.php');
+    $summary_date = $_POST['summary_date'];
+    $id_year = $_POST['id_year'];
+    $attendancies = $_POST['attendancies'];
+    $students = $_POST['students'];
+    $s->insert($id_class, $id_user, $class_n, $summary, $summary_date, $id_year, $attendancies, $students, 'summary_manage.php');
   }
 ?>
 
@@ -129,9 +127,9 @@
                     
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
-                      <label for="class_date" class="control-label col-sm-3 control-label">Data</label>
+                      <label for="summary_date" class="control-label col-sm-3 control-label">Data</label>
                       <div class="col-sm-9">
-                        <input type="text" name="class_date" id="class_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                        <input type="text" name="summary_date" id="summary_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
                     </div><!-- .Date -->
 

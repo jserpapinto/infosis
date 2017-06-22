@@ -20,6 +20,15 @@
       </ul>
     </li>
     
+    <!-- School Years -->
+    <li>
+      <a href="year_manage.php">
+        <i class="material-icons media-left pmd-sm">swap_calls</i> 
+        <span class="media-body">Anos Letivos</span>
+        <div class="media-right media-bottom"><i class="dic-more-vert dic"></i></div>
+      </a>
+    </li>
+
     <!-- Degrees -->
     <li class="dropdown pmd-dropdown">
       <a href="#" class="dropdown-toggle pmd-ripple-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
