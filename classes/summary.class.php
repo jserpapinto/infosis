@@ -53,7 +53,6 @@ class summary {
   //update
   public function update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendancies, $students, $destination) {
       try {
-        id_user, class_n, summary, summary_date
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
@@ -169,7 +168,7 @@ class summary {
         WHERE tSummarys.id_user = tUsers.id_user
           AND tSummarys.id_class = :idc
           AND tSummarys.id_year = :idy
-        ORDER BY tSummarys.class_n';
+        ORDER BY tSummarys.class_n DESC';
       $data = $con->prepare($sql);
       $data->bindvalue(':idc', $id_class);
       $data->bindvalue(':idy', $id_year);

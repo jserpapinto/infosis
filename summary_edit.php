@@ -17,9 +17,9 @@
   if (isset($_POST['summary']) && $_POST['summary'] != null) {
     $id_summary = $_POST['id_summary'];
     $summary = $_POST['summary'];
-    $class_date = $_POST['class_date'];
+    $summary_date = $_POST['summary_date'];
     $id_user = $_POST['id_user'];
-    $s->update($id_summary, $summary, $id_user, $class_date, 'summary_manage.php');
+    $s->update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendencies, $students, 'summary_manage.php');
   }
 ?>
 
@@ -102,11 +102,39 @@
                     
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
-                      <label for="class_date" class="control-label col-sm-3 control-label">Data</label>
+                      <label for="summary_date" class="control-label col-sm-3 control-label">Data</label>
                       <div class="col-sm-9">
-                        <input type="text" name="class_date" id="class_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                        <input type="text" name="summary_date" id="summary_date"  class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
                     </div>
+                    <!-- .Date -->
+
+                    <h3 class="heading">Presenças <small>Marque as presenças</small></h3>
+                    <!--single line list with avtar --> 
+                    <ul id="attendencies" class="list-group pmd-list pmd-list-avatar pmd-card-list">
+
+                    <?php
+                    $attendencies = $s->attendency($summary['id_summary']); 
+                    foreach ($attendencies as $attendency) { ?>
+
+                      <li class="col-sm-6 list-group-item">
+                        <div class="media-left">
+                            <a class="avatar-list-img" href="javascript:void(0);">
+                              <img data-holder-rendered="true" src="<?=$attendency['picture']?>" class="img-responsive" data-src="holder.js/40x40" alt="40x40">
+                            </a>
+                        </div>
+                        <div class="media-body media-middle">
+                            <label style="width:100%;" class="pmd-checkbox pmd-checkbox-ripple-effect">
+                                <span> <?=$attendency['name']?></span>
+                                <input class="pull-right" type="checkbox" name="attendancies[]" value="<?=$attendency['id_user']?>" <?= ($attendency['attendency']) ? "checked" : "" ?>>
+                                <input type="hidden" name="students[]" value="${el.id_user}">
+                            </label>
+                        </div>
+                      </li>
+
+                      <?php } ?>
+
+                    </ul>
 
                     <input type="hidden" name="id_summary" id="id_summary" value="<?= $_GET['id'] ?>">
 
@@ -137,7 +165,7 @@
     <script>
       $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
       $('.datetimepicker').datetimepicker({
-        date: new Date('<?= $summary['class_date'] ?>')
+        date: new Date('<?= $summary['summary_date'] ?>')
       });
     </script>
   </body>
