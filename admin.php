@@ -27,6 +27,10 @@
         </div>
       </div><!-- .Header -->
 
+
+          <?php include_once('includes/stats.inc.php'); ?>
+
+
       </div>
     </div><!-- .Container -->
 
