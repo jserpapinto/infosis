@@ -143,11 +143,11 @@ class classs {
           tClasses.active 
         FROM tClasses, tDegrees
         WHERE tDegrees.id_degree = tClasses.id_degree 
-          AND (tClasses.id_degree = :id OR :id = -1) 
+          AND (tClasses.id_degree = :idd OR :idd = -1) 
           AND (tDegrees.id_degree_level = :idl OR :idl = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
       $data = $con->prepare($sql);
-      $data->bindvalue(':id', $id_degree);
+      $data->bindvalue(':idd', $id_degree);
       $data->bindvalue(':idl', $id_degree_level);
       $data->execute();
       $classes = $data->fetchAll();
@@ -180,18 +180,16 @@ class classs {
         FROM tClasses 
         WHERE tClasses.id_class 
           IN (
-            SELECT tci.id_class 
-            FROM tClassInscriptions tci 
-              LEFT JOIN tUsers tu 
-                ON tci.id_user = tu.id_user 
-            WHERE tu.id_role = 3 
-              AND tci.id_year = 1
-            GROUP BY tci.id_class) 
-        ORDER BY `tClasses`.`fullName` ASC
-      ';
+            SELECT tClassInscriptions.id_class 
+            FROM tClassInscriptions 
+              LEFT JOIN tUsers 
+                ON tClassInscriptions.id_user = tUsers.id_user 
+            WHERE tUsers.id_role = 3 
+              AND tClassInscriptions.id_year = :idy
+            GROUP BY tClassInscriptions.id_class) 
+        ORDER BY tClasses.fullName';
       $data = $con->prepare($sql);
-      $data->bindvalue(':id', $id_degree);
-      $data->bindvalue(':idl', $id_degree_level);
+      $data->bindvalue(':idy', $id_year);
       $data->execute();
       $classes = $data->fetchAll();
       return $classes;
@@ -218,11 +216,11 @@ class classs {
           tClasses.active
         FROM tClasses, tClassInscriptions
         WHERE tClasses.id_class = tClassInscriptions.id_class 
-          AND (tClassInscriptions.id_user = :id OR :id = -1)
+          AND (tClassInscriptions.id_user = :idu OR :idu = -1)
           AND (tClasses.id_degree = :idd OR :idd = -1)
         ORDER BY tClasses.id_degree, tClasses.fullName';
       $data = $con->prepare($sql);
-      $data->bindvalue(':id', $id_user);
+      $data->bindvalue(':idu', $id_user);
       $data->bindvalue(':idd', $id_degree);
       $data->execute();
       $classes = $data->fetchAll();

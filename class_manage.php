@@ -67,7 +67,7 @@
                         <td><?= $class['dcode'] ?></td>
                         <td><?= $class['code'] ?></td>
                         <td><?= $class['fullName'] ?></td>
-                        <td><strong><?= $class['semester'] ?></strong> <small>(<?= ceil($class['semester'] / 2) ?>º ano)</small></td>
+                        <td><?= $class['semester'] ?> <small>(<?= ceil($class['semester'] / 2) ?>º ano)</small></td>
                         <td><?= $class['hours'] ?></td>
                         <td><?= $class['n_classes'] ?></td>
                         <td><?= $class['credits'] ?></td>

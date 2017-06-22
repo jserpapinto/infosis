@@ -10,7 +10,7 @@ class inscription {
       $con = $db->getCon();
       $sql = '
         INSERT INTO tClassInscriptions (id_user, id_class, inscription_year) 
-        VALUES ( :idu, :idc, :iy)';
+        VALUES (:idu, :idc, :iy)';
       $data = $con->prepare($sql);
       $data->bindvalue(':idu', $id_user);
       $data->bindvalue(':idc', $id_class);
