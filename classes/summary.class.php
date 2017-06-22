@@ -3,7 +3,7 @@
 class summary {
 
 	//insert
-  public function insert($id_class, $id_user, $class_n, $summary, $summary_date, $id_year, $attendancies, $misses, $destination) {
+  public function insert($id_class, $id_user, $class_n, $summary, $summary_date, $id_year, $attendancies, $students, $destination) {
       try {
         require_once 'db.class.php';
         $db = new database();
@@ -27,25 +27,19 @@ class summary {
         $id_summary = $data->lastInsertId();
 
         //insert attendancies
-        foreach ($attendancies as $id_userA) {
-          $sql = '
-            INSERT INTO tAttendancies (id_summary, id_user, attendancy) 
-            VALUES (:ids, :idu, 1)';
-          $data = $con->prepare($sql);
-          $data->bindvalue(':ids', $id_summary);
-          $data->bindvalue(':idu', $id_userA);
-          $data->execute();
-        }
-
-        foreach ($misses as $id_userA) {
-          $sql = '
-            INSERT INTO tAttendancies (id_summary, id_user, attendancy) 
-            VALUES (:ids, :idu, 0)';
-          $data = $con->prepare($sql);
-          $data->bindvalue(':ids', $id_summary);
-          $data->bindvalue(':idu', $id_userA);
-          $data->execute();
-        }
+        foreach ($students as $id_userA) {
+          $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
+            $sql = '
+              INSERT INTO tAttendancies (id_summary, id_user, attendancy) 
+              VALUES (:ids, :idu, :a)';
+            $data = $con->prepare($sql);
+            $data->bindvalue(':ids', $id_summary);
+            $data->bindvalue(':idu', $id_userA);
+            $data->bindvalue(':a', $a);
+            $data->execute();
+          }
+        } 
+        
         if ($destination != null) header('Location:' . $destination);
         return true;
 
