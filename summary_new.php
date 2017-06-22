@@ -165,6 +165,9 @@
           $('#id_user').html('');
           $('#id_user').prop('disabled', true);
           $('#id_user').trigger('chosen:updated');
+          $('#class_n').html('');
+          $('#class_n').prop('disabled', true);
+          $('#class_n').trigger('chosen:updated');
           return false;
         }
 
@@ -185,10 +188,9 @@
             text: ""
           }));
           res.forEach(function(el, i) {
-            $('#id_class').append($('<option>', {
-              value: el.id_class,
-              text: el.fullName
-            }));
+            $('#id_class').append(`
+              <option value="${el.id_class}" data-nclasses="${el.n_classes}">${el.fullName}</option>
+            `);
           });
 
           // enable/disable
@@ -208,14 +210,21 @@
       $('#id_class').on('change', function() {
 
         var idClass = $(this).val();
+        var nClasses = $(this).find(':selected').data('nclasses');
+
+        console.log(idClass, $(this).find(':selected').data('nclasses'));
 
         if (idClass == "") {
           $('#id_user').html('');
           $('#id_user').prop('disabled', true);
           $('#id_user').trigger('chosen:updated');
+          $('#class_n').html('');
+          $('#class_n').prop('disabled', true);
+          $('#class_n').trigger('chosen:updated');
           return false;
         }
 
+        // Fetch Professores
         $.ajax({
           url: "ajax/summary_new.php",
           method: "POST",
@@ -225,6 +234,10 @@
           }
         }).done(function(res) {
 
+          console.log(res.summarized);
+
+
+          // Professor
           $('#id_user').html('');
 
           // iterate and add as option
@@ -232,7 +245,7 @@
             value: "",
             text: ""
           }));
-          res.forEach(function(el, i) {
+          res.users.forEach(function(el, i) {
             $('#id_user').append($('<option>', {
               value: el.id_user,
               text: el.name
@@ -240,16 +253,50 @@
           });
 
           // enable/disable
-          if (res.length > 0) $('#id_user').prop('disabled', false);
+          if (res.users.length > 0) $('#id_user').prop('disabled', false);
           else $('#id_user').prop('disabled', true);
 
           // update select box
           $('#id_user').trigger('chosen:updated');
+
+
+          // Class number
+          $('#class_n').html('');
+
+          // iterate and add as option
+          $('#class_n').append($('<option>', {
+            value: "",
+            text: ""
+          }));
+
+          var summarizedArr = res.summarized.map(function(el) {
+            return parseInt(el.class_n);
+          });
+
+          for (var i = 1; i <= nClasses; i++) {
+            if (summarizedArr.indexOf(i) < 0) {
+              $('#class_n').append($('<option>', {
+                value: i,
+                text: i
+              }));
+            }
+          }
+
+          // enable/disable
+          if (res.summarized.length > 0) $('#class_n').prop('disabled', false);
+          else $('#class_n').prop('disabled', true);
+
+          // update select box
+          $('#class_n').trigger('chosen:updated');
+
+
           
 
         }).fail(function(xhr) {
           console.log(xhr, xhr.statusText);
         });
+
+
       })
     </script>
   </body>

@@ -144,7 +144,7 @@ class summary {
   }
 
   //get sumarized class numbers
-  public function sumarized($id_class) {
+  public function summarized($id_class) {
     try {
       require_once 'db.class.php';
       $db = new database();
