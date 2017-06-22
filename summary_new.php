@@ -16,11 +16,15 @@
 
   //form
   if (isset($_POST['summary']) && $_POST['summary'] != null) {
+    print_r($_POST);
+    die();
     $id_class = $_POST['id_class'];
     $id_user = $_POST['id_user']; // porque é admin, senao tem de ser o da session
+    $summary = $_POST['class_n'];
     $summary = $_POST['summary'];
     $class_date = $_POST['class_date'];
-    $s->insert($id_class, $id_user, $summary, $class_date, 'summary_manage.php');
+    $summary = $_POST['id_year'];
+    $s->insert($id_class, $id_user, $class_n, $summary, $class_date, $id_year, 'summary_manage.php');
   }
 ?>
 
@@ -29,6 +33,11 @@
   <head>
     <?php require_once('includes/head.inc.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/datetime.css">
+    <style type="text/css">
+      .pmd-checkbox-label {
+        float: right;
+      }
+    </style>
   </head>
 
   <body id="InsertSummary">
@@ -123,6 +132,13 @@
                         <input type="text" name="class_date" id="class_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
                     </div><!-- .Date -->
+
+                    <h3 class="heading">Presenças <small>Marque as presenças</small></h3>
+                    <!--single line list with avtar --> 
+                    <ul id="attendencies" class="list-group pmd-list pmd-list-avatar pmd-card-list">
+                      
+                      sem alunos
+                    </ul>
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
@@ -225,7 +241,6 @@
           return false;
         }
 
-        // Fetch Professores
         $.ajax({
           url: "ajax/summary_new.php",
           method: "POST",
@@ -236,10 +251,11 @@
           }
         }).done(function(res) {
 
-          console.log(res.summarized);
-
-
-          // Professor
+          /**
+           *
+           * Professores
+           *
+           */
           $('#id_user').html('');
 
           // iterate and add as option
@@ -262,7 +278,11 @@
           $('#id_user').trigger('chosen:updated');
 
 
-          // Class number
+          /**
+           *
+           * Classes number
+           *
+           */
           $('#class_n').html('');
 
           // iterate and add as option
@@ -291,7 +311,70 @@
           // update select box
           $('#class_n').trigger('chosen:updated');
 
+          /**
+           *
+           * Alunos
+           *
+           */
+          console.log(res.students);
 
+          $('#attendencies').html("");
+
+          res.students.forEach(function(el, i) {
+            $('#attendencies').append(`
+              <li class="col-sm-6 list-group-item">
+                <div class="media-left">
+                    <a class="avatar-list-img" href="javascript:void(0);">
+                      <img data-holder-rendered="true" src="${el.picture}" class="img-responsive" data-src="holder.js/40x40" alt="40x40">
+                    </a>
+                </div>
+                <div class="media-body media-middle">
+                    <label style="width:100%;" class="pmd-checkbox pmd-checkbox-ripple-effect">
+                        <span> ${el.name}</span>
+                        <input class="pull-right" type="checkbox" name="attendancy[]" value="${el.id_user}">
+                        <input type="hidden" name="students[]" value="${el.id_user}">
+                    </label>
+                </div>
+              </li>
+            `);
+          });
+
+          /**
+           *
+           * Repeated code because of dynamic append
+           *
+           */
+          $('.pmd-checkbox input').after('<span class="pmd-checkbox-label">&nbsp;</span>');
+          // Ripple Effect //
+          $(".pmd-checkbox-ripple-effect").on('mousedown', function(e) {
+            var rippler = $(this);
+            $('.ink').remove();
+            // create .ink element if it doesn't exist
+            if(rippler.find(".ink").length === 0) {
+              rippler.append('<span class="ink"></span>');
+            }
+            var ink = rippler.find(".ink");
+            // prevent quick double clicks
+            ink.removeClass("animate");
+            // set .ink diametr
+            if(!ink.height() && !ink.width())
+            {
+            //  var d = Math.max(rippler.outerWidth(), rippler.outerHeight());
+              ink.css({height: 20, width: 20});
+            }
+            // get click coordinates
+            var x = e.pageX - rippler.offset().left - ink.width()/2;
+            var y = e.pageY - rippler.offset().top - ink.height()/2;
+            // set .ink position and add class .animate
+            ink.css({
+              top: y+'px',
+              left:x+'px'
+            }).addClass("animate");
+            setTimeout(function(){ 
+              ink.remove();
+            }, 1500);
+
+          })
           
 
         }).fail(function(xhr) {

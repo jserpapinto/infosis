@@ -15,9 +15,12 @@ if ($id_class && $id_year) {
 	$s = new summary();
 	$summarized = $s->summarized($id_class);
 
+	$students = $u->usersClass($id_class, 4, $id_year);
+
 	$output = [
 		"users" => $users,
-		"summarized" => $summarized
+		"summarized" => $summarized,
+		"students"	=> $students
 	];
 
 	echo json_encode($output);
