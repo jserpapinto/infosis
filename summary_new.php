@@ -71,7 +71,7 @@
                             $years = $y->years();
                             foreach ($years as $year) {
                           ?>
-                            <option <?= ($year['current'] ? "selected" : "") ?> value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
+                            <option value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
                           <?php } ?>
                         </select>
                       </div>
@@ -93,6 +93,16 @@
                       <label for="id_user" class="control-label col-sm-3">Professor</label>
                       <div class="col-sm-9">
                         <select id="id_user" name="id_user" class="form-control chosen" data-placeholder="Escolha um Professor.." disabled="">
+                          <option value=""></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Class number -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="class_n" class="control-label col-sm-3">Número da aula</label>
+                      <div class="col-sm-9">
+                        <select id="class_n" name="class_n" class="form-control chosen" data-placeholder="Escolha a aula.." disabled="">
                           <option value=""></option>
                         </select>
                       </div>
@@ -142,7 +152,7 @@
       $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
       $('.datetimepicker').datetimepicker();
 
-      // AJAX get professores associados a curso
+      //AJAX get classes by year
       $('#id_year').on('change', function() {
 
         var idYear = $(this).val();
@@ -194,7 +204,7 @@
         });
       })
 
-      // AJAX get professores associados a curso
+      // AJAX get professores associados a curso + numero da aula
       $('#id_class').on('change', function() {
 
         var idClass = $(this).val();

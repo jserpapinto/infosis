@@ -142,6 +142,30 @@ class summary {
       return false;
     }
   }
+
+  //get sumarized class numbers
+  public function sumarized($id_class) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT class_n 
+        FROM tSummarys
+        WHERE id_class = :idc';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':idc', $id_class);
+      $data->execute();
+      $summarys = $data->fetchAll();
+      return $summarys;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
 }
 
   ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 22-Jun-2017 às 17:26
+-- Generation Time: 22-Jun-2017 às 18:48
 -- Versão do servidor: 5.6.31
 -- PHP Version: 5.6.25
 
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `tDegreeLevels` (
   `id_degree_level` int(11) NOT NULL,
   `designation` varchar(100) NOT NULL,
   `semesters` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tDegreeLevels`
@@ -267,7 +267,8 @@ CREATE TABLE IF NOT EXISTS `tDegreeLevels` (
 INSERT INTO `tDegreeLevels` (`id_degree_level`, `designation`, `semesters`) VALUES
 (1, 'CTESP', 4),
 (2, 'Licenciatura', 6),
-(3, 'Pós-Graduação', 4);
+(3, 'Pós-Graduação', 4),
+(4, 'Doutoramento', 2);
 
 -- --------------------------------------------------------
 
@@ -324,17 +325,17 @@ CREATE TABLE IF NOT EXISTS `tSummarys` (
   `id_summary` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `n_aula` int(11) NOT NULL,
+  `class_n` int(11) NOT NULL,
   `summary_date` date NOT NULL,
   `summary` varchar(255) NOT NULL,
   `id_year` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tSummarys`
 --
 
-INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `n_aula`, `summary_date`, `summary`, `id_year`) VALUES
+INSERT INTO `tSummarys` (`id_summary`, `id_class`, `id_user`, `class_n`, `summary_date`, `summary`, `id_year`) VALUES
 (3, 1, 9, 0, '0000-00-00', 'esta aula foi muito boa', 1),
 (9, 6, 14, 0, '0000-00-00', 'Aenean fermentum mauris dolor, in feugiat tellus blandit sed. Mauris vulputate egestas congue. Etiam et.', 1),
 (10, 7, 10, 0, '0000-00-00', 'ai ai', 1),
@@ -505,7 +506,7 @@ ALTER TABLE `tClassInscriptions`
 -- AUTO_INCREMENT for table `tDegreeLevels`
 --
 ALTER TABLE `tDegreeLevels`
-  MODIFY `id_degree_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id_degree_level` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tDegrees`
 --
@@ -520,7 +521,7 @@ ALTER TABLE `tRoles`
 -- AUTO_INCREMENT for table `tSummarys`
 --
 ALTER TABLE `tSummarys`
-  MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+  MODIFY `id_summary` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `tUsers`
 --
