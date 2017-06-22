@@ -45,11 +45,12 @@
           <li class="active">Editar Curso</li>
         </ol>
 
-        <!-- Form -->
+        <!-- Card -->
         <div class="page-content profile-edit section-custom">
           <div class="pmd-card pmd-z-depth">
             <div class="pmd-card-body">
 
+              <!-- Form -->
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
@@ -68,7 +69,7 @@
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Nivel de curso -->
+                    </div>
 
                     <!-- Codigo de curso -->
                     <div class="form-group pmd-textfield">
@@ -76,8 +77,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" placeholder="" value="<?= $degree['code'] ?>" required>
                       </div>
-                    </div><!-- .Codigo de curso -->
-
+                    </div>
 
                     <!-- Designação curso -->
                     <div class="form-group pmd-textfield">
@@ -86,7 +86,6 @@
                         <input type="text" class="form-control empty" value="<?= $degree['fullName'] ?>" id="fullName" name="fullName" placeholder="" required>
                       </div>
                     </div><!-- .Designação curso -->
-
 
                     <div class="form-group btns margin-bot-30">
                       <input type="hidden" value='<?= $_GET['id'] ?>' name="id_degree" id="id_degree">
@@ -97,10 +96,10 @@
 
                   </div>
                 </div>
-              </form>
+              </form><!-- .Form -->
             </div>
           </div>
-        </div><!-- .Form -->
+        </div><!-- .Card -->
 
       </div>
     </div><!-- .Container -->

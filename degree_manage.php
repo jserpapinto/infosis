@@ -50,7 +50,7 @@
             <?php } ?>
             </div>
             <hr/>
-          </div><!-- .Filters -->
+          </div>
 
           <!-- Grid -->
           <div class="col-xs-12">
