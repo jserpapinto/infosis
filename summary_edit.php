@@ -17,9 +17,12 @@
   if (isset($_POST['summary']) && $_POST['summary'] != null) {
     $id_summary = $_POST['id_summary'];
     $summary = $_POST['summary'];
-    $summary_date = $_POST['summary_date'];
+    $class_n = $_POST['class_n'];
     $id_user = $_POST['id_user'];
-    $s->update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendencies, $students, 'summary_manage.php');
+    $summary_date = $_POST['summary_date'];
+    $attendancies = $_POST['attendancies'];
+    $students = $_POST['students'];
+    $s->update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendancies, $students, 'summary_edit.php?id=' . $_GET['id']);
   }
 ?>
 
@@ -34,6 +37,11 @@
     <!-- Menu -->
     <?php require_once('includes/menuManager.inc.php'); ?>
     <link rel="stylesheet" type="text/css" href="css/datetime.css">
+    <style type="text/css">
+      .pmd-checkbox-label {
+        float: right;
+      }
+    </style>
     
     <!-- Container -->
     <div id="content" class="pmd-content inner-page">
@@ -114,20 +122,20 @@
                     <ul id="attendencies" class="list-group pmd-list pmd-list-avatar pmd-card-list">
 
                     <?php
-                    $attendencies = $s->attendency($summary['id_summary']); 
-                    foreach ($attendencies as $attendency) { ?>
+                    $attendancies = $s->attendancy($_GET['id']); 
+                    foreach ($attendancies as $a) { ?>
 
                       <li class="col-sm-6 list-group-item">
                         <div class="media-left">
                             <a class="avatar-list-img" href="javascript:void(0);">
-                              <img data-holder-rendered="true" src="<?=$attendency['picture']?>" class="img-responsive" data-src="holder.js/40x40" alt="40x40">
+                              <img data-holder-rendered="true" src="<?=$a['picture']?>" class="img-responsive" data-src="holder.js/40x40" alt="40x40">
                             </a>
                         </div>
                         <div class="media-body media-middle">
                             <label style="width:100%;" class="pmd-checkbox pmd-checkbox-ripple-effect">
-                                <span> <?=$attendency['name']?></span>
-                                <input class="pull-right" type="checkbox" name="attendancies[]" value="<?=$attendency['id_user']?>" <?= ($attendency['attendency']) ? "checked" : "" ?>>
-                                <input type="hidden" name="students[]" value="${el.id_user}">
+                                <span> <?=$a['name']?></span>
+                                <input class="pull-right" type="checkbox" name="attendancies[]" value="<?=$a['id_user']?>" <?= ($a['attendancy']) ? "checked" : "" ?>>
+                                <input type="hidden" name="students[]" value="<?=$a['id_user']?>">
                             </label>
                         </div>
                       </li>

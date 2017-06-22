@@ -214,11 +214,12 @@ class summary {
       $con = $db->getCon();
       $sql = '
         SELECT tUsers.id_user, 
-          tSummarys.attendancy, 
-          tUsers.picture 
-        FROM tSummarys, tUsers
-        WHERE tSummarys.id_user = tUsers.id_user
-          AND tSummarys.id_summary = :ids';
+          tAttendancies.attendancy, 
+          tUsers.picture,
+          tUsers.name 
+        FROM tAttendancies, tUsers
+        WHERE tAttendancies.id_user = tUsers.id_user
+          AND tAttendancies.id_summary = :ids';
       $data = $con->prepare($sql);
       $data->bindvalue(':ids', $id_summary);
       $data->execute();
