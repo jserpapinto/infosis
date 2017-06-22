@@ -24,7 +24,9 @@
     $summary = $_POST['summary'];
     $class_date = $_POST['class_date'];
     $summary = $_POST['id_year'];
-    $s->insert($id_class, $id_user, $class_n, $summary, $class_date, $id_year, 'summary_manage.php');
+    $attendencies = $_POST['attendencies'];
+    $student = $_POST['student'];
+    $s->insert($id_class, $id_user, $class_n, $summary, $class_date, $id_year, $attendencies, $students, 'summary_manage.php');
   }
 ?>
 
@@ -331,7 +333,7 @@
                 <div class="media-body media-middle">
                     <label style="width:100%;" class="pmd-checkbox pmd-checkbox-ripple-effect">
                         <span> ${el.name}</span>
-                        <input class="pull-right" type="checkbox" name="attendancy[]" value="${el.id_user}">
+                        <input class="pull-right" type="checkbox" name="attendancies[]" value="${el.id_user}">
                         <input type="hidden" name="students[]" value="${el.id_user}">
                     </label>
                 </div>
