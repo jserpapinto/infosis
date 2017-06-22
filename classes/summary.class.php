@@ -12,7 +12,7 @@ class summary {
           INSERT INTO tSummarys (id_class, id_user, class_n, summary, summary_date, id_year) 
           VALUES (:idc, :idu, :cn, :s, :d, :idy)';
         $data = $con->prepare($sql);
-        $data->bindvalue(':idc', $id_class);
+        $data->bindvalue(':idu', $id_user);
         $data->bindvalue(':cn', $class_n);
         $data->bindvalue(':idc', $id_class);
         $data->bindvalue(':idy', $id_year);
@@ -24,7 +24,7 @@ class summary {
 
         $data->execute();
 
-        $id_summary = $data->lastInsertId();
+        $id_summary = $con->lastInsertId();
 
         //insert attendancies
         foreach ($students as $id_userA) {
