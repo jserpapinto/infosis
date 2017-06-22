@@ -10,6 +10,6 @@
   $id = $_REQUEST['id'];
   if (isset($id) && $id != null) {
   	if (!$y->yearDepend($id)) $y->delete($id, 'year_manage.php');
-  	else header('Location:degree_level_manage.php?error=true');
+  	else header('Location:year_manage.php?error=true');
   }
 ?>

@@ -125,13 +125,13 @@
             <div class="modal-body">
               <div class="form-group pmd-textfield pmd-textfield-floating-label">
                 <label for="beginningCreate">Data de Inicio</label>
-                  <input type="text" name="beginningCreate" id="beginningCreate" class="mat-input datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                  <input type="text" name="beginningCreate" id="beginningCreate" class="mat-input datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
               </div>
             </div>
             <div class="modal-body">
               <div class="form-group pmd-textfield pmd-textfield-floating-label">
                 <label for="endingCreate">Data de Fim</label>
-                  <input type="text" name="endingCreate" id="endingCreate" class="mat-input datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                  <input type="text" name="endingCreate" id="endingCreate" class="mat-input datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
               </div>
             </div>
             <div class="pmd-modal-action">
@@ -168,13 +168,13 @@
             <div class="modal-body">
               <div class="form-group pmd-textfield">
                 <label for="beginningEdit">Data de Inicio</label>
-                  <input type="text" name="beginningEdit" id="beginningEdit" class="mat-input datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                  <input type="text" name="beginningEdit" id="beginningEdit" class="mat-input datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
               </div>
             </div>
             <div class="modal-body">
               <div class="form-group pmd-textfield">
                 <label for="endingEdit">Data de Fim</label>
-                  <input type="text" name="endingEdit" id="endingEdit" class="mat-input datetimepicker form-control"><span class="pmd-textfield-focused"></span>
+                  <input type="text" name="endingEdit" id="endingEdit" class="mat-input datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
               </div>
             </div>
             <div class="pmd-modal-action">
