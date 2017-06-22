@@ -3,17 +3,19 @@
 class summary {
 
 	//insert
-  public function insert($id_class, $id_user, $summary, $summary_date, $destination) {
+  public function insert($id_class, $id_user, $class_n, $summary, $summary_date, $id_year, $attendancies, $destination) {
       try {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
         $sql = '
-          INSERT INTO tSummarys (id_class, id_user, summary, summary_date) 
-          VALUES (:idc, :idu, :s, :d)';
+          INSERT INTO tSummarys (id_class, id_user, class_n, summary, summary_date, id_year) 
+          VALUES (:idc, :idu, :cn, :s, :d, :idy)';
         $data = $con->prepare($sql);
         $data->bindvalue(':idc', $id_class);
-        $data->bindvalue(':idu', $id_user);
+        $data->bindvalue(':cn', $class_n);
+        $data->bindvalue(':idc', $id_class);
+        $data->bindvalue(':idy', $id_year);
         $data->bindvalue(':s', $summary);
 
         // handle date
@@ -21,8 +23,23 @@ class summary {
         $data->bindvalue(':d', $date);
 
         $data->execute();
+
+        $id_summary = $data->lastInsertId();
+
+        //insert attendancies
+        foreach ($attendancies as $id_userA => $attendancy) {
+          $sql = '
+            INSERT INTO tAttendancies (id_summary, id_user, attendancy) 
+            VALUES (:ids, :idu, :a)';
+          $data = $con->prepare($sql);
+          $data->bindvalue(':ids', $id_summary);
+          $data->bindvalue(':idu', $id_userA);
+          $data->bindvalue(':a', $attendancy);
+          $data->execute();
+        }
         if ($destination != null) header('Location:' . $destination);
         return true;
+
       }
       catch (PDOException $e){
         echo("Erro de ligação:" . $e);
