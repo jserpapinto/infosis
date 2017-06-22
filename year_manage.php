@@ -80,7 +80,10 @@
                     <div class="pmd-card-media">
                         <div class="media-body">
                             <h2 class="pmd-card-title-text" ><?= date("Y",strtotime($year['beginning'])) . '/' . date("Y",strtotime($year['ending'])) ?></h2>
-                            <span class="pmd-card-subtitle-text"><?= 'Inicio: ' . $year['beginning'] . ' Final: ' . $year['ending']?></span>
+                            <span class="pmd-card-subtitle-text">
+                                <i class="material-icons" style="vertical-align:bottom; color:green;">play_arrow</i> <?= $year['beginning'] ?> <br/>
+                                <i class="material-icons" style="vertical-align:bottom; color:red;">stop</i> <?= $year['ending'] ?>
+                            </span>
                         </div>
                     </div>
 

@@ -231,9 +231,10 @@
 
             // Iterate all results
             res.forEach(function(el, i) {
+              console.log(el);
               // Add each result to table
               summaryTable.row.add([
-                el.class_date,
+                el.summary_date,
                 el.name,
                 el.summary,
                 `
