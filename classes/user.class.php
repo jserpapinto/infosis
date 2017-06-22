@@ -155,7 +155,7 @@ class user {
   }
 
   //list by class
-  public function usersClass($id_class, $id_role = -1) {
+  public function usersClass($id_class, $id_role, $id_year) {
     try {
       require_once 'db.class.php';
       $db = new database();
@@ -170,10 +170,12 @@ class user {
           AND tClassInscriptions.id_user = tUsers.id_user 
           AND tUsers.id_role = tRoles.id_role 
           AND (tUsers.id_role = :id OR :id = -1) 
+          AND (tUsers.id_year = :idy OR :idy = -1)
         ORDER BY tRoles.role, tUsers.name';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_role);
       $data->bindvalue(':idc', $id_class);
+      $data->bindvalue(':idy', $id_year);
       $data->execute();
       $users = $data->fetchAll();
       return $users;
