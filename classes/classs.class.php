@@ -161,8 +161,8 @@ class classs {
   }
 
   //list 
-  // Vai buscar pela inscriçao do professor 
-  public function classesYear($id_year) {
+  // Vai buscar pela inscriçao do professor no ano e curso
+  public function classesYear($id_year, $id_degree = -1) {
     try {
       require_once 'db.class.php';
       $db = new database();
@@ -187,40 +187,10 @@ class classs {
             WHERE tUsers.id_role = 3 
               AND tClassInscriptions.id_year = :idy
             GROUP BY tClassInscriptions.id_class) 
+          AND (tClasses.id_degree = :idd OR :idd = -1)
         ORDER BY tClasses.fullName';
       $data = $con->prepare($sql);
       $data->bindvalue(':idy', $id_year);
-      $data->execute();
-      $classes = $data->fetchAll();
-      return $classes;
-    }
-    catch (PDOException $e) {
-      echo("Erro de ligação:" . $e);
-      exit();
-      return false;
-    }
-  }
-
-  //list for professors students
-  public function classesUser($id_user = -1, $id_degree = -1) {
-    try {
-      require_once 'db.class.php';
-      $db = new database();
-      $con = $db->getCon();
-      $sql = '
-        SELECT tClasses.id_class, 
-          tClasses.code, 
-          tClasses.fullName, 
-          tClasses.credits, 
-          tClasses.hours, 
-          tClasses.active
-        FROM tClasses, tClassInscriptions
-        WHERE tClasses.id_class = tClassInscriptions.id_class 
-          AND (tClassInscriptions.id_user = :idu OR :idu = -1)
-          AND (tClasses.id_degree = :idd OR :idd = -1)
-        ORDER BY tClasses.id_degree, tClasses.fullName';
-      $data = $con->prepare($sql);
-      $data->bindvalue(':idu', $id_user);
       $data->bindvalue(':idd', $id_degree);
       $data->execute();
       $classes = $data->fetchAll();
