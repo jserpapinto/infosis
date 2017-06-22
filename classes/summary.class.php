@@ -206,6 +206,32 @@ class summary {
     }
   }
 
+  //get attendancy
+  public function attendancy($id_summary) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT tUsers.id_user, 
+          tSummarys.attendancy, 
+          tUsers.picture 
+        FROM tSummarys, tUsers
+        WHERE tSummarys.id_user = tUsers.id_user
+          AND tSummarys.id_summary = :ids';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':ids', $id_summary);
+      $data->execute();
+      $attendancies = $data->fetchAll();
+      return $attendancies;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
 }
 
   ?>
