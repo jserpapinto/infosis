@@ -62,7 +62,7 @@
                   <div class="col-lg-9 custom-col-9">
                     <h3 class="heading">Informações de Curso</h3>
                   
-                    <!-- Curso -->
+                    <!-- Degree -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_degree" class="control-label col-sm-3">Curso</label>
                       <div class="col-sm-9">
@@ -76,25 +76,24 @@
                         </select>
                       </div>
                     </div>
-                    <!-- .Curso --> 
                   
-                    <!-- Cadeira -->
+                    <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha um Curso.." disabled="">
+                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma Cadeira.." disabled="">
                           <option value=""></option>
                         </select>
                       </div>
-                    </div>
-                    <!-- .Cadeira --> 
+                    </div><!-- .Class -->
 
                     <h3 class="heading">Informações de Utilizador</h3>
+
                     <!-- Role -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="id_role" class="control-label col-sm-3">Role</label>
+                      <label for="id_role" class="control-label col-sm-3">Tipo de Utilizador</label>
                       <div class="col-sm-9">
-                        <select id="id_role" name="id_role" class="form-control chosen" data-placeholder="Escolha um Curso..">
+                        <select id="id_role" name="id_role" class="form-control chosen" data-placeholder="Escolha um Tipo de Utilizador..">
                           <option value=""></option>
                           <?php
                             foreach ($roles as $role) {
@@ -104,7 +103,6 @@
                         </select>
                       </div>
                     </div>
-                    <!-- .Role --> 
 
 
                     <!-- User -->
@@ -116,8 +114,6 @@
                         </select>
                       </div>
                     </div>
-                    <!-- .User --> 
-
 
                     <!-- Date -->
                     <div class="form-group pmd-textfield ">
@@ -125,9 +121,7 @@
                       <div class="col-sm-9">
                         <input type="text" name="inscription_year" id="inscription_year" class="datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
                       </div>
-                    </div>
-                    <!-- .Date -->
-
+                    </div><!-- .Date -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
@@ -163,6 +157,7 @@
         if (idDegree == "") {
           $('#id_class').html('');
           $('#id_class').prop('disabled', true);
+          
           // update select box
           $('#id_class').trigger('chosen:updated');
           summaryTable.clear().draw();

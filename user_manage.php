@@ -49,7 +49,6 @@
             </div>
             <hr/>
           </div>
-          <!-- .Filters -->
 
           <!-- Grid -->
           <div class="col-xs-12">

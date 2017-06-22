@@ -67,7 +67,7 @@
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Nivel de curso -->
+                    </div>
                     
 
                     <!-- Codigo de curso -->
@@ -76,7 +76,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" required>
                       </div>
-                    </div><!-- .Codigo de curso -->
+                    </div>
 
                     <!-- Designação curso -->
                     <div class="form-group pmd-textfield">

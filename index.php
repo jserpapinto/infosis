@@ -73,6 +73,7 @@ if (isset($_POST['username']) && $_POST['username'] != null) {
             $e = new error();
             if (isset($_GET['error']) && $_GET['error']) echo $e->errorMessage('danger', 'ACESSO NEGADO!', 'Nome de utilizador ou palavra-passe errados, por favor reveja os dados...');
             if (isset($_GET['error2']) && $_GET['error2']) echo $e->errorMessage('warning', 'VIOLAÇÃO DE ACESSO!', 'Está a tentar entrar numa área reservada, contacte o administrador !!!');
+            if (isset($_GET['error3']) && $_GET['error3']) echo $e->errorMessage('danger', 'VIOLAÇÃO DE ACESSO!', 'A sua tentativa foi registada, contacte um administrador o mais rapidamente possível');
           ?><!-- .Errors -->
 
         </div>

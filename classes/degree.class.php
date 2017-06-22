@@ -11,9 +11,9 @@ class degree {
         $con = $db->getCon();
         $sql = '
           INSERT INTO tDegrees (id_degree_level, code, fullName) 
-          VALUES ( :i, :c, :n)';
+          VALUES (:idl, :c, :n)';
         $data = $con->prepare($sql);
-        $data->bindvalue(':i', $id_degree_level);
+        $data->bindvalue(':idl', $id_degree_level);
         $data->bindvalue(':c', $code);
         $data->bindvalue(':n', $fullName);
         $data->execute();
@@ -37,7 +37,7 @@ class degree {
         $con = $db->getCon();
         $sql = '
           INSERT INTO tDegreeLevels (designation, semesters) 
-          VALUES ( :d, :s )';
+          VALUES (:d, :s)';
         $data = $con->prepare($sql);
         $data->bindvalue(':d', $designation);
         $data->bindvalue(':s', $semesters);
@@ -92,7 +92,8 @@ class degree {
         $con = $db->getCon();
         $sql = '
           UPDATE tDegreeLevels 
-          SET designation = :d, semesters = :s
+          SET designation = :d, 
+            semesters = :s
           WHERE id_degree_level = :id';
         $data = $con->prepare($sql);
         $data->bindvalue(':d', $designation);
@@ -161,8 +162,10 @@ class degree {
       $db = new database();
       $con = $db->getCon();
       $sql = '
-        SELECT tDegrees.id_degree_level, tDegrees.code, 
-          tDegrees.fullName, tDegreeLevels.semesters
+        SELECT tDegrees.id_degree_level, 
+          tDegrees.code, 
+          tDegrees.fullName, 
+          tDegreeLevels.semesters
         FROM tDegrees, tDegreeLevels
         WHERE tDegrees.id_degree_level = tDegreeLevels.id_degree_level
           AND tDegrees.id_degree = :i';
@@ -238,7 +241,9 @@ class degree {
     	$db = new database();
     	$con = $db->getCon();
     	$sql = '
-        SELECT id_degree_level, designation, semesters
+        SELECT id_degree_level, 
+          designation, 
+          semesters
         FROM tDegreeLevels
         ORDER BY id_degree_level';
     	$data = $con->prepare($sql);

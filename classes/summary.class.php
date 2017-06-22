@@ -92,10 +92,15 @@ class summary {
       $db = new database();
       $con = $db->getCon();
       $sql = '
-        SELECT ts.id_class, ts.id_user, ts.summary, ts.class_date, tc.fullName, tc.code
-        FROM tSummarys ts, tClasses tc
-        WHERE tc.id_class = ts.id_class
-          AND ts.id_summary = :ids';
+        SELECT tSummarys.id_class, 
+          tSummarys.id_user, 
+          tSummarys.summary, 
+          tSummarys.class_date, 
+          tClasses.fullName, 
+          tClasses.code
+        FROM tSummarys, tClasses
+        WHERE tClasses.id_class = tSummarys.id_class
+          AND tSummarys.id_summary = :ids';
       $data = $con->prepare($sql);
       $data->bindvalue(':ids', $id_summary);
       $data->execute();
@@ -124,7 +129,6 @@ class summary {
         WHERE tClassInscriptions.id_class = :idc
           AND tClassInscriptions.id_class = tSummarys.id_class
           AND tSummarys.id_user = tUsers.id_user
-          OR tClassInscriptions.id_user = -1
         ORDER BY tSummarys.class_date';
       $data = $con->prepare($sql);
       $data->bindvalue(':idc', $id_class);
@@ -138,6 +142,30 @@ class summary {
       return false;
     }
   }
+
+  //get sumarized class numbers
+  public function sumarized($id_class) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT class_n 
+        FROM tSummarys
+        WHERE id_class = :idc';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':idc', $id_class);
+      $data->execute();
+      $summarys = $data->fetchAll();
+      return $summarys;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+
 }
 
   ?>

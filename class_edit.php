@@ -34,6 +34,7 @@
   </head>
 
   <body id="UpdateClass">
+
     <!-- Menu -->
     <?php require_once('includes/menuManager.inc.php'); ?>
         
@@ -76,8 +77,6 @@
                         </select>
                       </div>
                     </div>
-                    <!-- .Curso --> 
-
 
                     <!-- Codigo de disciplina -->
                     <div class="form-group pmd-textfield">
@@ -85,7 +84,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" placeholder="" required value="<?= $class['code'] ?>">
                       </div>
-                    </div><!-- .Codigo de disciplina -->
+                    </div>
 
                     <!-- Designação da cadeira -->
                     <div class="form-group pmd-textfield">
@@ -93,7 +92,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="fullName" name="fullName" class="form-control empty" placeholder="" required value="<?= $class['fullName'] ?>">
                       </div>
-                    </div><!-- .Designação da cadeira -->
+                    </div>
 
                     <!-- Número total de horas -->
                     <div class="form-group pmd-textfield  col-sm-6">
@@ -101,7 +100,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="hours" name="hours" class="form-control" min="0" max="1000" required value="<?= $class['hours'] ?>">
                       </div>
-                    </div><!-- .Número total de horas -->
+                    </div>
 
 
                     <!-- Créditos -->
@@ -110,7 +109,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="1000" required value="<?= $class['credits'] ?>">
                       </div>
-                    </div><!-- .Créditos -->
+                    </div>
 
                     <!-- Semester -->
                     <div class="form-group pmd-textfield col-sm-6">
@@ -120,11 +119,11 @@
                           <?php 
                           for ($i = 1; $i <= $degree['semesters']; $i++) {
                           ?>
-                            <option <?= ($class['semester'] == $i) ? "selected" : "" ?> value="<?=$i?>"><?=$i?></option>
+                            <option <?= ($class['semester'] == $i) ? "selected" : "" ?> value="<?= $i ?>"><?= $i ?></option>
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Semester -->
+                    </div>
 
 
                     <!-- Créditos -->
@@ -133,8 +132,7 @@
                       <div class="col-sm-6">
                         <input type="number" value="<?= $class['n_classes'] ?>" id="n_classes" name="n_classes" class="form-control empty" min="0" max="50" required>
                       </div>
-                    </div><!-- .Créditos -->
-
+                    </div>
 
                     <!-- Activo -->
                     <div class="form-group checkbox pmd-default-theme pmd-textfield col-sm-12">
@@ -145,7 +143,6 @@
                         </div>
                       </label>
                     </div><!-- .Activo -->
-
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">

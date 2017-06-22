@@ -23,7 +23,7 @@ class year {
         // Insert year
         $sql = '
           INSERT INTO tYears (beginning, ending, current) 
-          VALUES ( :b, :e, :c)';
+          VALUES (:b, :e, :c)';
         $data = $con->prepare($sql);
 
         // handle dates
@@ -66,7 +66,7 @@ class year {
         // Insert year
         $sql = '
           UPDATE tYears
-          SET  beginning = :b, 
+          SET beginning = :b, 
             ending = :e, 
             current = :c
           WHERE id_year = :id
@@ -124,9 +124,7 @@ class year {
       $sql = '
         SELECT beginning, ending, current
         FROM tYears
-        WHERE id_year = :id
-      ';
-
+        WHERE id_year = :id';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_year);
       $data->execute();
@@ -161,22 +159,6 @@ class year {
       return false;
     }
   }
-
-  //validation
-  /*
-  public function valid($code, $fullName) {
-    require_once 'error.class.php';
-    $e = new error();
-    if (strlen($code) < 2) {
-      echo $e->errorMessage('danger', 'Código muito pequeno', "Tamanho mínimo 2 caracteres");
-      return false;
-    } elseif (strlen($fullName) < 4) {
-      echo $e->errorMessage('danger', 'Nome de curso muito pequeno', "Tamanho mínimo 4 caracteres");
-      return false;
-    }
-    else return true;
-  }*/
-
 
 }
 

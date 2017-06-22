@@ -73,7 +73,7 @@
                           <?php } ?>
                         </select>
                       </div>
-                    </div><!-- .Curso --> 
+                    </div>
 
                     <!-- Codigo de disciplina -->
                     <div class="form-group pmd-textfield">
@@ -81,7 +81,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="code" name="code" class="form-control empty" placeholder="" required>
                       </div>
-                    </div><!-- .Codigo de disciplina -->
+                    </div>
 
                     <!-- Designação da cadeira -->
                     <div class="form-group pmd-textfield">
@@ -89,7 +89,7 @@
                       <div class="col-sm-9">
                         <input type="text" id="fullName" name="fullName" class="form-control empty" placeholder="" required>
                       </div>
-                    </div><!-- .Designação da cadeira -->
+                    </div>
 
                     <!-- Número total de horas -->
                     <div class="form-group pmd-textfield  col-sm-6">
@@ -97,8 +97,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="hours" name="hours" class="form-control" min="0" max="1000" required>
                       </div>
-                    </div><!-- .Número total de horas -->
-
+                    </div>
 
                     <!-- Créditos -->
                     <div class="form-group pmd-textfield col-sm-6">
@@ -106,8 +105,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="credits" name="credits" class="form-control empty" min="0" max="20" required>
                       </div>
-                    </div><!-- .Créditos -->
-
+                    </div>
 
                     <!-- Semester -->
                     <div class="form-group pmd-textfield col-sm-6">
@@ -117,8 +115,7 @@
                             <option value=""></option>
                         </select>
                       </div>
-                    </div><!-- .Semester -->
-
+                    </div>
 
                     <!-- Créditos -->
                     <div class="form-group pmd-textfield col-sm-6">
@@ -126,7 +123,7 @@
                       <div class="col-sm-6">
                         <input type="number" id="n_classes" name="n_classes" class="form-control empty" min="0" max="50" required>
                       </div>
-                    </div><!-- .Créditos -->
+                    </div>
 
                     <!-- Activo -->
                     <div class="form-group checkbox pmd-default-theme pmd-textfield col-sm-12">

@@ -117,7 +117,7 @@
                           <input type="checkbox" id="active" name="active" checked="true">
                         </div>
                       </label>
-                    </div>
+                    </div><!-- .Active -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
