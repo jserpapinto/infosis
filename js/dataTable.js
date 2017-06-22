@@ -256,7 +256,6 @@ var nodataTemplate = `
       </svg>
       <h2>Não foram encontrados elementos para a tabela.</h2>
       <p>Selecione o Curso e a Cadeira para listar os sumários.</p>
-      <a href="docs/index.php" type="button" class="btn btn-primary pmd-ripple-effect">Get Started</a>
     </div>
   </div>  
 `;

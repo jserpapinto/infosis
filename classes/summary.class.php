@@ -115,6 +115,7 @@ class summary {
           tSummarys.id_user, 
           tSummarys.summary, 
           tSummarys.summary_date, 
+          tSummarys.id_year, 
           tClasses.fullName, 
           tClasses.code
         FROM tSummarys, tClasses

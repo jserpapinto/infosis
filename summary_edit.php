@@ -60,6 +60,15 @@
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
 
+                    <!-- Year -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_year" class="control-label col-sm-3">Ano Lectivo</label>
+                      <div class="col-sm-9">
+                        <input type="text" id="classid_year" name="id_year" value="<?= date('Y', strtotime($summary['beginning'])) ?> / <?= date('Y', strtotime($summary['ending'])) ?>" class="form-control empty" readonly>
+                      </div>
+                    </div>
+
+
                     <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="class" class="control-label col-sm-3">Cadeira</label>
@@ -75,7 +84,7 @@
                         <select id="id_user" name="id_user" class="form-control chosen" data-placeholder="Escolha um Professor.." >
                           <option value=""></option>
                           <?php 
-                          $users = $u->usersClass($summary['id_class'], 3);
+                          $users = $u->usersClass($summary['id_class'], 3, $summary['id_year']);
                           foreach ($users as $user) { ?>
                             <option <?= ($user['id_user'] == $summary['id_user']) ? "selected" : "" ?> value="<?= $user['id_user'] ?>"><?= $user['name'] ?></option>
                           <?php } ?>

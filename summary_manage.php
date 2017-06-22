@@ -11,6 +11,8 @@
   $c = new classs();
   require_once 'classes/summary.class.php';
   $s = new summary();
+  require_once 'classes/year.class.php';
+  $y = new year();
 ?>
 
 <!DOCTYPE html>
@@ -38,16 +40,39 @@
           <li class="active">Gerir Sumários</li>
         </ol>
 
-        <!-- Card degree -->
         <div class="row">
-          <div class="col-sm-6">
+
+          <!-- Card year -->
+          <div class="col-sm-3">
+            <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+                <div class="pmd-card-title">
+                    <h2 class="pmd-card-title-text">Ano Letivo</h2>
+                    <span class="pmd-card-subtitle-text">Selecione o ano</span>
+                </div>
+                <div class="pmd-card-body">
+                  <select id="id_year" name="id_year" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
+                    <option value=""></option>
+                    <?php
+                      $years = $y->years();
+                      foreach ($years as $year) {
+                      ?>
+                      <option value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) . " / " .  date('Y', strtotime($year['ending']))?></option>
+                      <?php } ?>
+                  </select>
+                </div>
+            </div>
+          </div>
+
+
+          <!-- Card degree -->
+          <div class="col-sm-4">
             <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
                 <div class="pmd-card-title">
                     <h2 class="pmd-card-title-text">Curso</h2>
                     <span class="pmd-card-subtitle-text">Filtre por curso</span>
                 </div>
                 <div class="pmd-card-body">
-                  <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha uma disciplina...">
+                  <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha uma disciplina..." disabled="">
                     <option value=""></option>
                     <?php
                       $degrees = $d->degrees();
@@ -61,7 +86,7 @@
           </div>
 
           <!-- Card class -->
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
                 <div class="pmd-card-title">
                     <h2 class="pmd-card-title-text">Cadeira</h2>
@@ -86,7 +111,7 @@
                     <thead>
                       <th>Data</th>
                       <th>Professor</th>
-                      <th>Sumário</th>
+                      <th>Nº de aula</th>
                       <th>Opções</th>
                     </thead>
                     <tbody class="summarys">
@@ -145,15 +170,35 @@
         });
 
 
+        $('#id_year').on('change', function() {
+
+          var idYear = $(this).val();
+
+          if (idYear == "") {
+            $('#id_degree').prop('disabled', true);
+            $('#id_degree').trigger('chosen:updated');
+            $('#id_class').html('');
+            $('#id_class').prop('disabled', true);
+            $('#id_class').trigger('chosen:updated');
+            summaryTable.clear().draw();
+            return false;
+          } 
+
+          $('#id_degree').prop('disabled', false);
+          $('#id_degree').trigger('chosen:updated');
+
+        });
+
+
 
         $('#id_degree').on('change', function() {
 
           var idDegree = $(this).val();
+          var idYear = $('#id_year').val();
 
           if (idDegree == "") {
             $('#id_class').html('');
             $('#id_class').prop('disabled', true);
-            // update select box
             $('#id_class').trigger('chosen:updated');
             summaryTable.clear().draw();
             return false;
@@ -165,8 +210,9 @@
             method: "POST",
             dataType: "json",
             data: {
-              id_user: <?= ($_SESSION['role'] == "Professor") ? $_SESSION['id_user'] : -1 ?>,
+              //id_user: <?= ($_SESSION['role'] == "Professor") ? $_SESSION['id_user'] : -1 ?>,
               id_degree: idDegree,
+              id_year: idYear,
               type: 'get_classes'
             }
           }).done(function(res) {
@@ -202,6 +248,7 @@
         $('#id_class').on('change', function() {
 
           var idClass = $(this).val();
+          var idYear = $('#id_year').val();
 
           if (idClass == "") {
             // clear and update datatable 
@@ -216,6 +263,7 @@
             dataType: "json",
             data: {
               id_class: idClass,
+              id_year: idYear,
               type: 'get_summarys'
             }
           }).done(function(res) {
@@ -236,7 +284,7 @@
               summaryTable.row.add([
                 el.summary_date,
                 el.name,
-                el.summary,
+                el.class_n,
                 `
                   <a href="summary_edit.php?id=${el.id_summary}"><button type="button" class="btn btn-sm btn-info">Editar</button></a>
                   <button data-destination="summary_delete.php?id=${el.id_summary}" type="button" class="btn btn-sm btn-danger sweet-delete">Apagar</button>
