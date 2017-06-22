@@ -7,10 +7,10 @@ require_once "../classes/summary.class.php";
 $id_class = (isset($_POST['id_class']) && !empty($_POST['id_class']) ? $_POST['id_class'] : null);
 $id_year = (isset($_POST['id_year']) && !empty($_POST['id_year']) ? $_POST['id_year'] : null);
 
-if ($id_class) {
-
+if ($id_class&& $id_year) {
+	
 	$u = new user();
-	$users = $u->usersClass($id_class, 3);
+	$users = $u->usersClass($id_class, 3, $id_year);
 
 	$s = new summary();
 	$summarized = $s->summarized($id_class);

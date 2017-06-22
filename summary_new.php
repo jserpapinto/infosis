@@ -211,6 +211,7 @@
 
         var idClass = $(this).val();
         var nClasses = $(this).find(':selected').data('nclasses');
+        var idYear = $('#id_year').val();
 
         console.log(idClass, $(this).find(':selected').data('nclasses'));
 
@@ -230,7 +231,8 @@
           method: "POST",
           dataType: "json",
           data: {
-            id_class: idClass
+            id_class: idClass,
+            id_year: idYear
           }
         }).done(function(res) {
 
