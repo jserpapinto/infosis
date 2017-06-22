@@ -134,7 +134,7 @@ class summary {
   }
 
   //list
-  public function summarys($id_class) {
+  public function summarys($id_class, $id_year) {
     try {
       require_once 'db.class.php';
       $db = new database();
@@ -142,15 +142,17 @@ class summary {
       $sql = '
         SELECT tSummarys.id_summary, 
           tUsers.name, 
-          tSummarys.summary, 
+          tSummarys.class_n, 
           tSummarys.summary_date
         FROM tClassInscriptions, tSummarys, tUsers
         WHERE tClassInscriptions.id_class = :idc
           AND tClassInscriptions.id_class = tSummarys.id_class
           AND tSummarys.id_user = tUsers.id_user
+          AND tSummarys.id_year = :idy
         ORDER BY tSummarys.summary_date';
       $data = $con->prepare($sql);
       $data->bindvalue(':idc', $id_class);
+      $data->bindvalue(':idy', $id_year);
       $data->execute();
       $summarys = $data->fetchAll();
       return $summarys;
