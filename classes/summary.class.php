@@ -51,19 +51,21 @@ class summary {
   }
 
   //update
-  public function update($id_summary, $summary, $id_user, $summary_date, $destination) {
+  public function update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendancies, $students, $destination) {
       try {
+        id_user, class_n, summary, summary_date
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
         $sql = '
+
           UPDATE tSummarys 
           SET summary = :s, 
             summary_date = :d,
-            id_user = :idu
+            id_user = :idu,
+            class_n = :cn
           WHERE id_summary = :ids';
         $data = $con->prepare($sql);
-        $data->bindvalue(':ids', $id_summary);
         $data->bindvalue(':s', $summary);
 
         // handle date
@@ -71,7 +73,25 @@ class summary {
         
         $data->bindvalue(':d', $date);
         $data->bindvalue(':idu', $id_user);
+        $data->bindvalue(':cn', $class_n);
+        $data->bindvalue(':ids', $id_summary);
         $data->execute();
+
+        //update attendancies
+        foreach ($students as $id_userA) {
+          $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
+          $sql = '
+            UPDATE tAttendancies 
+              SET attendancy = :a 
+              WHERE id_summary = :ids 
+                AND id_user = :idu';
+          $data = $con->prepare($sql);
+          $data->bindvalue(':ids', $id_summary);
+          $data->bindvalue(':idu', $id_userA);
+          $data->bindvalue(':a', $a);
+          $data->execute();
+        }
+
         if ($destination != null) header('Location:' . $destination);
         return true;
       }
@@ -145,12 +165,11 @@ class summary {
           tUsers.name, 
           tSummarys.class_n, 
           tSummarys.summary_date
-        FROM tClassInscriptions, tSummarys, tUsers
-        WHERE tClassInscriptions.id_class = :idc
-          AND tClassInscriptions.id_class = tSummarys.id_class
-          AND tSummarys.id_user = tUsers.id_user
+        FROM tSummarys, tUsers
+        WHERE tSummarys.id_user = tUsers.id_user
+          AND tSummarys.id_class = :idc
           AND tSummarys.id_year = :idy
-        ORDER BY tSummarys.summary_date';
+        ORDER BY tSummarys.class_n';
       $data = $con->prepare($sql);
       $data->bindvalue(':idc', $id_class);
       $data->bindvalue(':idy', $id_year);
