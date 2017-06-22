@@ -5,20 +5,28 @@
   $u->logged();
 
   //page
-  $user = $u->fetch($_GET['id']);
-
+  if ($_SESSION['role'] != "Admin" && $_SESSION['id_user'] != $_GET['id']) logout('index.php?error3=true');
+  else $user = $u->fetch($_GET['id']);
 
   //form
   if (isset($_POST['username']) && $_POST['username'] != null) {
+    if ($_SESSION['role'] != "Admin") {
+      $id_role = $user['id_role'];
+      $destination = strtolower($_SESSION['role']) . '.php';
+      $active = $user['active'];
+    }
+    else {
+      $id_role = $_POST['id_role'];
+      $destination = 'user_manage.php';
+      $active = ($_POST['active']) ? true : false;
+    }
     $id_user = $_POST['id_user'];
-    $id_role = $_POST['role'];
     $name = $_POST['name'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $active = ($_POST['active']) ? true : false;
     $picture = 'picture';
     $picture_old = $_POST['picture_old'];
-    $u->update($id_user, $id_role, $username, $password, $name, $picture, $picture_old, $active, 'user_manage.php');
+    $u->update($id_user, $id_role, $username, $password, $name, $picture, $picture_old, $active, $destination);
   }
 ?>
 
@@ -76,9 +84,9 @@
 
                     <!-- Tipo de utilizador -->
                     <div class="form-group prousername pmd-textfield">
-                      <label for="role" class="control-label col-sm-3">Tipo de utilizador</label>
+                      <label for="id_role" class="control-label col-sm-3">Tipo de utilizador</label>
                       <div class="col-sm-9">
-                        <select id="role" name="role" class="form-control chosen" data-placeholder="Escolha um tipo de utilizador.." <?= ($_SESSION('role') != "Admin") ? 'readonly' : '' ?>>
+                        <select id="id_role" name="id_role" class="form-control chosen" data-placeholder="Escolha um tipo de utilizador.." <?= ($_SESSION['role'] != "Admin") ? 'disabled' : '' ?>>
                           <option value=""></option>
                           <?php
                             $r = $u->roles();
@@ -90,7 +98,6 @@
                       </div>
                     </div>
 
-
                     <!-- Nome completo -->
                     <div class="form-group pmd-textfield">
                       <label class="col-sm-3 control-label" for="code">Nome Completo</label>
@@ -98,7 +105,6 @@
                         <input type="text" id="name" name="name" value="<?= $user['name'] ?>" class="form-control empty" required="required">
                       </div>
                     </div>
-
 
                     <!-- Username -->
                     <div class="form-group pmd-textfield">
@@ -122,7 +128,7 @@
                       <label for="active" class="pmd-checkbox pmd-checkbox-ripple-effect col-sm-12">
                         <span class="col-sm-3 ">Utilizador ativo</span>
                         <div class="col-sm-9">
-                          <input type="checkbox" <?= ($user['active']) ? 'checked="true"' : '' ?> id="active" name="active" checked="true">
+                          <input type="checkbox" <?= ($user['active']) ? 'checked="true"' : '' ?> id="active" name="active" <?= ($_SESSION['role'] != "Admin") ? 'disabled' : '' ?>>
                         </div>
                       </label>
                     </div><!-- .Activo -->
