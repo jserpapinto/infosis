@@ -170,7 +170,7 @@ class user {
           AND tClassInscriptions.id_user = tUsers.id_user 
           AND tUsers.id_role = tRoles.id_role 
           AND (tUsers.id_role = :id OR :id = -1) 
-          AND (tUsers.id_year = :idy OR :idy = -1)
+          AND (tClassInscriptions.id_year = :idy OR :idy = -1)
         ORDER BY tRoles.role, tUsers.name';
       $data = $con->prepare($sql);
       $data->bindvalue(':id', $id_role);

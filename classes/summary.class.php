@@ -3,13 +3,13 @@
 class summary {
 
 	//insert
-  public function insert($id_class, $id_user, $summary, $class_date, $destination) {
+  public function insert($id_class, $id_user, $summary, $summary_date, $destination) {
       try {
         require_once 'db.class.php';
         $db = new database();
         $con = $db->getCon();
         $sql = '
-          INSERT INTO tSummarys (id_class, id_user, summary, class_date) 
+          INSERT INTO tSummarys (id_class, id_user, summary, summary_date) 
           VALUES (:idc, :idu, :s, :d)';
         $data = $con->prepare($sql);
         $data->bindvalue(':idc', $id_class);
@@ -17,7 +17,7 @@ class summary {
         $data->bindvalue(':s', $summary);
 
         // handle date
-        $date = date("Y-m-d H:i:s", strtotime($class_date));
+        $date = date("Y-m-d H:i:s", strtotime($summary_date));
         $data->bindvalue(':d', $date);
 
         $data->execute();
@@ -32,7 +32,7 @@ class summary {
   }
 
   //update
-  public function update($id_summary, $summary, $id_user, $class_date, $destination) {
+  public function update($id_summary, $summary, $id_user, $summary_date, $destination) {
       try {
         require_once 'db.class.php';
         $db = new database();
@@ -40,7 +40,7 @@ class summary {
         $sql = '
           UPDATE tSummarys 
           SET summary = :s, 
-            class_date = :d,
+            summary_date = :d,
             id_user = :idu
           WHERE id_summary = :ids';
         $data = $con->prepare($sql);
@@ -48,7 +48,7 @@ class summary {
         $data->bindvalue(':s', $summary);
 
         // handle date
-        $date = date("Y-m-d H:i:s", strtotime($class_date));
+        $date = date("Y-m-d H:i:s", strtotime($summary_date));
         
         $data->bindvalue(':d', $date);
         $data->bindvalue(':idu', $id_user);
@@ -95,7 +95,7 @@ class summary {
         SELECT tSummarys.id_class, 
           tSummarys.id_user, 
           tSummarys.summary, 
-          tSummarys.class_date, 
+          tSummarys.summary_date, 
           tClasses.fullName, 
           tClasses.code
         FROM tSummarys, tClasses
@@ -124,12 +124,12 @@ class summary {
         SELECT tSummarys.id_summary, 
           tUsers.name, 
           tSummarys.summary, 
-          tSummarys.class_date
+          tSummarys.summary_date
         FROM tClassInscriptions, tSummarys, tUsers
         WHERE tClassInscriptions.id_class = :idc
           AND tClassInscriptions.id_class = tSummarys.id_class
           AND tSummarys.id_user = tUsers.id_user
-        ORDER BY tSummarys.class_date';
+        ORDER BY tSummarys.summary_date';
       $data = $con->prepare($sql);
       $data->bindvalue(':idc', $id_class);
       $data->execute();
