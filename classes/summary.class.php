@@ -108,6 +108,8 @@ class summary {
       $db = new database();
       $con = $db->getCon();
       $sql = '
+        DELETE FROM tAttendancies
+        WHERE id_summary = :ids;
         DELETE FROM tSummarys 
         WHERE id_summary = :ids';
       $data = $con->prepare($sql);

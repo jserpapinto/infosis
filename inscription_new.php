@@ -3,24 +3,21 @@
   require_once 'classes/user.class.php';
   $u = new user();
   $u->logged("Admin");
-  $roles = $u->roles();
 
   //page
   require_once 'classes/degree.class.php';
   $d = new degree();
-  $degrees = $d->degrees();
-  require_once 'classes/classs.class.php';
-  $c = new classs();
-  $classes = $c->classes();
+  require_once 'classes/year.class.php';
+  $y = new year();
   require_once 'classes/inscription.class.php';
   $i = new inscription();
 
   //form
-  if (isset($_POST['id_class']) && $_POST['id_user'] != null) {
+  if (isset($_POST['id_class']) && $_POST['id_class'] != null && isset($_POST['id_user']) && $_POST['id_user'] != null) {
     $id_class = $_POST['id_class'];
     $id_user = $_POST['id_user'];
-    $inscription_year = $_POST['inscription_year'];
-    $i->insert($id_class, $id_user, $inscription_year, 'inscription_new.php');
+    $id_year = $_POST['id_year'];
+    $i->insert($id_user, $id_class, $id_year, 'inscription_manage.php');
   }
 ?>
 
@@ -31,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="css/datetime.css">
   </head>
 
-  <body id="InsertSummary">
+  <body>
   
     <!-- Menu -->
     <?php require_once('includes/menuManager.inc.php'); ?>
@@ -60,18 +57,64 @@
               <form class="form-chosen form-horizontal" method="post">
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
-                    <h3 class="heading">Informações de Curso</h3>
+                  
+                    <!-- Role -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_role" class="control-label col-sm-3">Tipo de Utilizador</label>
+                      <div class="col-sm-9">
+                        <select id="id_role" name="id_role" class="form-control chosen" data-placeholder="Escolha um Tipo de Utilizador..">
+                          <option value=""></option>
+                          <?php
+                            $roles = $u->roles();
+                            foreach ($roles as $role) {
+                              if ($role['role'] == "Professor" || $role['role'] == "Aluno") {
+                          ?>
+                          <option value="<?= $role['id_role'] ?>"><?= $role['role'] ?></option>
+                          <?php 
+                              }
+                            } 
+                          ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- User -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_user" class="control-label col-sm-3">Utilizador</label>
+                      <div class="col-sm-9">
+                        <select id="id_user" name="id_user[]" class="form-control chosen" multiple data-placeholder="Escolha um Utilizador.." disabled="">
+                          <option value=""></option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Year -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_year" class="control-label col-sm-3">Ano</label>
+                      <div class="col-sm-9">
+                        <select id="id_year" name="id_year" class="form-control chosen" data-placeholder="Escolha um Ano..">
+                          <option value=""></option>
+                          <?php
+                            $years = $y->years();
+                            foreach ($years as $year) {
+                          ?>
+                          <option value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div>
                   
                     <!-- Degree -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_degree" class="control-label col-sm-3">Curso</label>
                       <div class="col-sm-9">
-                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Curso..">
+                        <select id="id_degree" name="id_degree" class="form-control chosen" data-placeholder="Escolha um Curso.." disabled>
                           <option value=""></option>
                           <?php
+                            $degrees = $d->degrees();
                             foreach ($degrees as $degree) {
                           ?>
-                          <option value="<?= $degree['id_degree'] ?>"><?= $degree['designation'] . '(' . $degree['code'] . ') - ' . $degree['fullName'] ?></option>
+                          <option value="<?= $degree['id_degree'] ?>"><?= $degree['fullName'] ?></option>
                           <?php } ?>
                         </select>
                       </div>
@@ -81,47 +124,11 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_class" class="control-label col-sm-3">Cadeira</label>
                       <div class="col-sm-9">
-                        <select id="id_class" name="id_class" class="form-control chosen" data-placeholder="Escolha uma Cadeira.." disabled="">
-                          <option value=""></option>
-                        </select>
-                      </div>
-                    </div><!-- .Class -->
-
-                    <h3 class="heading">Informações de Utilizador</h3>
-
-                    <!-- Role -->
-                    <div class="form-group prousername pmd-textfield">
-                      <label for="id_role" class="control-label col-sm-3">Tipo de Utilizador</label>
-                      <div class="col-sm-9">
-                        <select id="id_role" name="id_role" class="form-control chosen" data-placeholder="Escolha um Tipo de Utilizador..">
-                          <option value=""></option>
-                          <?php
-                            foreach ($roles as $role) {
-                          ?>
-                          <option value="<?= $role['id_role'] ?>"><?= $role['role'] ?></option>
-                          <?php } ?>
-                        </select>
-                      </div>
-                    </div>
-
-
-                    <!-- User -->
-                    <div class="form-group prousername pmd-textfield">
-                      <label for="id_user" class="control-label col-sm-3">Utilizador</label>
-                      <div class="col-sm-9">
-                        <select id="id_user" name="id_user" class="form-control chosen" data-placeholder="Escolha um Curso.." disabled="">
+                        <select id="id_class" name="id_class[]" class="form-control chosen" multiple data-placeholder="Escolha uma Cadeira.." disabled="" required>
                           <option value=""></option>
                         </select>
                       </div>
                     </div>
-
-                    <!-- Date -->
-                    <div class="form-group pmd-textfield ">
-                      <label for="inscription_year" class="control-label col-sm-3 control-label">Data de Inscrição</label>
-                      <div class="col-sm-9">
-                        <input type="text" name="inscription_year" id="inscription_year" class="datetimepicker form-control" required><span class="pmd-textfield-focused"></span>
-                      </div>
-                    </div><!-- .Date -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
@@ -146,32 +153,47 @@
 
     <!-- Custom scripts -->
     <script> 
+      $(".chosen").chosen({width:'85%', allow_single_deselect:true});
 
-      $(".chosen").chosen({width:'85%', allow_single_deselect:true}); 
-      $('.datetimepicker').datetimepicker();
+      $('#id_year').on('change', function() {
+
+          var idYear = $(this).val();
+
+          if (idYear == "") {
+            $('#id_degree').prop('disabled', true);
+            $('#id_degree').val('').trigger('chosen:updated');
+            $('#id_class').html('');
+            $('#id_class').prop('disabled', true);
+            $('#id_class').trigger('chosen:updated');
+            return false;
+          } 
+
+          $('#id_degree').prop('disabled', false);
+          $('#id_degree').trigger('chosen:updated');
+
+        });
+
 
       $('#id_degree').on('change', function() {
 
         var idDegree = $(this).val();
+        var idYear = $('#id_year').val();
 
         if (idDegree == "") {
           $('#id_class').html('');
           $('#id_class').prop('disabled', true);
-          
-          // update select box
           $('#id_class').trigger('chosen:updated');
-          summaryTable.clear().draw();
           return false;
         }
         // AJAX fetch classes from degree
         $.ajax({
-          url: "ajax/summary_manage.php",
+          url: "ajax/inscriptions_new.php",
           method: "POST",
           dataType: "json",
           data: {
-            id_user: <?= ($_SESSION['role'] == "Professor") ? $_SESSION['id_user'] : -1 ?>,
+            //id_user: <?= ($_SESSION['role'] == "Professor") ? $_SESSION['id_user'] : -1 ?>,
             id_degree: idDegree,
-            type: 'get_classes'
+            id_year: idYear,
           }
         }).done(function(res) {
           $('#id_class').html('');
@@ -203,7 +225,6 @@
 
       }); // on change
 
-
       $('#id_role').on('change', function() {
 
         var idRole = $(this).val();
@@ -213,7 +234,6 @@
           $('#id_user').prop('disabled', true);
           // update select box
           $('#id_user').trigger('chosen:updated');
-          summaryTable.clear().draw();
           return false;
         }
 
@@ -223,8 +243,7 @@
           method: "POST",
           dataType: "json",
           data: {
-            id_role: idRole,
-            type: 'get_classes'
+            id_role: idRole
           }
         }).done(function(res) {
           $('#id_user').html('');

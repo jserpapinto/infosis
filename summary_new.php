@@ -40,7 +40,7 @@
     </style>
   </head>
 
-  <body id="InsertSummary">
+  <body>
 
     <!-- Menu -->
     <?php require_once('includes/menuManager.inc.php'); ?>
@@ -86,7 +86,6 @@
                       </div>
                     </div>
 
-
                     <!-- Class -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_class" class="control-label col-sm-3">Cadeira</label>
@@ -131,14 +130,13 @@
                       <div class="col-sm-9">
                         <input type="text" name="summary_date" id="summary_date" class="datetimepicker form-control"><span class="pmd-textfield-focused"></span>
                       </div>
-                    </div><!-- .Date -->
+                    </div>
 
-                    <h3 class="heading">Presenças <small>Marque as presenças</small></h3>
-                    <!--single line list with avtar --> 
+                    <!-- Attendancy -->
+                    <h1 class="pmd-display1">Presenças <small class="text-muted">Marque as presenças</small></h1>
                     <ul id="attendencies" class="list-group pmd-list pmd-list-avatar pmd-card-list">
-                      
-                      sem alunos
-                    </ul>
+                      <p class="lead">sem alunos</p>
+                    </ul><!-- .Attendancy -->
 
                     <div class="form-group btns margin-bot-30">
                       <div class="col-sm-9 col-sm-offset-3">
@@ -256,6 +254,7 @@
            * Professores
            *
            */
+
           $('#id_user').html('');
 
           // iterate and add as option
@@ -294,7 +293,7 @@
           var summarizedArr = res.summarized.map(function(el) {
             return parseInt(el.class_n);
           });
-
+          
           for (var i = 1; i <= nClasses; i++) {
             if (summarizedArr.indexOf(i) < 0) {
               $('#class_n').append($('<option>', {
@@ -305,7 +304,7 @@
           }
 
           // enable/disable
-          if (res.summarized.length > 0) $('#class_n').prop('disabled', false);
+          if (nClasses - summarizedArr.length > 0) $('#class_n').prop('disabled', false);
           else $('#class_n').prop('disabled', true);
 
           // update select box

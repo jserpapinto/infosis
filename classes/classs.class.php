@@ -203,6 +203,67 @@ class classs {
     }
   }
 
+    
+    
+    /*
+    
+    //list 
+  // Vai buscar pelo ano e curso
+  public function classesYearAll($id_degree = -1) {
+    try {
+      require_once 'db.class.php';
+      $db = new database();
+      $con = $db->getCon();
+      $sql = '
+        SELECT 
+          tClasses.id_class, 
+          tClasses.code, 
+          tClasses.fullName, 
+          tClasses.credits, 
+          tClasses.hours, 
+          tClasses.semester, 
+          tClasses.n_classes, 
+          tClasses.active 
+        FROM tClasses 
+        WHERE tClasses.id_degree = :idd
+          AND tClasses.active = 1
+        ORDER BY tClasses.fullName';
+      $data = $con->prepare($sql);
+      $data->bindvalue(':idd', $id_degree);
+      $data->execute();
+      $classes = $data->fetchAll();
+      return $classes;
+    }
+    catch (PDOException $e) {
+      echo("Erro de ligação:" . $e);
+      exit();
+      return false;
+    }
+  }
+  
+  
+  */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   //validation
   public function valid($code, $fullName) {
     require_once 'error.class.php';
