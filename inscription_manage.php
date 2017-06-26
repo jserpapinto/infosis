@@ -231,9 +231,9 @@
           });
         }
 
-        $('#id_year').on('change', updateInscritpions);
-        $('#id_user').on('change', updateInscritpions);
-        $('#id_class').on('change', updateInscritpions);
+        $('#id_year, #id_user, #id_class').on('change', updateInscritpions);
+        //$('#id_user').on('change', updateInscritpions);
+        //$('#id_class').on('change', updateInscritpions);
     
       });
     </script>
