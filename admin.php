@@ -19,17 +19,18 @@
     <div id="content" class="pmd-content content-area dashboard">
       <div class="container-fluid">
 
-      <!-- Header -->
-      <div class="row">
-        <div class="jumbotron">
-          <h1>Backoffice <?= $GLOBALS['appname'] ?></h1>
-          <small>Sistema de Informação v<?= $GLOBALS['version'] ?></small>
-        </div>
-      </div><!-- .Header -->
-
-
-          <?php include_once('includes/stats.inc.php'); ?>
-
+        <!-- Header -->
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="pmd-card pmd-card-default pmd-z-depth pmd-card-custom-form">
+              <div class="pmd-card-title">
+                <h1 class="pmd-card-title-text pmd-display3">Backoffice <?= $GLOBALS['appname'] ?></h1>
+                <span class="pmd-card-subtitle-text">Sistema de Informação v<?= $GLOBALS['version'] ?></span>
+                <p class="lead"></p>
+              </div>
+            </div>
+          </div>
+        </div><!-- .Header -->
 
       </div>
     </div><!-- .Container -->
