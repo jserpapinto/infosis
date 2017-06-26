@@ -22,7 +22,7 @@
     $summary_date = $_POST['summary_date'];
     $attendancies = $_POST['attendancies'];
     $students = $_POST['students'];
-    $s->update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendancies, $students, 'summary_edit.php?id=' . $_GET['id']);
+    $s->update($id_summary, $summary, $class_n, $id_user, $summary_date, $attendancies, $students, 'summary_manage.php');
   }
 ?>
 
@@ -72,7 +72,7 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_year" class="control-label col-sm-3">Ano Lectivo</label>
                       <div class="col-sm-9">
-                        <input type="text" id="classid_year" name="id_year" value="<?= date('Y', strtotime($summary['beginning'])) ?> / <?= date('Y', strtotime($summary['ending'])) ?>" class="form-control empty" readonly>
+                        <input type="text" id="id_year" name="id_year" value="<?= date('Y', strtotime($summary['beginning'])) ?> / <?= date('Y', strtotime($summary['ending'])) ?>" class="form-control empty" readonly>
                       </div>
                     </div>
 
@@ -96,6 +96,15 @@
                           foreach ($users as $user) { ?>
                             <option <?= ($user['id_user'] == $summary['id_user']) ? "selected" : "" ?> value="<?= $user['id_user'] ?>"><?= $user['name'] ?></option>
                           <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="class_n" class="control-label col-sm-3">Número da aula</label>
+                      <div class="col-sm-9">
+                        <select id="class_n" name="class_n" class="form-control chosen" data-placeholder="Escolha a aula.." disabled="" required disabled>
+                          <option value="<?= $summary['class_n'] ?>"><?= $summary['class_n'] ?></option>
                         </select>
                       </div>
                     </div>

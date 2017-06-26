@@ -28,7 +28,8 @@ class summary {
 
         //insert attendancies
         foreach ($students as $id_userA) {
-          $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
+          if (empty($attendancies)) $a = 0;
+          else $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
           $sql = '
             INSERT INTO tAttendancies (id_summary, id_user, attendancy) 
             VALUES (:ids, :idu, :a)';
@@ -78,7 +79,8 @@ class summary {
 
         //update attendancies
         foreach ($students as $id_userA) {
-          $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
+          if (empty($attendancies)) $a = 0;
+          else $a = (in_array($id_userA, $attendancies)) ? 1 : 0;
           $sql = '
             UPDATE tAttendancies 
               SET attendancy = :a 
@@ -137,10 +139,14 @@ class summary {
           tSummarys.summary, 
           tSummarys.summary_date, 
           tSummarys.id_year, 
+          tSummarys.class_n,
           tClasses.fullName, 
-          tClasses.code
-        FROM tSummarys, tClasses
-        WHERE tClasses.id_class = tSummarys.id_class
+          tClasses.code,
+          tYears.beginning,
+          tYears.ending
+        FROM tSummarys, tClasses, tYears
+        WHERE tSummarys.id_year = tYears.id_year
+          AND tClasses.id_class = tSummarys.id_class
           AND tSummarys.id_summary = :ids';
       $data = $con->prepare($sql);
       $data->bindvalue(':ids', $id_summary);

@@ -110,7 +110,7 @@
                     <div class="form-group prousername pmd-textfield">
                       <label for="class_n" class="control-label col-sm-3">Número da aula</label>
                       <div class="col-sm-9">
-                        <select id="class_n" name="class_n" class="form-control chosen" data-placeholder="Escolha a aula.." disabled="">
+                        <select id="class_n" name="class_n" class="form-control chosen" data-placeholder="Escolha a aula.." disabled="" required>
                           <option value=""></option>
                         </select>
                       </div>
