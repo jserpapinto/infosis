@@ -58,6 +58,22 @@
                 <div class="row">
                   <div class="col-lg-9 custom-col-9">
                   
+                    <!-- Year -->
+                    <div class="form-group prousername pmd-textfield">
+                      <label for="id_year" class="control-label col-sm-3">Ano</label>
+                      <div class="col-sm-9">
+                        <select id="id_year" name="id_year" class="form-control chosen" data-placeholder="Escolha um Ano..">
+                          <option value=""></option>
+                          <?php
+                            $years = $y->years();
+                            foreach ($years as $year) {
+                          ?>
+                          <option value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
+                          <?php } ?>
+                        </select>
+                      </div>
+                    </div>
+                    
                     <!-- Role -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_role" class="control-label col-sm-3">Tipo de Utilizador</label>
@@ -88,22 +104,6 @@
                       </div>
                     </div>
 
-                    <!-- Year -->
-                    <div class="form-group prousername pmd-textfield">
-                      <label for="id_year" class="control-label col-sm-3">Ano</label>
-                      <div class="col-sm-9">
-                        <select id="id_year" name="id_year" class="form-control chosen" data-placeholder="Escolha um Ano..">
-                          <option value=""></option>
-                          <?php
-                            $years = $y->years();
-                            foreach ($years as $year) {
-                          ?>
-                          <option value="<?= $year['id_year'] ?>"><?= date('Y', strtotime($year['beginning'])) ?>/<?= date('Y', strtotime($year['ending'])) ?></option>
-                          <?php } ?>
-                        </select>
-                      </div>
-                    </div>
-                  
                     <!-- Degree -->
                     <div class="form-group prousername pmd-textfield">
                       <label for="id_degree" class="control-label col-sm-3">Curso</label>

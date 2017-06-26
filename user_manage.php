@@ -66,7 +66,7 @@
                   <!-- Card media-->
                   <div class="pmd-card-media">
                     <div class="media-body">
-                      <h2 class="pmd-card-title-text pmd-tooltip"  data-toggle="tooltip" data-placement="top" title="<?= $value['name'] ?>"><?= $value['username'] ?></h2>
+                      <h2 class="pmd-card-title-text pmd-tooltip"  data-toggle="tooltip" data-placement="top" title="<?= $value['username'] ?>"><?= $value['name'] ?></h2>
                       <span class="pmd-card-subtitle-text"><?= $value['role'] ?></span>  
                     </div>
                     <div class="media-right media-middle">

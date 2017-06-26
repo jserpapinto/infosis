@@ -5,7 +5,7 @@
   $u->logged();
 
   //page
-  if ($_SESSION['role'] != "Admin" && $_SESSION['id_user'] != $_GET['id']) logout('index.php?error3=true');
+  if ($_SESSION['role'] != "Admin" && $_SESSION['id_user'] != $_GET['id']) $u->logout('index.php?error3=true');
   else $user = $u->fetch($_GET['id']);
 
   //form
